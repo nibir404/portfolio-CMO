@@ -36,7 +36,7 @@ A world-class personal portfolio for **Abdullah Al Alamin** — Group CMO at Bet
 - **Scroll-spy navigation** — top nav highlights the section currently in view; tone (dark/light) flips based on overlapping `[data-nav-tone]` sections.
 - **Strict B&W palette** — pure `#0A0A0A` ink on `#FFFFFF` paper, no greys, no creams, no golds. AAA contrast by construction.
 - **Dual theme system** — Dark (default, 21:1 contrast) and Light Editorial, persisted in `localStorage` under `theme`, SSR-safe via `data-theme` on `<html>`.
-- **Custom typography stack** — SF Pro / Helvetica (display, system-installed), Inter (body), Cormorant Garamond (quote), JetBrains Mono (mono) loaded via `next/font`. No Google Fonts for display = no FOUT, faster first paint.
+- **Custom typography stack** — Anton (display), Inter (body), Cormorant Garamond (quote), JetBrains Mono (mono) loaded via `next/font`.
 - **Reusable GSAP + Lenis motion hooks** — `useGSAPHero`, `useHorizontalPin`, `useReveal`, `useScrollFx`, `useScrollSpy`, `useSplitText`, `useCountUp`, `useActiveMarker`. All gated behind `prefers-reduced-motion`.
 
 ## Stack
@@ -67,12 +67,12 @@ Themed surfaces swap the relationship in light mode via CSS variables (`--ink`, 
 
 ### Typography
 
-| Role     | Family                       | Loaded via                            |
-| -------- | ---------------------------- | ------------------------------------- |
-| Display  | SF Pro → Helvetica → Arial   | Native stack defined in `globals.css` (no Google Font) |
-| Body     | Inter                        | `next/font/google` → `--font-body`   |
-| Quote    | Cormorant Garamond           | `next/font/google` → `--font-quote`  |
-| Mono     | JetBrains Mono               | `next/font/google` → `--font-mono`   |
+| Role     | Family              | Loaded via                              |
+| -------- | ------------------- | --------------------------------------- |
+| Display  | Anton               | `next/font/google` → `--font-display`  |
+| Body     | Inter               | `next/font/google` → `--font-body`     |
+| Quote    | Cormorant Garamond  | `next/font/google` → `--font-quote`    |
+| Mono     | JetBrains Mono      | `next/font/google` → `--font-mono`     |
 
 Fluid sizing uses `clamp()` so headlines scale from mobile to ultrawide without per-breakpoint media queries. Tailwind exposes `text-mega`, `text-hero`, `text-section` shortcuts.
 
@@ -255,7 +255,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Credits
 
-- Typography: **SF Pro / Helvetica** (display, OS-native), **Inter**, **Cormorant Garamond**, **JetBrains Mono** (Google Fonts via `next/font`).
+- Typography: **Anton**, **Inter**, **Cormorant Garamond**, **JetBrains Mono** (Google Fonts via `next/font`).
 - Animation: **GSAP** & **ScrollTrigger** (GreenSock).
 - Smooth scroll: **Lenis**.
 - Icons & glyphs: handcrafted SVG, no icon-pack dependencies.

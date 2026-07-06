@@ -23,18 +23,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        // Display = SF Pro on macOS/iOS, then Helvetica Neue, Helvetica,
-        // Arial, generic sans. Same stack Apple itself uses.
-        display: [
-          "-apple-system",
-          "BlinkMacSystemFont",
-          '"SF Pro Display"',
-          '"SF Pro"',
-          '"Helvetica Neue"',
-          "Helvetica",
-          "Arial",
-          "sans-serif",
-        ],
+        display: ["var(--font-display)", "Bebas Neue", "Oswald", "sans-serif"],
         body: ["var(--font-body)", "Inter", "system-ui", "sans-serif"],
         quote: ["var(--font-quote)", "Cormorant Garamond", "serif"],
       },
