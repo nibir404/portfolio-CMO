@@ -1,14 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Inter, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
+import { Inter, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-
-const anton = Anton({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -109,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       suppressHydrationWarning
       data-theme="dark"
-      className={`${anton.variable} ${inter.variable} ${cormorant.variable} ${jetbrains.variable}`}
+      className={`${inter.variable} ${cormorant.variable} ${jetbrains.variable}`}
     >
       <head>
         <script
