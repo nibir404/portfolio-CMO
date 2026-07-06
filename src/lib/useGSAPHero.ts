@@ -3,10 +3,11 @@
 import { useEffect, type RefObject } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useSplitText, playCharReveal } from "@/lib/useSplitText";
 
 interface UseGSAPHeroOpts {
   rootRef: RefObject<HTMLElement | null>;
-  imageWrapRef: RefObject<HTMLDivElement | null>;
+  portraitRef: RefObject<HTMLDivElement | null>;
 }
 
 function reducedMotion(): boolean {
@@ -14,35 +15,48 @@ function reducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function useGSAPHero({ rootRef, imageWrapRef }: UseGSAPHeroOpts) {
+/**
+ * Hero composition timeline (always-dark, portrait bg cover):
+ *   1. Portrait clip-path wipe (diagonal) — opener
+ *   2. Portrait scale + grayscale settle
+ *   3. Eyebrow roll-in
+ *   4. Display headline — character-by-character reveal
+ *   5. Body copy fade-up
+ *   6. CTA pop
+ *   7. Portrait parallax on scroll
+ *   8. Subtle scale drift on scroll (capped so portrait never crops badly)
+ *   9. Magnetic primary CTA
+ */
+export function useGSAPHero({ rootRef, portraitRef }: UseGSAPHeroOpts) {
+  /* Split the headline text into chars for the reveal animation. */
+  useSplitText("#hero-title");
+
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
     if (reducedMotion()) {
-      // Set everything to final state immediately
-      gsap.set(root.querySelectorAll(".hero-display, .hero-body-copy"), {
+      gsap.set(root.querySelectorAll(".hero-title .char, .hero-sub, .hero-cta-row, .hero-eyebrow"), {
         opacity: 1,
         y: 0,
       });
+      gsap.set(".hero-portrait-img", { scale: 1 });
       return;
     }
 
-    // ScrollTrigger plugin is needed for scroll-driven tweens below
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Local cleanup array — the gsap.context() callback can't reference
-    // `ctx` itself (TDZ). All non-GSAP listeners are torn down manually.
     const cleanups: Array<() => void> = [];
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        defaults: { ease: "expo.out" },
+        defaults: { ease: "power3.out" },
       });
 
-      // ① Image clip-path wipe — diagonal from top-left
-      if (imageWrapRef.current) {
+      // ① Portrait clip-path wipe — diagonal from top-left
+      if (portraitRef.current) {
         tl.from(
-          imageWrapRef.current,
+          portraitRef.current,
           {
             clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
             duration: 1.4,
@@ -52,49 +66,39 @@ export function useGSAPHero({ rootRef, imageWrapRef }: UseGSAPHeroOpts) {
         );
       }
 
-      // ② Image — start scaled up + heavy grayscale, then snap to neutral
+      // ② Portrait — scale 1.08 → 1, with grayscale settling
       tl.from(
-        ".hero-image",
+        ".hero-portrait-img",
         {
-          scale: 1.3,
-          filter: "grayscale(100%) contrast(1.4)",
+          scale: 1.08,
+          filter: "grayscale(100%) contrast(1.25)",
           duration: 1.6,
           ease: "power2.out",
         },
         0
       ).to(
-        ".hero-image",
+        ".hero-portrait-img",
         {
-          filter: "grayscale(100%) contrast(1.05)",
+          filter: "grayscale(100%) contrast(1.04)",
           duration: 0.8,
           ease: "sine.inOut",
         },
         "-=0.4"
       );
 
-      // ③ Eyebrow rolls in
+      // ③ Eyebrow roll-in
       tl.from(".hero-eyebrow", {
         x: 40,
         opacity: 0,
         duration: 0.7,
-        ease: "power3.out",
       });
 
-      // ④ Display headline — soft fade-up
-      tl.from(
-        ".hero-display",
-        {
-          opacity: 0,
-          y: 36,
-          duration: 1.1,
-          ease: "expo.out",
-        },
-        "-=0.5"
-      );
+      // ④ Headline — character-by-character reveal
+      tl.add(() => playCharReveal("#hero-title", { stagger: 0.045, duration: 0.9 }), "-=0.3");
 
-      // ⑤ Body copy
+      // ⑤ Subhead fade-up
       tl.from(
-        ".hero-body-copy",
+        ".hero-sub",
         {
           opacity: 0,
           y: 24,
@@ -104,36 +108,23 @@ export function useGSAPHero({ rootRef, imageWrapRef }: UseGSAPHeroOpts) {
         "-=0.5"
       );
 
-      // ⑥ CTA pop
+      // ⑥ CTAs pop
       tl.from(
-        ".hero-cta",
+        ".hero-cta-row",
         {
           opacity: 0,
-          scale: 0.85,
+          scale: 0.92,
           y: 20,
           duration: 0.6,
           ease: "back.out(1.5)",
         },
-        "-=0.3"
-      );
-
-      // ⑦ Stats strip wipes up
-      tl.from(
-        ".hero-stat-chrome",
-        {
-          opacity: 0,
-          yPercent: 100,
-          stagger: 0.06,
-          duration: 0.7,
-          ease: "power3.out",
-        },
         "-=0.4"
       );
 
-      // ⑧ Image parallax on scroll
-      if (imageWrapRef.current) {
-        gsap.to(imageWrapRef.current, {
-          yPercent: 18,
+      // ⑦ Portrait parallax on scroll
+      if (portraitRef.current) {
+        gsap.to(portraitRef.current, {
+          yPercent: 12,
           ease: "none",
           scrollTrigger: {
             trigger: root,
@@ -144,9 +135,9 @@ export function useGSAPHero({ rootRef, imageWrapRef }: UseGSAPHeroOpts) {
         });
       }
 
-      // ⑨ Image gentle zoom on scroll
-      gsap.to(".hero-image", {
-        scale: 1.08,
+      // ⑧ Gentle zoom — capped at 1.03 (only on the active portrait)
+      gsap.to(".hero-portrait-img.is-active", {
+        scale: 1.03,
         ease: "none",
         scrollTrigger: {
           trigger: root,
@@ -156,8 +147,8 @@ export function useGSAPHero({ rootRef, imageWrapRef }: UseGSAPHeroOpts) {
         },
       });
 
-      // ⑩ Magnetic primary CTA
-      const cta = root.querySelector<HTMLElement>(".hero-cta--primary");
+      // ⑨ Magnetic primary CTA
+      const cta = root.querySelector<HTMLElement>(".hero-cta-row .btn-pill--invert");
       if (cta) {
         const onMv = (e: MouseEvent) => {
           const r = cta.getBoundingClientRect();
@@ -185,13 +176,67 @@ export function useGSAPHero({ rootRef, imageWrapRef }: UseGSAPHeroOpts) {
           cta.removeEventListener("mouseleave", onLv);
         });
       }
+
+      // ⑩ Portrait gallery crossfade — auto-rotate every 6s + manual thumb clicks
+      const imgs = Array.from(
+        root.querySelectorAll<HTMLImageElement>(".hero-portrait-img")
+      );
+      const thumbs = Array.from(
+        root.querySelectorAll<HTMLElement>(".hero-portrait-thumb")
+      );
+      if (imgs.length > 1) {
+        let active = 0;
+        const ROTATE_MS = 6000;
+
+        const setActive = (idx: number) => {
+          active = ((idx % imgs.length) + imgs.length) % imgs.length;
+          imgs.forEach((img, i) => {
+            img.classList.toggle("is-active", i === active);
+          });
+          thumbs.forEach((t, i) => {
+            t.classList.toggle("is-active", i === active);
+          });
+          // Re-apply zoom to the now-active image (kill any existing tween first)
+          ScrollTrigger.getAll()
+            .filter((t) => t.trigger === imgs[active] && t.animation)
+            .forEach((t) => t.kill());
+          gsap.fromTo(
+            imgs[active],
+            { scale: 1.0 },
+            {
+              scale: 1.03,
+              ease: "none",
+              scrollTrigger: {
+                trigger: root,
+                start: "top top",
+                end: "bottom top",
+                scrub: 0.8,
+              },
+            }
+          );
+        };
+
+        const interval = window.setInterval(() => {
+          setActive(active + 1);
+        }, ROTATE_MS);
+        cleanups.push(() => window.clearInterval(interval));
+
+        thumbs.forEach((thumb, i) => {
+          const onClick = (e: MouseEvent) => {
+            e.preventDefault();
+            setActive(i);
+          };
+          thumb.addEventListener("click", onClick);
+          cleanups.push(() => thumb.removeEventListener("click", onClick));
+        });
+
+        thumbs[0]?.classList.add("is-active");
+      }
     }, root);
 
     return () => {
-      // Tear down GSAP tweens + ScrollTriggers created inside ctx
       ctx.revert();
-      // Then tear down manual DOM listeners
       cleanups.forEach((fn) => fn());
     };
-  }, [rootRef, imageWrapRef]);
+  }, [rootRef, portraitRef]);
 }

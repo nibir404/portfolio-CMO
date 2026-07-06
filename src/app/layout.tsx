@@ -1,53 +1,132 @@
 import type { Metadata, Viewport } from "next";
+import { Anton, Inter, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Cursor from "@/components/Cursor";
-import Grain from "@/components/Grain";
+
+const anton = Anton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  weight: ["400", "500"],
+  style: ["italic", "normal"],
+  subsets: ["latin"],
+  variable: "--font-quote",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Abdullah Al Amin — Visionary Entrepreneur & Ecosystem Builder",
+  title: "Abdullah Al Alamin | CMO, Betopia Group & AI Researcher",
   description:
-    "A digital monument to a visionary entrepreneur, ecosystem builder, and transformation leader. Legacy is Greater Than Currency.",
+    "Abdullah Al Alamin is CMO of Betopia Group and a doctoral AI researcher at Carnegie Mellon. 14+ years building category-defining brands with AI-powered growth.",
   keywords: [
-    "Abdullah Al Amin",
-    "Visionary Entrepreneur",
-    "Digital Transformation Leader",
-    "Ecosystem Builder",
-    "Bangladesh",
-    "Leadership",
-    "Legacy",
+    "Abdullah Al Alamin",
+    "Chief Marketing Officer Bangladesh",
+    "AI marketing strategist Bangladesh",
+    "CMO Betopia Group",
+    "brand architect Bangladesh",
+    "AI-driven growth strategist",
   ],
-  authors: [{ name: "Abdullah Al Amin" }],
+  authors: [{ name: "Abdullah Al Alamin" }],
   openGraph: {
-    title: "Abdullah Al Amin — Legacy is Greater Than Currency",
+    title: "Abdullah Al Alamin | CMO, Betopia Group & AI Researcher",
     description:
-      "Building companies, empowering people, and shaping the future through innovation.",
+      "CMO of Betopia Group and doctoral AI researcher at Carnegie Mellon. 14+ years building category-defining brands with AI-powered growth.",
     type: "website",
     locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Abdullah Al Alamin | CMO, Betopia Group & AI Researcher",
+    description:
+      "CMO of Betopia Group and doctoral AI researcher at Carnegie Mellon. 14+ years building category-defining brands with AI-powered growth.",
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#050505" },
-    { media: "(prefers-color-scheme: light)", color: "#F5F1E8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
   ],
   width: "device-width",
   initialScale: 1,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Abdullah Al Alamin",
+  jobTitle: "Chief Marketing Officer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Betopia Group",
+  },
+  alumniOf: [
+    {
+      "@type": "EducationalOrganization",
+      name: "Carnegie Mellon University",
+    },
+    {
+      "@type": "EducationalOrganization",
+      name: "University of Illinois Urbana-Champaign — Gies College of Business",
+    },
+    {
+      "@type": "EducationalOrganization",
+      name: "Daffodil Institute of IT (DIIT)",
+    },
+  ],
+  award: [
+    "Global Brand Leadership Award — World Brand Congress (2024)",
+    "Asia Pacific Marketing Excellence Award — Asia Marketing Federation (2023)",
+    "International Corporate Communication Excellence Award — IABC (2022)",
+    "Digital Bangladesh Innovation Award — ICT Division, Government of Bangladesh (2023)",
+    "National Marketing Excellence Award — Ministry of Commerce, Government of Bangladesh (2022)",
+    "Outstanding Brand Builder Award — FMCG & Consumer Goods Marketing Summit (2021)",
+  ],
+  description:
+    "Bangladesh-based Chief Marketing Officer and doctoral AI researcher at Carnegie Mellon, building category-defining brands with AI-powered growth.",
+  url: "https://abdullah-al-alamin.vercel.app",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-theme="dark"
+      className={`${anton.variable} ${inter.variable} ${cormorant.variable} ${jetbrains.variable}`}
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js');",
+          }}
+        />
+      </head>
       <body>
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
-        <ThemeProvider>
-          <Grain />
-          <Cursor />
-          {children}
-        </ThemeProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

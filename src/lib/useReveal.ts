@@ -14,9 +14,10 @@ export function useRevealInit() {
     if (!initialized) {
       gsap.registerPlugin(ScrollTrigger);
       const lenis = new Lenis({
-        duration: 1.4,
+        duration: 1.1,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
+        wheelMultiplier: 1.1,
       });
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add((time) => lenis.raf(time * 1000));
@@ -25,17 +26,16 @@ export function useRevealInit() {
     }
 
     const ctx = gsap.context(() => {
-      // ── Reveal on enter ───────────────────────────────────────
+      // ── Reveal on enter (restrained fade — no translate) ───────
       const reveals = gsap.utils.toArray<HTMLElement>(".reveal");
       reveals.forEach((el) => {
         gsap.fromTo(
           el,
-          { opacity: 0, y: 60 },
+          { opacity: 0 },
           {
             opacity: 1,
-            y: 0,
             duration: 1.2,
-            ease: "power3.out",
+            ease: "power2.out",
             scrollTrigger: {
               trigger: el,
               start: "top 88%",
@@ -49,13 +49,12 @@ export function useRevealInit() {
       staggers.forEach((el) => {
         gsap.fromTo(
           el.querySelectorAll(":scope > *"),
-          { opacity: 0, y: 40 },
+          { opacity: 0 },
           {
             opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-            stagger: 0.12,
+            duration: 0.9,
+            ease: "power2.out",
+            stagger: 0.1,
             scrollTrigger: {
               trigger: el,
               start: "top 85%",

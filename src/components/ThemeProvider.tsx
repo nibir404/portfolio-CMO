@@ -2,25 +2,67 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "light";
+export type Theme = "dark" | "light";
 
-interface ThemeCtx {
+type ThemeContextValue = {
   theme: Theme;
-}
+  setTheme: (t: Theme) => void;
+  toggleTheme: () => void;
+};
 
-const ThemeContext = createContext<ThemeCtx>({ theme: "light" });
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+
+const STORAGE_KEY = "cmo-theme";
+
+function readInitialTheme(): Theme {
+  if (typeof window === "undefined") return "dark";
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (saved === "dark" || saved === "light") return saved;
+  } catch {
+    /* localStorage may be blocked */
+  }
+  if (window.matchMedia?.("(prefers-color-scheme: light)").matches) return "light";
+  return "dark";
+}
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Locked to single light mode — site theme is fixed.
-  const [theme] = useState<Theme>("light");
+  const [theme, setThemeState] = useState<Theme>("dark");
 
+  /* Mount: read stored theme and apply to <html data-theme>. */
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove("dark");
-    root.classList.add("light");
+    const initial = readInitialTheme();
+    setThemeState(initial);
+    document.documentElement.dataset.theme = initial;
   }, []);
 
-  return <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>;
+  const setTheme = (t: Theme) => {
+    setThemeState(t);
+    document.documentElement.dataset.theme = t;
+    try {
+      window.localStorage.setItem(STORAGE_KEY, t);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
 
-export const useTheme = () => useContext(ThemeContext);
+export function useTheme(): ThemeContextValue {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) {
+    return {
+      theme: "dark",
+      setTheme: () => {},
+      toggleTheme: () => {},
+    };
+  }
+  return ctx;
+}
