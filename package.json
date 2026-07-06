@@ -2,7 +2,7 @@
   "name": "abdullah-al-amin",
   "version": "1.0.0",
   "private": true,
-  "description": "Cinematic personal portfolio for Abdullah Al Amin — Legacy is Greater Than Currency.",
+  "description": "Cinematic personal portfolio for Abdullah Al Alamin — Group CMO at Betopia Group and doctoral AI researcher at Carnegie Mellon. Legacy is Greater Than Currency.",
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
