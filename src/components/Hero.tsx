@@ -53,21 +53,17 @@ export default function Hero() {
         <div className="hero-split">
           <div className="hero-split-left">
             <h1 id="hero-title" className="hero-title">
-              The CMO turning
+              Turning AI into
               <br />
-              AI into compounded
-              <br />
-              brand equity<span className="period">.</span>
+              Brand Equity<span className="period">.</span>
             </h1>
           </div>
 
           <div className="hero-split-right">
             <p className="hero-sub">
-              I lead marketing at the scale of an industry. Fourteen years
-              rebuilding category-defining brands across FMCG, building
-              materials, and conglomerate portfolios &mdash; now bringing
-              generative AI, predictive analytics, and marketing automation
-              into the boardroom as compounding advantage, not theatre.
+              Fourteen years building category-defining brands across FMCG and
+              conglomerate portfolios &mdash; bringing generative AI into the
+              boardroom as compounding advantage.
             </p>
 
             <div className="hero-cta-row">
