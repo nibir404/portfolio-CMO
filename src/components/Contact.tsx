@@ -59,8 +59,6 @@ export default function Contact() {
     <section
       id="contact"
       className="contact snap-section"
-      data-nav-tone="dark"
-      data-section-tone="dark"
       aria-labelledby="contact-heading"
     >
       <div className="container">
