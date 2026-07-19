@@ -5,25 +5,52 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
-let initialized = false;
+let globalLenis: Lenis | null = null;
+
+export function getLenis(): Lenis | null {
+  return globalLenis;
+}
 
 export function useRevealInit() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (!initialized) {
+    const cleanups: Array<() => void> = [];
+
+    if (!globalLenis) {
       gsap.registerPlugin(ScrollTrigger);
-      const lenis = new Lenis({
-        duration: 1.1,
+      globalLenis = new Lenis({
+        duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
         wheelMultiplier: 1.1,
       });
-      lenis.on("scroll", ScrollTrigger.update);
-      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      globalLenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add((time) => globalLenis?.raf(time * 1000));
       gsap.ticker.lagSmoothing(0);
-      initialized = true;
     }
+
+    /* Intercept anchor clicks for ultra-smooth Lenis scrolling */
+    const handleAnchorClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest<HTMLAnchorElement>("a[href^='#']");
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const targetEl = document.querySelector<HTMLElement>(href);
+      if (targetEl && globalLenis) {
+        e.preventDefault();
+        globalLenis.scrollTo(targetEl, {
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+    cleanups.push(() => document.removeEventListener("click", handleAnchorClick));
+
+
 
     const ctx = gsap.context(() => {
       // ── Reveal on enter (restrained fade — no translate) ───────
@@ -108,7 +135,10 @@ export function useRevealInit() {
       });
     });
 
-    return () => ctx.revert();
+    return () => {
+      cleanups.forEach((fn) => fn());
+      ctx.revert();
+    };
   }, []);
 }
 
