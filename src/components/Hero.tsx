@@ -53,9 +53,8 @@ export default function Hero() {
         <div className="hero-split">
           <div className="hero-split-left">
             <h1 id="hero-title" className="hero-title">
-              Turning AI into
-              <br />
-              Brand Equity<span className="period">.</span>
+              Turning AI into {' '}
+              <span className="line-through inline-block" >Brand Equity</span>
             </h1>
           </div>
 
