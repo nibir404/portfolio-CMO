@@ -8,7 +8,7 @@ import { useGSAPHero } from "@/lib/useGSAPHero";
 const portraits = [
   { src: "/images/boss-9.jpg", alt: "Abdullah Al Alamin addressing an international leadership audience" },
   { src: "/images/boss-8.jpg", alt: "Abdullah Al Alamin on stage at a keynote engagement" },
-  { src: "/images/boss.jpg",   alt: "Abdullah Al Alamin — executive portrait" },
+  { src: "/images/boss.jpg", alt: "Abdullah Al Alamin — executive portrait" },
   { src: "/images/boss-2.jpg", alt: "Abdullah Al Alamin — strategic leadership" },
 ];
 
