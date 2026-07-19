@@ -4,11 +4,12 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useGSAPHero } from "@/lib/useGSAPHero";
 
+/* Executive-context imagery — stage, leadership, boardroom, conferences. */
 const portraits = [
-  { src: "/images/boss.jpg",       alt: "Abdullah Al Alamin — editorial portrait" },
-  { src: "/images/boss-8.jpg",     alt: "Abdullah Al Alamin — speaking engagement" },
-  { src: "/images/boss-9.jpg",     alt: "Abdullah Al Alamin — leadership event" },
-  { src: "/images/boss-2.jpg",     alt: "Abdullah Al Alamin — on assignment" },
+  { src: "/images/boss-9.jpg", alt: "Abdullah Al Alamin addressing an international leadership audience" },
+  { src: "/images/boss-8.jpg", alt: "Abdullah Al Alamin on stage at a keynote engagement" },
+  { src: "/images/boss.jpg",   alt: "Abdullah Al Alamin — executive portrait" },
+  { src: "/images/boss-2.jpg", alt: "Abdullah Al Alamin — strategic leadership" },
 ];
 
 export default function Hero() {
@@ -25,13 +26,13 @@ export default function Hero() {
       data-section-tone="dark"
       aria-labelledby="hero-title"
     >
-      {/* Full-bleed portrait — crossfading gallery of 4 shots */}
-      <div ref={portraitRef} className="hero-portrait">
+      {/* Full-bleed executive image */}
+      <div ref={portraitRef} className="hero-portrait" aria-hidden="true">
         {portraits.map((p, i) => (
           <Image
             key={p.src}
             src={p.src}
-            alt={p.alt}
+            alt=""
             fill
             priority={i === 0}
             sizes="100vw"
@@ -42,47 +43,44 @@ export default function Hero() {
         <div className="hero-shade" aria-hidden="true" />
       </div>
 
-      {/* Content overlay */}
+      {/* Two-column content — heading left, body + CTAs right, both anchored to bottom */}
       <div className="hero-content container">
-        <div className="hero-eyebrow">
-          Chief Marketing Officer · Brand Architect · AI-Driven Growth Strategist
+        <div className="hero-eyebrow hero-eyebrow--full">
+          <span className="hero-eyebrow-dot" aria-hidden="true" />
+          Office of the Chief Marketing Officer · Betopia Group
         </div>
 
-        <div className="hero-grid">
-          <h1 id="hero-title" className="hero-title">
-            Abdullah Al Alamin<span className="period">.</span>
-          </h1>
+        <div className="hero-split">
+          <div className="hero-split-left">
+            <h1 id="hero-title" className="hero-title">
+              The CMO turning
+              <br />
+              AI into compounded
+              <br />
+              brand equity<span className="period">.</span>
+            </h1>
+          </div>
 
-          <div className="hero-side">
+          <div className="hero-split-right">
             <p className="hero-sub">
-              Group CMO at Betopia, engineering category-defining brands while
-              researching the AI that will build the next ones.
+              I lead marketing at the scale of an industry. Fourteen years
+              rebuilding category-defining brands across FMCG, building
+              materials, and conglomerate portfolios &mdash; now bringing
+              generative AI, predictive analytics, and marketing automation
+              into the boardroom as compounding advantage, not theatre.
             </p>
 
             <div className="hero-cta-row">
-              <a href="#journey" className="btn-pill btn-pill--invert magnetic-btn">
-                <span>View My Work</span>
+              <a href="#impact" className="btn-pill btn-pill--invert magnetic-btn">
+                <span>See the impact</span>
                 <span className="arrow" aria-hidden="true">→</span>
               </a>
               <a href="#contact" className="btn-pill btn-pill--ghost">
-                <span>Let&rsquo;s Connect</span>
+                <span>Brief my office</span>
               </a>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Portrait strip — small thumbnails at bottom-right */}
-      <div className="hero-portrait-strip" aria-hidden="true">
-        {portraits.map((p, i) => (
-          <div className="hero-portrait-thumb" key={p.src} data-thumb={i}>
-            <Image src={p.src} alt="" fill sizes="80px" />
-          </div>
-        ))}
-      </div>
-
-      <div className="hero-scroll" aria-hidden="true">
-        Scroll
       </div>
     </header>
   );

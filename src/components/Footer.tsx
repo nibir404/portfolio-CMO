@@ -1,24 +1,23 @@
 const navLinks = [
-  { label: "Origin", href: "#about" },
-  { label: "Journey", href: "#journey" },
-  { label: "Results", href: "#results" },
-  { label: "Awards", href: "#awards" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Education", href: "#education" },
-  { label: "Beyond", href: "#beyond" },
-  { label: "Contact", href: "#contact" },
+  { label: "Leadership", href: "#about" },
+  { label: "Impact", href: "#impact" },
+  { label: "Initiatives", href: "#initiatives" },
+  { label: "Insights", href: "#insights" },
+  { label: "On Stage", href: "#speaking" },
+  { label: "Recognition", href: "#recognition" },
+  { label: "Engage the office", href: "#contact" },
 ];
 
 const socials = [
-  { label: "LinkedIn", href: "#" },
-  { label: "X / Twitter", href: "#" },
-  { label: "Facebook", href: "#" },
-  { label: "YouTube", href: "#" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/abdullah-al-alamin" },
+  { label: "X / Twitter", href: "https://x.com/abdullah_alamin" },
+  { label: "YouTube", href: "https://youtube.com/@abdullah-al-alamin" },
+  { label: "Facebook", href: "https://facebook.com/abdullah.alamin" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="footer" data-section-tone="dark">
+    <footer className="footer">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-col">
@@ -26,7 +25,9 @@ export default function Footer() {
               Legacy &gt; Currency<span className="italic-serif accent">.</span>
             </h2>
             <p className="footer-tagline">
-              Building brands that outlast the businesses that made them.
+              Office of the Chief Marketing Officer &middot; Betopia Group
+              &middot; doctoral AI researcher, Carnegie Mellon &middot;
+              fourteen years compounding brand work.
             </p>
           </div>
 
@@ -42,24 +43,47 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
+            <h4>Channels</h4>
+            <ul>
+              <li>
+                <a href="mailto:office@abdullah-al-alamin.com">
+                  office@abdullah-al-alamin.com
+                </a>
+              </li>
+              <li>
+                <a href="mailto:speaking@abdullah-al-alamin.com">
+                  speaking@abdullah-al-alamin.com
+                </a>
+              </li>
+              <li>
+                <a href="mailto:press@abdullah-al-alamin.com">
+                  press@abdullah-al-alamin.com
+                </a>
+              </li>
+              <li>
+                <a href="https://cal.com/abdullah-al-alamin">
+                  Book a 30-min call
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
             <h4>Connect</h4>
             <ul>
               {socials.map((s) => (
                 <li key={s.label}>
-                  <a href={s.href}>{s.label}</a>
+                  <a href={s.href} target="_blank" rel="noreferrer">
+                    {s.label}
+                  </a>
                 </li>
               ))}
-              <li>
-                <a href="mailto:hello@abdullah-al-alamin.com">
-                  hello@abdullah-al-alamin.com
-                </a>
-              </li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Abdullah Al Alamin</span>
+          <span>© {new Date().getFullYear()} Office of the CMO · Abdullah Al Alamin</span>
           <span>Made with intent · Dhaka, BD</span>
         </div>
       </div>

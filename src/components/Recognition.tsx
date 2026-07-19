@@ -9,6 +9,7 @@ type Category = {
   items: Award[];
 };
 
+/* Recognition grouped by source of authority: international bodies, national government, industry institutions. */
 const categories: Category[] = [
   {
     title: "International",
@@ -20,7 +21,7 @@ const categories: Category[] = [
     ],
   },
   {
-    title: "Bangladesh · Government & National",
+    title: "Government & National",
     items: [
       { name: "Digital Bangladesh Innovation Award", issuer: "ICT Division, Government of Bangladesh", year: "2023" },
       { name: "National Marketing Excellence Award", issuer: "Ministry of Commerce, Government of Bangladesh", year: "2022" },
@@ -41,11 +42,24 @@ const categories: Category[] = [
 
 const totalCount = categories.reduce((sum, c) => sum + c.items.length, 0);
 
-export default function Awards() {
+export default function Recognition() {
   return (
-    <section id="awards" className="awards" aria-labelledby="awards-heading">
+    <section id="recognition" className="awards" aria-labelledby="recognition-heading">
       <div className="container">
-        <h2 id="awards-heading" className="sr-only">Awards &amp; Recognition</h2>
+        <div className="awards-head">
+          <span className="text-eyebrow chapter-h">
+            <span className="num">/11</span>
+            <span className="name">Recognition</span>
+          </span>
+          <h2 id="recognition-heading" className="display-section">
+            Industry recognition<span className="italic-serif accent">.</span>
+          </h2>
+          <p>
+            Twelve awards across three categories &mdash; international
+            bodies, national government, and industry institutions. The
+            credential is the work; these are the footnotes.
+          </p>
+        </div>
 
         <div className="awards-summary fx-stagger" aria-hidden="false">
           <div>
@@ -93,7 +107,8 @@ export default function Awards() {
           <p style={{ margin: 0, color: "var(--ink-soft)", lineHeight: 1.7 }}>
             Juror at <strong style={{ color: "var(--ink)" }}>Bangladesh Marketing Excellence Awards</strong>,
             mentor at the <strong style={{ color: "var(--ink)" }}>Commonwealth Youth Programme</strong>,
-            and keynote speaker across APAC &mdash; giving back to the industry that built him.
+            and faculty voice across APAC &mdash; giving back to the industry
+            that built the operator.
           </p>
         </div>
       </div>

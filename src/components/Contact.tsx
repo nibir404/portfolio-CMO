@@ -1,8 +1,40 @@
 "use client";
 
-import { useEffect, type FormEvent } from "react";
 import Image from "next/image";
 import { useSplitText, playCharReveal } from "@/lib/useSplitText";
+import { useEffect } from "react";
+
+/* Direct channels into the Office of the CMO. Each channel names the audience it serves. */
+const channels = [
+  {
+    n: "/01",
+    label: "Boardroom & brand mandates",
+    value: "office@abdullah-al-alamin.com",
+    href: "mailto:office@abdullah-al-alamin.com",
+    note: "Group CMO mandates · board advisory · 90-day growth sprints",
+  },
+  {
+    n: "/02",
+    label: "Speaking & faculty",
+    value: "speaking@abdullah-al-alamin.com",
+    href: "mailto:speaking@abdullah-al-alamin.com",
+    note: "Keynotes · juries · faculty conversations",
+  },
+  {
+    n: "/03",
+    label: "Press & interviews",
+    value: "press@abdullah-al-alamin.com",
+    href: "mailto:press@abdullah-al-alamin.com",
+    note: "Interviews · bylines · photo and fact-sheet requests",
+  },
+  {
+    n: "/04",
+    label: "Direct line",
+    value: "+880 1700 000 000",
+    href: "tel:+8801700000000",
+    note: "Mon–Fri · 10:00–18:00 BST · WhatsApp available",
+  },
+];
 
 export default function Contact() {
   useSplitText(".contact-title");
@@ -23,11 +55,6 @@ export default function Contact() {
     return () => io.disconnect();
   }, []);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    /* placeholder — no backend yet */
-  };
-
   return (
     <section
       id="contact"
@@ -47,46 +74,46 @@ export default function Contact() {
             />
           </figure>
 
-          <span className="contact-eyebrow">/10 · Contact</span>
+          <span className="contact-eyebrow">/13 · Engage the office</span>
           <h2 id="contact-heading" className="contact-title">
-            Let&rsquo;s build something that lasts<span className="period">.</span>
+            Brief the office of the CMO<span className="period">.</span>
           </h2>
           <p className="contact-sub">
-            Currently open to collaborating with growth-driven, visionary
-            companies &mdash; where brand evolution, customer connection, and
-            business expansion happen at scale.
+            Currently engaging with growth-driven, visionary companies &mdash;
+            where brand evolution, customer connection, and business
+            expansion happen at scale.
           </p>
 
-          <div className="contact-cta-row">
-            <a href="mailto:hello@abdullah-al-alamin.com" className="btn-pill btn-pill--invert magnetic-btn">
-              <span>Get in Touch</span>
-              <span className="arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="/cv.pdf" className="btn-pill btn-pill--ghost">
-              <span>Download CV</span>
-            </a>
+          <div className="contact-channels fx-stagger">
+            {channels.map((c) => (
+              <a key={c.n} href={c.href} className="contact-channel">
+                <span className="contact-channel-n">{c.n}</span>
+                <div className="contact-channel-body">
+                  <span className="contact-channel-label">{c.label}</span>
+                  <span className="contact-channel-value">{c.value}</span>
+                  <span className="contact-channel-note">{c.note}</span>
+                </div>
+                <span className="contact-channel-arrow" aria-hidden="true">→</span>
+              </a>
+            ))}
           </div>
 
-          <div className="newsletter">
-            <h3 className="newsletter-label">
-              AlaminWeekly<span className="italic-serif accent">.</span>
-            </h3>
-            <p className="newsletter-sub">
-              One brand-strategy insight a week, straight from 14+ years in
-              the field &mdash; now with applied AI research in the mix.
-            </p>
-            <form className="newsletter-form" onSubmit={handleSubmit}>
-              <input
-                type="email"
-                required
-                placeholder="you@company.com"
-                aria-label="Email address"
-                className="newsletter-input"
-              />
-              <button type="submit" className="newsletter-submit">
-                Subscribe →
-              </button>
-            </form>
+          <div className="contact-cta-row">
+            <a
+              href="https://cal.com/abdullah-al-alamin"
+              className="btn-pill btn-pill--invert magnetic-btn"
+            >
+              <span>Book a 30-min call</span>
+              <span className="arrow" aria-hidden="true">→</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/abdullah-al-alamin"
+              className="btn-pill btn-pill--ghost"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>LinkedIn</span>
+            </a>
           </div>
         </div>
       </div>

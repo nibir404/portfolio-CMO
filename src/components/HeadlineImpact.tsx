@@ -14,11 +14,31 @@ type Item = {
   decimals?: number;
 };
 
+/* Numbers over adjectives. Each metric names the company, the scope, and the timeframe. */
 const items: Item[] = [
-  { value: 350, suffix: "%", caption: "Sales growth — PRAN Frozen Food's nationwide campaign, delivered in 45 days." },
-  { value: 12, caption: "Business units — led branding and communication strategy across Bengal Group's full portfolio." },
-  { value: 1500, suffix: "+", caption: "Youth participants — organized Bangladesh's first life-skill bootcamp, Camp for Life." },
-  { value: 14, suffix: "+", caption: "Years leading brand, communication, and now AI-driven marketing strategy across FMCG, building materials, education, and technology." },
+  {
+    value: 350,
+    suffix: "%",
+    caption:
+      "Sales growth for PRAN Frozen Food — a nationwide campaign, delivered in forty-five days under field constraints.",
+  },
+  {
+    value: 12,
+    caption:
+      "Business units under a single brand architecture — Bengal Group's portfolio rebuilt under one operating discipline.",
+  },
+  {
+    value: 1500,
+    suffix: "+",
+    caption:
+      "Youth leaders trained through Camp for Life, Bangladesh's first life-skill bootcamp at national scale.",
+  },
+  {
+    value: 14,
+    suffix: "+",
+    caption:
+      "Years compounding brand work across FMCG, building materials, conglomerates, and the AI frontier.",
+  },
 ];
 
 function Counter({ item }: { item: Item }) {
@@ -32,7 +52,7 @@ function Counter({ item }: { item: Item }) {
   );
 }
 
-function ParallaxImage({ src, alt }: { src: string; alt: string }) {
+function ParallaxBreak({ src, alt }: { src: string; alt: string }) {
   const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -69,22 +89,22 @@ function ParallaxImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export default function Accomplishments() {
+export default function HeadlineImpact() {
   return (
-    <section id="results" className="accomplishments" aria-labelledby="results-heading">
+    <section id="impact" className="accomplishments" aria-labelledby="impact-heading">
       <div className="container">
         <div className="accomplishments-grid">
           <div className="accomplishments-head">
             <span className="text-eyebrow chapter-h">
-              <span className="num">/03</span>
-              <span className="name">Results That Speak</span>
+              <span className="num">/04</span>
+              <span className="name">Headline Impact</span>
             </span>
-            <h2 id="results-heading" className="display-section">
+            <h2 id="impact-heading" className="display-section">
               The proof<span className="italic-serif accent">.</span>
             </h2>
             <p>
-              Numbers over adjectives &mdash; growth, reach, and rebuilt trust,
-              measured.
+              Numbers over adjectives &mdash; growth, reach, and rebuilt
+              trust, measured across the mandates that built the operator.
             </p>
           </div>
 
@@ -96,7 +116,7 @@ export default function Accomplishments() {
               </div>
             ))}
 
-            <ParallaxImage
+            <ParallaxBreak
               src="/images/boss-2.jpg"
               alt="Abdullah Al Alamin — on assignment"
             />
@@ -108,32 +128,27 @@ export default function Accomplishments() {
               </div>
             ))}
 
-            <ParallaxImage
+            <ParallaxBreak
               src="/images/boss-8.jpg"
-              alt="Abdullah Al Alamin — speaking engagement"
+              alt="Abdullah Al Alamin — keynote address"
             />
 
-            {items.slice(4).map((it, i) => (
-              <div className="accomplishment fx-fade-up" key={`bot-${i}`}>
-                <Counter item={it} />
-                <p className="accomplishment-caption">{it.caption}</p>
-              </div>
-            ))}
-
             <div className="accomplishment fx-fade-up">
-              <span className="accomplishment-value">National</span>
+              <span className="accomplishment-value">National&nbsp;TV</span>
               <p className="accomplishment-caption">
-                Television — created and managed <em>Metrocem To The Point</em>,
-                one of Channel i&rsquo;s highest-rated talk shows.
+                Created and managed <em>Metrocem To The Point</em>, one of
+                Channel i&rsquo;s highest-rated talk shows &mdash; turning an
+                industrial cement brand into a national thought-leadership
+                platform.
               </p>
             </div>
 
             <div className="accomplishment fx-fade-up">
-              <span className="accomplishment-value">Crisis → Trust</span>
+              <span className="accomplishment-value">Crisis&nbsp;&rarr;&nbsp;Trust</span>
               <p className="accomplishment-caption">
                 Led Bengal Cement&rsquo;s branding transformation and crisis
-                communication strategy, rebuilding stakeholder confidence
-                through a turnaround narrative.
+                communication strategy &mdash; a turnaround narrative that
+                rebuilt stakeholder confidence under public scrutiny.
               </p>
             </div>
           </div>

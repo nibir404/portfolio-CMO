@@ -86,25 +86,30 @@ Fluid sizing uses `clamp()` so headlines scale from mobile to ultrawide without 
 
 ## Sections
 
-Built in `src/app/page.tsx` as a composition of 10 client sections + Navigation + Footer + SiteInit:
+Built in `src/app/page.tsx` as an executive leadership platform. Composition: 13 client sections + Navigation + Footer + SiteInit.
 
-| # | Section           | id           | What it does |
-|---|-------------------|--------------|--------------|
-| 0 | Navigation        | (top-fixed)  | Tone-tracking nav, scroll-spy, theme toggle, mobile drawer |
-| 1 | Hero              | `hero`       | Crossfading 4-image portrait, display headline, scroll cue |
-| 2 | About             | `about`      | "Brand Architect at the Intersection of Marketing & AI" framing |
-| 3 | Journey           | `journey`    | **Horizontal-pinned** GSAP scroll — 7 mandates, 1 chapter slide + 6 step slides |
-| 4 | Accomplishments   | `results`    | Animated count-up stats (350%, 12 units, 1,500+, 14+), parallax break images |
-| 5 | Awards            | `awards`     | 12 awards across 3 categories (International / Government / Industry) |
-| 6 | Expertise         | `expertise`  | 7 capabilities + engagement/sectors/geography grid |
-| 7 | Education         | `education`  | 6 entries incl. PhD CMU + iMBA UIUC, with active-marker dot animation |
-| 8 | Media             | `media`      | 3 press tiles, parallax, press-token marquee |
-| 9 | BeyondWork        | `beyond`     | AI enthusiast, marathon, scouting, Rotary, community |
-|10 | Contact           | `contact`    | Direct channels (already routed in Navigation `Get in touch` CTA) |
-|11 | Footer            | (site)       | Legal, social, back-to-top |
-|-- | SiteInit          | (client)     | Boot-time client effects (Lenis, reveal observers) |
+The visitor journey answers, in order: *Who is he → Should I trust him → What's his point of view → What has he achieved → What businesses has he rebuilt → What's he building → What's it like working with him → How does he think → What does he publish → Where does he speak → What has he won → Where did he study → How do I engage the office.*
 
-The Journey section is the signature interaction: a GSAP-pinned horizontal scroll through 7 career chapters with snap-to-slide, a progress counter (`01 / 07`), and a mobile vertical fallback for screens under 1024px.
+| # | Section                | id                    | What it does |
+|---|------------------------|-----------------------|--------------|
+| 0 | Navigation             | (top-fixed)           | Tone-tracking nav, scroll-spy, theme toggle, mobile drawer. CTA: "Engage the office". |
+| 1 | Hero                   | `hero`                | Crossfading 4-image leadership gallery, "Building brands, shaping markets", dual CTAs ("See the impact" / "Brief my office"). |
+| 2 | Featured In            | `featured`            | Premium press strip — newspapers, awards bodies, gov't ministries, conferences. Three signature placements. |
+| 3 | About                  | `about`               | "A note from the office of the CMO" — manifesto, operating principle, philosophy. |
+| 4 | Headline Impact        | `impact`              | Animated count-up stats (350%, 12, 1,500+, 14+) with full business context. |
+| 5 | Transformations        | `transformations`     | **Horizontal-pinned** GSAP scroll — 7 business transformations, each with scope, decision, and measurable outcome. |
+| 6 | Initiatives            | `initiatives`         | What the office is building now: Project Atlas, OneBet, The Compounding Engine, AI Marketing Council. |
+| 7 | Leadership Gallery     | `leadership-gallery`  | Bento-style imagery: stage, boardroom, awards, international meetings — captioned by context. |
+| 8 | Operating Principles   | `thinking`            | The decision framework behind the work — 7 principles an operator would stake P&L on. |
+| 9 | Content Hub (Insights) | `insights`            | Reels-style content hub: 12 vertical cards with hover-autoplay, filterable by Marketing / AI / Leadership / Business / Growth / Branding / Innovation. Mobile horizontal-snap scroll. |
+|10 | On Stage               | `speaking`            | Keynote engagements with audience + scope, marquee of venues, juror & advisory note. |
+|11 | Recognition            | `recognition`         | 12 awards grouped: International / Government & National / Industry & Institutional. |
+|12 | Education              | `education`           | Compact academic affiliations strip — institutions only, no CGPA, near the bottom. |
+|13 | Contact                | `contact`             | "Brief the office of the CMO" — 4 direct channels (boardroom, speaking, press, direct line). |
+|14 | Footer                 | (site)                | Legal, navigate, channels, social. |
+|-- | SiteInit               | (client)              | Boot-time client effects (Lenis, reveal observers). |
+
+The Transformations section is the signature interaction: a GSAP-pinned horizontal scroll through 7 business chapters with snap-to-slide, a progress counter (`01 / 07`), and a mobile vertical fallback for screens under 1024px.
 
 ## Project structure
 

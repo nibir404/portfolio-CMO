@@ -5,14 +5,14 @@ import { useTheme } from "@/components/ThemeProvider";
 import { useScrollSpy } from "@/lib/useScrollSpy";
 
 const links = [
-  { label: "Origin", href: "#about" },
-  { label: "Journey", href: "#journey" },
-  { label: "Results", href: "#results" },
-  { label: "Awards", href: "#awards" },
-  { label: "Craft", href: "#expertise" },
-  { label: "Learn", href: "#education" },
-  { label: "Media", href: "#media" },
-  { label: "Beyond", href: "#beyond" },
+  { label: "Leadership",  href: "#about" },
+  { label: "Impact",     href: "#impact" },
+  { label: "Initiatives", href: "#initiatives" },
+  { label: "Thinking",   href: "#thinking" },
+  { label: "Insights",   href: "#insights" },
+  { label: "Speaking",   href: "#speaking" },
+  { label: "Recognition", href: "#recognition" },
+  { label: "Contact",    href: "#contact" },
 ];
 
 /**
@@ -31,14 +31,17 @@ export default function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const activeId = useScrollSpy([
     "hero",
+    "featured",
     "about",
-    "journey",
-    "results",
-    "awards",
-    "expertise",
+    "impact",
+    "transformations",
+    "initiatives",
+    "leadership-gallery",
+    "thinking",
+    "insights",
+    "speaking",
+    "recognition",
     "education",
-    "media",
-    "beyond",
     "contact",
   ]);
 
@@ -171,9 +174,9 @@ export default function Navigation() {
           <a
             href="#contact"
             className="nav-cta"
-            aria-label="Get in touch with Abdullah"
+            aria-label="Engage the Office of the CMO"
           >
-            Get in touch
+            Engage the office
           </a>
 
           <button
@@ -219,7 +222,7 @@ export default function Navigation() {
             className="btn-pill btn-pill--invert nav-drawer-cta"
             onClick={handleLinkClick}
           >
-            Get in touch
+            Engage the office
           </a>
         </div>
       </div>

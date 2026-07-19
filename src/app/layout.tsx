@@ -31,30 +31,32 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Abdullah Al Alamin | CMO, Betopia Group & AI Researcher",
+  title: "Abdullah Al Alamin | Chief Marketing Officer, Betopia Group",
   description:
-    "Abdullah Al Alamin is CMO of Betopia Group and a doctoral AI researcher at Carnegie Mellon. 14+ years building category-defining brands with AI-powered growth.",
+    "Abdullah Al Alamin is the Chief Marketing Officer of Betopia Group and a doctoral AI researcher at Carnegie Mellon. He builds category-defining brands, leads AI-powered marketing transformation, and advises boards on growth strategy.",
   keywords: [
     "Abdullah Al Alamin",
-    "Chief Marketing Officer Bangladesh",
-    "AI marketing strategist Bangladesh",
-    "CMO Betopia Group",
+    "Chief Marketing Officer Betopia Group",
+    "Group CMO Bangladesh",
+    "AI marketing strategist",
     "brand architect Bangladesh",
     "AI-driven growth strategist",
+    "executive brand advisor",
+    "marketing transformation leader",
   ],
   authors: [{ name: "Abdullah Al Alamin" }],
   openGraph: {
-    title: "Abdullah Al Alamin | CMO, Betopia Group & AI Researcher",
+    title: "Abdullah Al Alamin | Chief Marketing Officer, Betopia Group",
     description:
-      "CMO of Betopia Group and doctoral AI researcher at Carnegie Mellon. 14+ years building category-defining brands with AI-powered growth.",
+      "The personal headquarters of Abdullah Al Alamin — Group CMO of Betopia Group and doctoral AI researcher at Carnegie Mellon. Strategic thinking, business transformations, and AI-powered marketing leadership.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abdullah Al Alamin | CMO, Betopia Group & AI Researcher",
+    title: "Abdullah Al Alamin | Chief Marketing Officer, Betopia Group",
     description:
-      "CMO of Betopia Group and doctoral AI researcher at Carnegie Mellon. 14+ years building category-defining brands with AI-powered growth.",
+      "Group CMO of Betopia Group. Doctoral AI researcher at Carnegie Mellon. Building category-defining brands with AI-powered marketing strategy.",
   },
 };
 
@@ -85,10 +87,6 @@ const jsonLd = {
       "@type": "EducationalOrganization",
       name: "University of Illinois Urbana-Champaign — Gies College of Business",
     },
-    {
-      "@type": "EducationalOrganization",
-      name: "Daffodil Institute of IT (DIIT)",
-    },
   ],
   award: [
     "Global Brand Leadership Award — World Brand Congress (2024)",
@@ -96,11 +94,14 @@ const jsonLd = {
     "International Corporate Communication Excellence Award — IABC (2022)",
     "Digital Bangladesh Innovation Award — ICT Division, Government of Bangladesh (2023)",
     "National Marketing Excellence Award — Ministry of Commerce, Government of Bangladesh (2022)",
-    "Outstanding Brand Builder Award — FMCG & Consumer Goods Marketing Summit (2021)",
   ],
   description:
-    "Bangladesh-based Chief Marketing Officer and doctoral AI researcher at Carnegie Mellon, building category-defining brands with AI-powered growth.",
-  url: "https://abdullah-al-alamin.vercel.app",
+    "Chief Marketing Officer of Betopia Group and doctoral AI researcher at Carnegie Mellon. Fourteen years building category-defining brands with AI-powered marketing strategy.",
+  url: "https://abdullahalamin.me",
+  sameAs: [
+    "https://www.linkedin.com/in/abdullah-al-alamin",
+    "https://x.com/abdullah_alamin",
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
