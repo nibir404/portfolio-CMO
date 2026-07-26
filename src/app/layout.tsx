@@ -1,133 +1,73 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Inter, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
+import { site } from "@/content/site";
+import { buildMetadataBase } from "@/lib/metadata";
+import { personSchema, websiteSchema } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { MobileContactCta } from "@/components/layout/MobileContactCta";
+import { SkipLink } from "@/components/layout/SkipLink";
+import { ThemeSync } from "@/components/layout/ThemeSync";
+import { RevealInit } from "@/components/motion/RevealInit";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
 
-const anton = Anton({
-  weight: "400",
+const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
-const inter = Inter({
+const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
-});
-
-const cormorant = Cormorant_Garamond({
-  weight: ["400", "500"],
-  style: ["italic", "normal"],
-  subsets: ["latin"],
-  variable: "--font-quote",
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Abdullah Al Alamin | Chief Marketing Officer, Betopia Group",
-  description:
-    "Abdullah Al Alamin is the Chief Marketing Officer of Betopia Group and a doctoral AI researcher at Carnegie Mellon. He builds category-defining brands, leads AI-powered marketing transformation, and advises boards on growth strategy.",
-  keywords: [
-    "Abdullah Al Alamin",
-    "Chief Marketing Officer Betopia Group",
-    "Group CMO Bangladesh",
-    "AI marketing strategist",
-    "brand architect Bangladesh",
-    "AI-driven growth strategist",
-    "executive brand advisor",
-    "marketing transformation leader",
-  ],
-  authors: [{ name: "Abdullah Al Alamin" }],
+  ...buildMetadataBase(),
+  authors: [{ name: site.name, url: site.origin }],
+  creator: site.name,
+  publisher: site.name,
   openGraph: {
-    title: "Abdullah Al Alamin | Chief Marketing Officer, Betopia Group",
-    description:
-      "The personal headquarters of Abdullah Al Alamin — Group CMO of Betopia Group and doctoral AI researcher at Carnegie Mellon. Strategic thinking, business transformations, and AI-powered marketing leadership.",
-    type: "website",
-    locale: "en_US",
+    ...buildMetadataBase().openGraph,
+    url: site.origin,
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Abdullah Al Alamin | Chief Marketing Officer, Betopia Group",
-    description:
-      "Group CMO of Betopia Group. Doctoral AI researcher at Carnegie Mellon. Building category-defining brands with AI-powered marketing strategy.",
+    ...buildMetadataBase().twitter,
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
-    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
-  ],
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Abdullah Al Alamin",
-  jobTitle: "Chief Marketing Officer",
-  worksFor: {
-    "@type": "Organization",
-    name: "Betopia Group",
-  },
-  alumniOf: [
-    {
-      "@type": "EducationalOrganization",
-      name: "Carnegie Mellon University",
-    },
-    {
-      "@type": "EducationalOrganization",
-      name: "University of Illinois Urbana-Champaign — Gies College of Business",
-    },
-  ],
-  award: [
-    "Global Brand Leadership Award — World Brand Congress (2024)",
-    "Asia Pacific Marketing Excellence Award — Asia Marketing Federation (2023)",
-    "International Corporate Communication Excellence Award — IABC (2022)",
-    "Digital Bangladesh Innovation Award — ICT Division, Government of Bangladesh (2023)",
-    "National Marketing Excellence Award — Ministry of Commerce, Government of Bangladesh (2022)",
-  ],
-  description:
-    "Chief Marketing Officer of Betopia Group and doctoral AI researcher at Carnegie Mellon. Fourteen years building category-defining brands with AI-powered marketing strategy.",
-  url: "https://abdullahalamin.me",
-  sameAs: [
-    "https://www.linkedin.com/in/abdullah-al-alamin",
-    "https://x.com/abdullah_alamin",
-  ],
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      data-theme="dark"
-      className={`${anton.variable} ${inter.variable} ${cormorant.variable} ${jetbrains.variable}`}
-    >
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js');",
+            __html:
+              "(function(){try{var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s||(p?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t;}catch(e){}})();document.documentElement.classList.add('js');",
           }}
         />
       </head>
       <body>
-        <a href="#main" className="skip-link">
-          Skip to main content
-        </a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <ThemeProvider>{children}</ThemeProvider>
+        <SkipLink href="#main" />
+        <JsonLd data={personSchema()} />
+        <JsonLd data={websiteSchema()} />
+        <SiteHeader />
+        <main id="main">{children}</main>
+        <SiteFooter />
+        <MobileContactCta />
+        <ThemeSync />
+        <RevealInit />
       </body>
     </html>
   );

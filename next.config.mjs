@@ -2,9 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "abdullah-al-alamin.vercel.app" },
-    ],
+    formats: ["image/avif", "image/webp"],
   },
 };
 
