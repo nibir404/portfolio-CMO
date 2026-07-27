@@ -133,65 +133,50 @@ export default function TrainingPage() {
             <span className="section-heading__title">What participants ship.</span>
           </h2>
           <div className="grid grid--2" style={{ marginTop: "var(--space-6)" }}>
-            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", height: "100%" }}>
-              <span style={{ fontSize: "1.5rem" }} aria-hidden="true">📋</span>
+            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)", height: "100%" }}>
+              <svg className="card__icon" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="1.75" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--color-accent)", display: "block" }}>
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                <path d="M9 12h6" />
+                <path d="M9 16h6" />
+              </svg>
               <h3 style={{ margin: 0 }}>90-day operating plan</h3>
               <p style={{ color: "var(--color-ink-soft)", margin: 0 }}>
                 A comprehensive operating plan tailored to govern and scale the marketing function.
               </p>
             </div>
-            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", height: "100%" }}>
-              <span style={{ fontSize: "1.5rem" }} aria-hidden="true">📊</span>
+            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)", height: "100%" }}>
+              <svg className="card__icon" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="1.75" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--color-accent)", display: "block" }}>
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <line x1="9" y1="17" x2="9" y2="12" />
+                <line x1="12" y1="17" x2="12" y2="9" />
+                <line x1="15" y1="17" x2="15" y2="14" />
+              </svg>
               <h3 style={{ margin: 0 }}>Board pre-read template</h3>
               <p style={{ color: "var(--color-ink-soft)", margin: 0 }}>
                 A high-fidelity reporting deck the leadership team can reuse for quarterly board updates.
               </p>
             </div>
-            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", height: "100%" }}>
-              <span style={{ fontSize: "1.5rem" }} aria-hidden="true">⚙️</span>
+            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)", height: "100%" }}>
+              <svg className="card__icon" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="1.75" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--color-accent)", display: "block" }}>
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z" />
+                <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5.5Z" />
+                <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1Z" />
+              </svg>
               <h3 style={{ margin: 0 }}>AI use-case register</h3>
               <p style={{ color: "var(--color-ink-soft)", margin: 0 }}>
                 A structured roadmap including rigorous evaluation criteria, rollout schedules, and governance.
               </p>
             </div>
-            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", height: "100%" }}>
-              <span style={{ fontSize: "1.5rem" }} aria-hidden="true">📈</span>
+            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)", height: "100%" }}>
+              <svg className="card__icon" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="1.75" fill="none" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--color-accent)", display: "block" }}>
+                <path d="M3 3v18h18" />
+                <path d="m18.7 8-5.1 5.2-2.8-2.7L7 14.3" />
+              </svg>
               <h3 style={{ margin: 0 }}>Brand-equity scorecard</h3>
               <p style={{ color: "var(--color-ink-soft)", margin: 0 }}>
                 A data-driven scorecard linking brand health directly to key commercial outcomes.
               </p>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      <Section id="inquiry" ariaLabelledBy="enquire-title" surface="default">
-        <Container>
-          <div
-            className="cta-banner"
-            style={{
-              marginBlock: "var(--space-5) var(--space-6)",
-              ["--cta-banner-image" as string]: "url('/images/10.jpg')",
-            }}
-          >
-            <div className="cta-banner__media" aria-hidden="true" />
-            <div className="cta-banner__overlay" aria-hidden="true" />
-            <div className="cta-banner__inner">
-              <div className="cta-banner__copy">
-                <span className="eyebrow">Discuss a programme</span>
-                <h2 id="enquire-title" className="cta-banner__title">
-                  Build the next cohort with the office.
-                </h2>
-                <p className="cta-banner__body">
-                  Programmes are scoped against the team, the market, and the board&rsquo;s
-                  decision calendar. The office replies within two business days.
-                </p>
-              </div>
-              <div className="cta-banner__actions">
-                <ButtonLink href="/contact" variant="white">
-                  Email the office
-                </ButtonLink>
-              </div>
             </div>
           </div>
         </Container>

@@ -7,7 +7,7 @@ export function ImmersiveHero() {
     <section className="immersive-hero" aria-labelledby="home-hero-title">
       <div className="immersive-hero__bg">
         <Image
-          src="/images/boss-final-image.jpg"
+          src="/images/boss.jpg"
           alt="Abdullah Al Alamin"
           fill
           priority
