@@ -17,11 +17,11 @@
   --color-line: #d2d2d7;
   --color-control-line: #86868b;
   --color-surface: #f5f5f7;
-  --color-accent: #0066cc;
-  --color-accent-soft: #0071e3;
+  --color-accent: #e03b00;
+  --color-accent-soft: #f24400;
   --color-accent-ink: #ffffff;
   --color-gold: #f5f5f7;
-  --color-focus: #0066cc;
+  --color-focus: #e03b00;
   --color-error: #7d1111;
   --color-error-soft: #fff4f4;
   --color-error-ink: #7d1111;
@@ -74,11 +74,11 @@
   --color-line: #333336;
   --color-control-line: #86868b;
   --color-surface: #1d1d1f;
-  --color-accent: #2997ff;
-  --color-accent-soft: #2997ff;
+  --color-accent: #ff5f1f;
+  --color-accent-soft: #ff6d2e;
   --color-accent-ink: #ffffff;
   --color-gold: #ff4500;
-  --color-focus: #2997ff;
+  --color-focus: #ff5f1f;
   --color-error: #ff8a8a;
   --color-error-soft: #2a1414;
   --color-error-ink: #ffb3b3;
@@ -265,8 +265,9 @@ main {
 }
 
 .section--accent {
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
+  background: #111112;
+  color: #ffffff;
+  border-top: 4px solid var(--color-accent);
 }
 
 .section--accent h1,
@@ -274,7 +275,19 @@ main {
 .section--accent h3,
 .section--accent h4,
 .section--accent a:not(.btn) {
-  color: var(--color-accent-ink);
+  color: #ffffff;
+}
+
+.section--accent .btn--ghost,
+.section--dark .btn--ghost {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.section--accent .btn--ghost:hover,
+.section--dark .btn--ghost:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .section--dark {
@@ -697,15 +710,17 @@ main {
   z-index: 1000;
   height: var(--header-h);
   border-bottom: 1px solid transparent;
-  background: color-mix(in srgb, var(--color-canvas) 78%, transparent);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  transition: background-color 200ms ease, border-color 200ms ease;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background 250ms ease, backdrop-filter 250ms ease, border-color 250ms ease, -webkit-backdrop-filter 250ms ease;
 }
 
 .site-header--scrolled {
   border-bottom-color: var(--color-line);
-  background: color-mix(in srgb, var(--color-canvas) 92%, transparent);
+  background: color-mix(in srgb, var(--color-canvas) 78%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
 
 .site-header__inner {
@@ -3256,6 +3271,51 @@ body.menu-open .mobile-cta {
   gap: var(--space-4);
   margin-top: var(--space-3);
   align-items: center;
+}
+
+@media (max-width: 1023px) {
+  .immersive-hero {
+    min-height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    padding-block: 0 var(--space-8);
+    background: #0a0a0a;
+  }
+
+  .immersive-hero__bg {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+
+  .immersive-hero__bg img {
+    object-position: center center;
+  }
+
+  .immersive-hero__overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0) 0%,
+      rgba(10, 10, 10, 0.4) 60%,
+      rgba(10, 10, 10, 0.95) 100%
+    );
+  }
+
+  .immersive-hero__copy {
+    padding-inline: var(--space-5);
+    margin-top: var(--space-6);
+    max-width: 100%;
+  }
+
+  .immersive-hero__title {
+    font-size: clamp(2rem, 6.5vw, 2.75rem);
+  }
+
+  .immersive-hero__subhead {
+    font-size: 1rem;
+    max-width: 100%;
+  }
 }
 
 /* ============================================================
