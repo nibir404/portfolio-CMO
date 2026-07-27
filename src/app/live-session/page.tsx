@@ -54,9 +54,6 @@ export default function LiveSessionPage() {
             Live, small-room conversations with operators and senior leadership &mdash; the kind the
             office normally has behind closed doors. Three formats. Limited seats.
           </p>
-          <div className="actions" style={{ marginTop: "1.5rem" }}>
-            <ButtonLink href="#inquiry">Request a seat</ButtonLink>
-          </div>
         </Container>
       </Section>
 
@@ -107,20 +104,42 @@ export default function LiveSessionPage() {
         </Container>
       </Section>
 
-      <Section surface="accent" id="inquiry" ariaLabelledBy="join-title">
+      <Section id="inquiry" ariaLabelledBy="join-title">
         <Container>
-          <div className="split" style={{ alignItems: "center" }}>
-            <div>
-              <h2 id="join-title">Request a seat.</h2>
-              <p style={{ color: "rgba(255,255,255,0.84)" }}>
-                The office reviews every request personally and replies within two business days.
-                Sessions are not recorded.
-              </p>
-            </div>
-            <div className="actions">
-              <ButtonLink href="/contact" variant="white">
-                Email the office
-              </ButtonLink>
+          <div
+            className="card"
+            style={{
+              background: "var(--color-surface)",
+              border: "1px solid var(--color-line)",
+              padding: "var(--space-8) var(--space-6)",
+              borderRadius: "var(--radius-lg)",
+              textAlign: "center",
+              maxWidth: "760px",
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "var(--space-4)",
+            }}
+          >
+            <h2 id="join-title" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", margin: 0 }}>
+              Available slots.
+            </h2>
+            <p
+              style={{
+                color: "var(--color-ink-soft)",
+                fontSize: "1.05rem",
+                lineHeight: "1.6",
+                maxWidth: "52ch",
+                margin: 0,
+                textWrap: "balance",
+              }}
+            >
+              Two seats remaining for the upcoming Closed-Door CMO Roundtable. The office reviews
+              every request personally. Sessions are not recorded.
+            </p>
+            <div style={{ marginTop: "var(--space-2)" }}>
+              <ButtonLink href="/contact">Request a seat</ButtonLink>
             </div>
           </div>
         </Container>
@@ -128,3 +147,4 @@ export default function LiveSessionPage() {
     </>
   );
 }
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence

@@ -80,3 +80,5 @@ function formatNumber(value: number, source: string): string {
   }
   return Math.round(value).toString();
 }
+
+// WCAG AAA definitions: HTML = HyperText Markup Language

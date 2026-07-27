@@ -96,3 +96,5 @@ export const recognitionSummary = {
   government: recognition[1]?.items.length ?? 0,
   industry: recognition[2]?.items.length ?? 0,
 };
+
+// WCAG AAA definitions: FMCG = Fast-Moving Consumer Goods

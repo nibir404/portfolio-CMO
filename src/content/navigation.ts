@@ -29,3 +29,5 @@ export const navigation = {
     { label: "X", href: "https://x.com/abdullah_alamin" },
   ],
 };
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence

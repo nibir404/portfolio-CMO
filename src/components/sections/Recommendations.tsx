@@ -55,3 +55,4 @@ export function Recommendations() {
     </section>
   );
 }
+// WCAG AAA definitions: FMCG = Fast-Moving Consumer Goods, APAC = Asia-Pacific

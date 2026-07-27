@@ -80,9 +80,6 @@ export default function TrainingPage() {
             Cohort programmes, in-house academies, and board literacy sessions &mdash; built around
             the operator&rsquo;s point of view, not the content calendar.
           </p>
-          <div className="actions" style={{ marginTop: "1.5rem" }}>
-            <ButtonLink href="#inquiry">Discuss a programme</ButtonLink>
-          </div>
         </Container>
       </Section>
 
@@ -103,11 +100,6 @@ export default function TrainingPage() {
                   <br />
                   <strong style={{ color: "var(--color-ink)" }}>Format:</strong> {programme.format}
                 </p>
-                <div className="actions" style={{ marginTop: "1rem" }}>
-                  <ButtonLink href={programme.href} variant="primary">
-                    Discuss cohort
-                  </ButtonLink>
-                </div>
               </article>
             ))}
           </div>
@@ -140,21 +132,36 @@ export default function TrainingPage() {
             <span className="eyebrow">Outcomes</span>
             <span className="section-heading__title">What participants ship.</span>
           </h2>
-          <ul className="prose">
-            <li>
-              <strong>A 90-day operating plan</strong> for the marketing function.
-            </li>
-            <li>
-              <strong>A board pre-read template</strong> the team can re-use every quarter.
-            </li>
-            <li>
-              <strong>An AI use-case register</strong> with evaluation, governance, and rollout.
-            </li>
-            <li>
-              <strong>A brand-equity scorecard</strong> tied to the company&rsquo;s commercial
-              outcomes.
-            </li>
-          </ul>
+          <div className="grid grid--2" style={{ marginTop: "var(--space-6)" }}>
+            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", height: "100%" }}>
+              <span style={{ fontSize: "1.5rem" }} aria-hidden="true">📋</span>
+              <h3 style={{ margin: 0 }}>90-day operating plan</h3>
+              <p style={{ color: "var(--color-ink-soft)", margin: 0 }}>
+                A comprehensive operating plan tailored to govern and scale the marketing function.
+              </p>
+            </div>
+            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", height: "100%" }}>
+              <span style={{ fontSize: "1.5rem" }} aria-hidden="true">📊</span>
+              <h3 style={{ margin: 0 }}>Board pre-read template</h3>
+              <p style={{ color: "var(--color-ink-soft)", margin: 0 }}>
+                A high-fidelity reporting deck the leadership team can reuse for quarterly board updates.
+              </p>
+            </div>
+            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", height: "100%" }}>
+              <span style={{ fontSize: "1.5rem" }} aria-hidden="true">⚙️</span>
+              <h3 style={{ margin: 0 }}>AI use-case register</h3>
+              <p style={{ color: "var(--color-ink-soft)", margin: 0 }}>
+                A structured roadmap including rigorous evaluation criteria, rollout schedules, and governance.
+              </p>
+            </div>
+            <div className="card card--service" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", height: "100%" }}>
+              <span style={{ fontSize: "1.5rem" }} aria-hidden="true">📈</span>
+              <h3 style={{ margin: 0 }}>Brand-equity scorecard</h3>
+              <p style={{ color: "var(--color-ink-soft)", margin: 0 }}>
+                A data-driven scorecard linking brand health directly to key commercial outcomes.
+              </p>
+            </div>
+          </div>
         </Container>
       </Section>
 
@@ -192,3 +199,4 @@ export default function TrainingPage() {
     </>
   );
 }
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence

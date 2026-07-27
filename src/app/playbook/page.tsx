@@ -99,3 +99,5 @@ export default function PlaybookPage() {
     </>
   );
 }
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, APAC = Asia-Pacific

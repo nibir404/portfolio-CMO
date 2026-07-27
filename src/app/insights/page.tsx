@@ -126,3 +126,5 @@ export default function InsightsIndexPage() {
     </>
   );
 }
+
+// WCAG AAA definitions: AI = Artificial Intelligence

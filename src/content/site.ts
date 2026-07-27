@@ -62,3 +62,5 @@ export const site: Site = {
 };
 
 export const currentYear = new Date().getFullYear();
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence

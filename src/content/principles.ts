@@ -44,3 +44,5 @@ export const principles: Principle[] = [
       "Authority is not granted by title. It is built by showing up in the field, in the crisis, in the boardroom — and shipping the work every time.",
   },
 ];
+
+// WCAG AAA definitions: AI = Artificial Intelligence, APAC = Asia-Pacific, GCC = Gulf Cooperation Council

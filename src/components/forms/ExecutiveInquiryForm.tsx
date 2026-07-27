@@ -242,3 +242,5 @@ export function ExecutiveInquiryForm() {
     </div>
   );
 }
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence

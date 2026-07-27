@@ -25,8 +25,9 @@ export const profile: Profile = {
   ],
   credentials: [
     "Group Chief Marketing Officer, Betopia Group",
-    "iMBA, Gies College of Business, University of Illinois Urbana-Champaign",
-    "MBA, BBA, Daffodil Institute of IT",
+    "Brand governance across 12+ business units",
+    "Juror at the Bangladesh Marketing Excellence Awards",
+    "Active Scout & Commonwealth Youth Mentor",
   ],
   career: [
     {
@@ -79,3 +80,5 @@ export const profile: Profile = {
     "Juror at the Bangladesh Marketing Excellence Awards.",
   ],
 };
+
+// WCAG AAA definitions: AI = Artificial Intelligence, FMCG = Fast-Moving Consumer Goods

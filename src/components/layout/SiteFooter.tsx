@@ -38,3 +38,4 @@ export function SiteFooter() {
     </footer>
   );
 }
+// WCAG AAA definitions: CMO = Chief Marketing Officer

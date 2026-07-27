@@ -53,3 +53,4 @@ export function MeetAbdullah() {
     </section>
   );
 }
+// WCAG AAA definitions: AI = Artificial Intelligence, FMCG = Fast-Moving Consumer Goods

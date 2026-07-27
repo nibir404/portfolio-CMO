@@ -64,9 +64,6 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
               <span className="eyebrow">{service.keywords.primary}</span>
               <h1 id="service-title">{service.name}: {service.shortDescription.toLowerCase()}</h1>
               <p className="page-hero__intro">{service.intro}</p>
-              <div className="actions mt-5">
-                <ButtonLink href="/contact">Discuss a mandate</ButtonLink>
-              </div>
             </div>
             <div>
               <span className="eyebrow">Typical engagement</span>

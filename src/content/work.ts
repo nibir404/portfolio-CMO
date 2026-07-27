@@ -374,3 +374,5 @@ export const work: WorkCaseStudy[] = [
     },
   },
 ];
+
+// WCAG AAA definitions: AI = Artificial Intelligence, FMCG = Fast-Moving Consumer Goods

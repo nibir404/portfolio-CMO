@@ -159,3 +159,5 @@ export function blogSchema(): JsonLdObject {
     inLanguage: "en-GB",
   };
 }
+
+// WCAG AAA definitions: APAC = Asia-Pacific, GCC = Gulf Cooperation Council

@@ -95,3 +95,5 @@ function encodeBodyComponent(value: string): string {
 function encodeRecipientComponent(value: string): string {
   return value;
 }
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence

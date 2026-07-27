@@ -122,9 +122,6 @@ export default function ResourcesPage() {
             The working tools the office uses with boards and operators &mdash; long-form essays,
             templates, and short-form notes.
           </p>
-          <div className="actions mt-5">
-            <ButtonLink href="#inquiry">Request the library</ButtonLink>
-          </div>
         </Container>
       </Section>
 
@@ -183,3 +180,4 @@ export default function ResourcesPage() {
     </>
   );
 }
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence

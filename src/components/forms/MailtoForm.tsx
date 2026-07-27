@@ -25,6 +25,7 @@ type MailtoFormProps = {
   consentLabel?: React.ReactNode;
   conditionalFields?: (values: Record<string, string>) => FormFieldDef[];
   className?: string;
+  gridClassName?: string;
 };
 
 const CONSENT_KEY = "consent";
@@ -44,6 +45,7 @@ export function MailtoForm({
   ),
   conditionalFields,
   className = "",
+  gridClassName = "form-grid form-grid--2",
 }: MailtoFormProps) {
   const defaults = useMemo(() => {
     const base: Record<string, string> = { [CONSENT_KEY]: "" };
@@ -120,7 +122,7 @@ export function MailtoForm({
             </ul>
           </div>
         ) : null}
-        <div className="form-grid form-grid--2">
+        <div className={gridClassName}>
           {activeFields.map((field) => (
             <FormField
               key={field.name}

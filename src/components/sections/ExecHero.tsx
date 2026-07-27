@@ -37,3 +37,4 @@ export function ExecHero() {
     </section>
   );
 }
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence, GCC = Gulf Cooperation Council

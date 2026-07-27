@@ -122,3 +122,5 @@ export const pastStages = [
     verificationStatus: "needs-verification" as const,
   },
 ];
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence, FMCG = Fast-Moving Consumer Goods, APAC = Asia-Pacific

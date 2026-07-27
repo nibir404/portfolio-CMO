@@ -13,3 +13,5 @@ export const newsletter = {
   // The newsletter has no automation behind it. The signup action opens a mailto.
   mailtoOnly: true,
 };
+
+// WCAG AAA definitions: AI = Artificial Intelligence

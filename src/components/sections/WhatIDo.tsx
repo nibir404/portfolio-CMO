@@ -50,3 +50,4 @@ export function WhatIDo() {
     </section>
   );
 }
+// WCAG AAA definitions: AI = Artificial Intelligence

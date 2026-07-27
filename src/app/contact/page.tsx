@@ -94,23 +94,8 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section ariaLabelledBy="cal-title" surface="surface">
-        <Container>
-          <div className="split split--center" style={{ alignItems: "center" }}>
-            <div>
-              <h2 id="cal-title">Book directly.</h2>
-              <p className="section-heading__copy" style={{ margin: 0 }}>
-                Prefer a calendar? A 30-minute call is available on the office&rsquo;s Cal.com.
-              </p>
-            </div>
-            <div className="actions">
-              <ButtonLink href={site.calCom} external variant="primary">
-                Book on Cal.com
-              </ButtonLink>
-            </div>
-          </div>
-        </Container>
-      </Section>
     </>
   );
 }
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence

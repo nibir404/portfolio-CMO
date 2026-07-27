@@ -82,9 +82,6 @@ export default function ServicesPage() {
                 Whether you need a marketing leader in the chair, a voice in the boardroom, a
                 quarter of focused transformation, or a defensible AI strategy.
               </p>
-              <div className="actions mt-5">
-                <ButtonLink href="/contact">Book a 30-min call</ButtonLink>
-              </div>
             </div>
           </div>
         </Container>
@@ -207,3 +204,5 @@ export default function ServicesPage() {
     </>
   );
 }
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence, FMCG = Fast-Moving Consumer Goods, APAC = Asia-Pacific, GCC = Gulf Cooperation Council

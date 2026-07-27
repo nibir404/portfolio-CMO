@@ -64,3 +64,4 @@ export function StrategicAdvisory() {
     </section>
   );
 }
+// WCAG AAA definitions: AI = Artificial Intelligence

@@ -37,3 +37,5 @@ export const playbook = {
   // Until a real PDF is uploaded to /public/downloads/playbook/, the form action is a request — not a download.
   requestOnly: true,
 };
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer

@@ -32,3 +32,5 @@ export function ImmersiveHero() {
     </section>
   );
 }
+
+// WCAG AAA definitions: FMCG = Fast-Moving Consumer Goods

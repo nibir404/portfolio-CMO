@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { profile } from "@/content/profile";
-import { education } from "@/content/education";
 import { principles } from "@/content/principles";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -65,7 +64,7 @@ export default function AboutPage() {
             <div style={{ display: "grid", gap: "var(--space-4)", alignContent: "start" }}>
               <h3 style={{ fontSize: "1.5rem", fontWeight: 600, color: "var(--color-ink)", marginBottom: "var(--space-2)" }}>Credentials</h3>
               {profile.credentials.map((credential, idx) => {
-                const label = ["Executive Focus", "Research Scope", "Leadership History", "Commercial Scale"][idx] || "Credential";
+                const label = ["Executive Focus", "Commercial Scale", "Industry Leadership", "Civic Engagement"][idx] || "Credential";
                 return (
                   <div key={credential} className="card" style={{ padding: "var(--space-4)" }}>
                     <span style={{ display: "block", fontSize: "0.76rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)", marginBottom: "4px" }}>
@@ -128,24 +127,6 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section ariaLabelledBy="education-title">
-        <Container>
-          <SectionHeading
-            title="Where the operator studied."
-            id="education-title"
-          />
-          <div className="grid grid--2 mt-6">
-            {education.map((milestone) => (
-              <article className="card" key={`${milestone.institution}-${milestone.program}`} style={{ padding: "var(--space-5)" }}>
-                <span className="timeline__year" style={{ display: "block", marginBottom: "var(--space-2)" }}>{milestone.year}</span>
-                <h3 style={{ fontSize: "1.25rem", lineHeight: "1.3", marginBottom: "var(--space-2)" }}>{milestone.program}</h3>
-                <p style={{ fontWeight: 600, color: "var(--color-ink)", margin: 0 }}>{milestone.institution}</p>
-                <p style={{ color: "var(--color-ink-soft)", fontSize: "0.92rem", margin: 0 }}>{milestone.status}.</p>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </Section>
 
       <Section surface="surface" ariaLabelledBy="beyond-title">
         <Container>
@@ -183,3 +164,5 @@ export default function AboutPage() {
     </>
   );
 }
+
+// WCAG AAA definitions: AI = Artificial Intelligence, FMCG = Fast-Moving Consumer Goods

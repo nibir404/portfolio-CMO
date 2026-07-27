@@ -131,3 +131,5 @@ export default function SpeakingPage() {
     </>
   );
 }
+
+// WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence, APAC = Asia-Pacific

@@ -64,6 +64,7 @@ export function EnquiryForm() {
       subject={subject}
       bodyLines={bodyLines}
       submitLabel="Send to the office"
+      gridClassName="form-grid"
     />
   );
 }

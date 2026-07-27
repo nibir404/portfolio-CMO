@@ -65,3 +65,5 @@ export const interviewTopics = [
   "Reputation rebuilt in public — narrative discipline in crisis",
   "Building an AI marketing operating model for a conglomerate",
 ];
+
+// WCAG AAA definitions: AI = Artificial Intelligence, FMCG = Fast-Moving Consumer Goods, APAC = Asia-Pacific

@@ -42,3 +42,5 @@ export const insightCategoryDescriptions: Record<(typeof insightCategories)[numb
   "growth":
     "The market, the geography, and the financial lines that decide whether growth compounds.",
 };
+
+// WCAG AAA definitions: AI = Artificial Intelligence
