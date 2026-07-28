@@ -721,10 +721,10 @@ main {
 
 .site-header--scrolled {
   position: fixed;
-  border-bottom-color: transparent;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  border-bottom-color: var(--color-line);
+  background: color-mix(in srgb, var(--color-canvas) 78%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
 
 .site-header__inner {
