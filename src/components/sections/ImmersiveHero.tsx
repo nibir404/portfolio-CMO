@@ -13,11 +13,8 @@ export function ImmersiveHero() {
               <span className="status-badge__dot"></span>
               <span className="status-badge__text">Currently accepting boardroom mandates</span>
             </div>
-            <span className="hero-eyebrow">
-              Business Transformation Advisor &amp; AI Business Strategist
-            </span>
             <h1 id="home-hero-title" className="hero-headline">
-              Abdullah Al <em>Alamin.</em>
+              Alamin is solving business problems through AI and strategic brand repositioning.
             </h1>
           </div>
 
