@@ -3205,299 +3205,125 @@ body.menu-open .mobile-cta {
    Immersive Home Hero Section
    ============================================================ */
 
-/* ============================================================
-   Immersive Home Hero Section — Clean Reference Design
-   ============================================================ */
-
 .immersive-hero {
   position: relative;
   overflow: hidden;
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: calc(var(--header-h) + var(--space-7));
-  padding-bottom: var(--space-8);
-  background: var(--color-canvas);
-  color: var(--color-ink);
+  padding-block: clamp(var(--space-9), 10vw, var(--space-10));
+  color: #ffffff;
   transition: background-color 200ms ease, color 200ms ease;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .hero-grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: var(--space-8);
-  }
-}
-
-.hero-col--left {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-@media (min-width: 1024px) {
-  .hero-col--left {
-    grid-column: span 4;
-  }
-}
-
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--color-ink-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.status-badge__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #30d158; /* Apple green */
-  display: inline-block;
-  box-shadow: 0 0 6px #30d158;
-}
-
-.hero-headline {
-  font-family: var(--font-display), var(--font-body), sans-serif;
-  font-size: clamp(2rem, 2.5vw + 0.8rem, 2.85rem);
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  font-weight: 600;
-  color: var(--color-ink);
-  margin: 0;
-}
-
-.hero-col--center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .hero-col--center {
-    grid-column: span 4;
-  }
-}
-
-.hero-portrait-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 380px;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: 32px;
-  box-shadow: var(--shadow-soft);
-}
-
-.hero-portrait {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 25%;
-}
-
-.hero-portrait-fade {
+.immersive-hero__bg {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 25%;
-  background: linear-gradient(to top, var(--color-canvas) 0%, rgba(255, 255, 255, 0) 100%);
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
-[data-theme="dark"] .hero-portrait-fade {
-  background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0) 100%);
+.immersive-hero__bg img {
+  object-fit: cover;
+  object-position: center 30%;
 }
 
-.hero-col--right {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-}
-
-@media (min-width: 1024px) {
-  .hero-col--right {
-    grid-column: span 4;
-  }
-}
-
-.hero-bio {
-  font-size: clamp(1rem, 1.1vw, 1.15rem);
-  line-height: 1.6;
-  color: var(--color-ink-soft);
-  margin: 0;
-  max-width: 38ch;
-}
-
-.hero-actions {
-  display: flex;
-  gap: var(--space-4);
-}
-
-/* ============================================================
-   Navigation & Custom Clean UI Sections
-   ============================================================ */
-
-.desktop-nav {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .desktop-nav {
-    display: flex;
-    align-items: center;
-    gap: var(--space-5);
-  }
-
-  .desktop-nav a {
-    text-decoration: none;
-    color: var(--color-ink-soft);
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 150ms ease;
-  }
-
-  .desktop-nav a:hover {
-    color: var(--color-ink);
-  }
-}
-
-.section-header-split {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-6);
-}
-
-.section-title {
-  font-family: var(--font-display), var(--font-body), sans-serif;
-  font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
-  font-weight: 600;
-  color: var(--color-ink);
-  margin: 0;
-}
-
-.pill-btn {
-  border-radius: 999px;
-  padding: var(--space-2) var(--space-4);
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-/* Featured Works Card Grid Overlay Styles */
-.featured-works-grid .card {
-  position: relative;
-  padding: 0;
-  overflow: hidden;
-  aspect-ratio: 16 / 11;
-  border: 1px solid var(--color-line);
-  border-radius: 28px;
-  box-shadow: var(--shadow-soft);
-  transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
-}
-
-.featured-works-grid .card:hover {
-  border-color: var(--color-accent);
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-strong);
-}
-
-.featured-works-grid .card__image {
+.immersive-hero__overlay {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  aspect-ratio: auto;
-  border-radius: 0;
-  z-index: 1;
-}
-
-.featured-works-grid .card__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 400ms ease;
-}
-
-.featured-works-grid .card:hover .card__image img {
-  transform: scale(1.035);
-}
-
-.featured-works-grid .card__body {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: var(--space-6);
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.5) 60%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  color: #ffffff;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 60%;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(10, 10, 10, 0.9) 0%,
+    rgba(10, 10, 10, 0.65) 50%,
+    rgba(10, 10, 10, 0.4) 100%
+  );
 }
 
-.featured-works-grid .card__meta {
+.immersive-hero__copy {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  gap: var(--space-5);
+  max-width: 44rem;
+}
+
+.immersive-hero__title {
+  margin: 0;
+  font-size: clamp(2.75rem, 3.2vw + 1rem, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  color: #ffffff !important;
+  text-wrap: balance;
+}
+
+.immersive-hero__title em {
+  color: var(--color-gold) !important;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.immersive-hero__subhead {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: clamp(1.0625rem, 1.3vw, 1.2rem);
+  line-height: 1.65;
+  max-width: 54ch;
+}
+
+.immersive-hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-3);
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  align-items: center;
 }
 
-.featured-works-grid .card__meta span {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  padding: var(--space-1) var(--space-3);
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
+@media (max-width: 1023px) {
+  .immersive-hero {
+    min-height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    padding-block: 0 var(--space-8);
+    background: #0a0a0a;
+  }
 
-.featured-works-grid .card h3 {
-  color: #ffffff;
-  font-size: clamp(1.25rem, 1.5vw, 1.6rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  margin: 0 0 var(--space-2) 0;
-}
+  .immersive-hero__bg {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
 
-.featured-works-grid .card__body p:not(.card__meta) {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.95rem;
-  line-height: 1.45;
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+  .immersive-hero__bg img {
+    object-position: center center;
+  }
 
-.featured-works-grid .card__footer {
-  display: none;
+  .immersive-hero__overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0) 0%,
+      rgba(10, 10, 10, 0.4) 60%,
+      rgba(10, 10, 10, 0.95) 100%
+    );
+  }
+
+  .immersive-hero__copy {
+    padding-inline: var(--space-5);
+    margin-top: var(--space-6);
+    max-width: 100%;
+  }
+
+  .immersive-hero__title {
+    font-size: clamp(2rem, 6.5vw, 2.75rem);
+  }
+
+  .immersive-hero__subhead {
+    font-size: 1rem;
+    max-width: 100%;
+  }
 }
 
 /* ============================================================
