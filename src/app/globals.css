@@ -60,8 +60,9 @@
   --mobile-cta-h: 64px;
   --radius: 4px;
   --radius-lg: 12px;
-  --shadow-soft: none;
-  --shadow-strong: none;
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 8px -1px rgba(0, 0, 0, 0.03);
+  --shadow-strong: 0 20px 40px -4px rgba(0, 0, 0, 0.08), 0 8px 16px -2px rgba(0, 0, 0, 0.04);
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 [data-theme="dark"] {
@@ -90,8 +91,8 @@
   --color-cta-ink: #1d1d1f;
   --color-cta-hover-bg: #d2d2d7;
 
-  --shadow-soft: none;
-  --shadow-strong: none;
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4), 0 2px 8px -1px rgba(0, 0, 0, 0.3);
+  --shadow-strong: 0 20px 40px -4px rgba(0, 0, 0, 0.5), 0 8px 16px -2px rgba(0, 0, 0, 0.4);
 }
 
 /* ============================================================
@@ -1163,12 +1164,14 @@ body.menu-open .mobile-cta {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
-  transition: border-color 250ms ease, transform 250ms ease;
+  box-shadow: var(--shadow-soft);
+  transition: border-color 250ms ease, transform 250ms ease, box-shadow 250ms ease;
 }
 
 .card:hover {
   border-color: var(--color-accent);
   transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
 }
 
 .card__image {
@@ -2149,12 +2152,14 @@ body.menu-open .mobile-cta {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   height: 100%;
-  transition: border-color 200ms ease, transform 200ms ease;
+  box-shadow: var(--shadow-soft);
+  transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 }
 
 .cap-card:hover {
-  border-color: var(--color-ink);
-  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
 }
 
 .cap-card__num {
@@ -2313,6 +2318,14 @@ body.menu-open .mobile-cta {
   background: var(--color-canvas);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: border-color 250ms ease, transform 250ms ease, box-shadow 250ms ease;
+}
+
+.how-step:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
 }
 
 .how-step__num {

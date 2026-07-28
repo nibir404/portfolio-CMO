@@ -23,7 +23,7 @@ export function SiteFooter() {
             </p>
             <div className="actions mt-2">
               <Link href="#inquiry" className="btn btn--primary">
-                Discuss Opportunity &rarr;
+                Discuss Opportunity
               </Link>
             </div>
           </div>
