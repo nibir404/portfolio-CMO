@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 
 const stats = [
   { value: "14+", label: "Years operating inside category leaders" },
@@ -36,6 +37,11 @@ export function Proof() {
               <span className="exec-metric__label">{stat.label}</span>
             </div>
           ))}
+        </div>
+        <div style={{ marginTop: "var(--space-6)", textAlign: "center" }}>
+          <ButtonLink href="/work" variant="ghost" trailingArrow>
+            View Case Studies & Proof
+          </ButtonLink>
         </div>
       </Container>
     </section>

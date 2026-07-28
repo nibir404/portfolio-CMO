@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 
 const challenges = [
   {
@@ -53,6 +54,11 @@ export function Challenges() {
               >
                 I partner with <strong>CEOs, founders, chairmen, managing directors, and investors</strong> of mid-market companies and conglomerates who are ready to transform their business and prepare for the next decade of digital-first, AI-driven competition.
               </p>
+            </div>
+            <div style={{ marginTop: "var(--space-4)" }}>
+              <ButtonLink href="/contact" variant="primary">
+                Resolve Your Bottlenecks
+              </ButtonLink>
             </div>
           </div>
           <div style={{ display: "grid", gap: "var(--space-4)" }}>

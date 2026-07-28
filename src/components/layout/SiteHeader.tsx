@@ -26,6 +26,9 @@ export function SiteHeader() {
           <span className="site-logo__title">Group CMO · Betopia Group</span>
         </Link>
         <div className="header-actions">
+          <Link href="/contact" className="btn btn--primary">
+            Discuss Opportunity
+          </Link>
           <ThemeToggle />
           <MobileNav />
         </div>

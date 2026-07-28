@@ -45,8 +45,11 @@ export function WhatIDo() {
                 className="cap-card__body text-ink-soft text-sm leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: item.body }}
               />
-              <Link href={item.href} className="cap-card__link mt-auto">
-                Explore →
+              <Link
+                href={item.href}
+                className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-soft transition-colors duration-200"
+              >
+                Explore Capability <span aria-hidden="true">→</span>
               </Link>
             </article>
           ))}
