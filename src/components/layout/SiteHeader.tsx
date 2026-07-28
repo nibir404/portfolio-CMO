@@ -33,6 +33,12 @@ export function SiteHeader() {
             priority
           />
         </Link>
+        <nav className="desktop-nav" aria-label="Main Navigation">
+          <Link href="/services">Capabilities</Link>
+          <Link href="/work">Work</Link>
+          <Link href="/insights">Insights</Link>
+          <Link href="/about">About</Link>
+        </nav>
         <div className="header-actions">
           <Link href="/contact" className="btn btn--primary">
             Discuss Opportunity
