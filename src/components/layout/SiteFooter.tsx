@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="container">
         <div
           className="cta-banner site-footer__cta-banner"
-          style={{ ["--cta-banner-image" as string]: "url('/images/10.jpg')" }}
+          style={{ ["--cta-banner-image" as string]: "url('/images/boss-8.jpg')" }}
         >
           <div className="cta-banner__media" aria-hidden="true" />
           <div className="cta-banner__overlay" aria-hidden="true" />
