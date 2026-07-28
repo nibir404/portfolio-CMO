@@ -1,5 +1,6 @@
 import { ImmersiveHero } from "@/components/sections/ImmersiveHero";
 import { BrandStrip } from "@/components/sections/BrandStrip";
+import { FeaturedWorks } from "@/components/sections/FeaturedWorks";
 import { Challenges } from "@/components/sections/Challenges";
 import { WhatIDo } from "@/components/sections/WhatIDo";
 import { Proof } from "@/components/sections/Proof";
@@ -12,6 +13,7 @@ export default function HomePage() {
     <>
       <ImmersiveHero />
       <BrandStrip />
+      <FeaturedWorks />
       <Challenges />
       <WhatIDo />
       <Proof />

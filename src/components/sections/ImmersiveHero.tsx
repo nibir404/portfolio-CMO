@@ -5,29 +5,44 @@ import { Container } from "@/components/ui/Container";
 export function ImmersiveHero() {
   return (
     <section className="immersive-hero" aria-labelledby="home-hero-title">
-      <div className="immersive-hero__bg">
-        <Image
-          src="/images/7.jpg"
-          alt="Abdullah Al Alamin"
-          fill
-          priority
-          sizes="100vw"
-        />
-      </div>
-      <div className="immersive-hero__overlay" aria-hidden="true" />
       <Container>
-        <div className="immersive-hero__copy">
-          <span className="eyebrow" style={{ color: "var(--color-accent)", display: "block", marginBottom: "var(--space-2)" }}>
-            Business Transformation Advisor & AI Business Strategist
-          </span>
-          <h1 id="home-hero-title" className="immersive-hero__title">
-            Abdullah Al <em>Alamin.</em>
-          </h1>
-          <p className="immersive-hero__subhead">
-            I transform ambitious businesses into AI-powered market leaders. An operator-first advisory practice built on fourteen years of scaling operations, rebuilding brand equity, and future-proofing organisations.
-          </p>
-          <div className="immersive-hero__actions">
-            <ButtonLink href="/contact">Discuss Transformation</ButtonLink>
+        <div className="hero-grid">
+          {/* Left Column */}
+          <div className="hero-col hero-col--left">
+            <div className="status-badge">
+              <span className="status-badge__dot"></span>
+              <span className="status-badge__text">Currently accepting boardroom mandates</span>
+            </div>
+            <h1 id="home-hero-title" className="hero-headline">
+              Alamin is solving business problems through AI and strategic brand repositioning.
+            </h1>
+          </div>
+
+          {/* Center Column - Portrait Photo */}
+          <div className="hero-col hero-col--center">
+            <div className="hero-portrait-wrapper">
+              <Image
+                src="/images/7.jpg"
+                alt="Abdullah Al Alamin portrait"
+                width={480}
+                height={600}
+                priority
+                className="hero-portrait"
+              />
+              <div className="hero-portrait-fade"></div>
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="hero-col hero-col--right">
+            <p className="hero-bio">
+              I transform ambitious businesses into AI-powered market leaders. An operator-first advisory practice built on fourteen years of scaling operations, rebuilding brand equity, and future-proofing organisations.
+            </p>
+            <div className="hero-actions">
+              <ButtonLink href="/contact" variant="primary">
+                Discuss Transformation
+              </ButtonLink>
+            </div>
           </div>
         </div>
       </Container>
