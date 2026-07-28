@@ -3226,6 +3226,7 @@ body.menu-open .mobile-cta {
 .immersive-hero__bg img {
   object-fit: cover;
   object-position: center 30%;
+  transform: scaleX(-1);
 }
 
 .immersive-hero__overlay {
