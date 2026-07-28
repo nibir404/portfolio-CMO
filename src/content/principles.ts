@@ -3,45 +3,39 @@ import type { Principle } from "@/types/content";
 export const principles: Principle[] = [
   {
     n: "/01",
-    title: "Brand is a financial instrument.",
+    title: "I don't recommend AI. I build AI-powered businesses.",
     description:
-      "Every campaign must answer to a balance-sheet question. Equity, retention, and preference are measured like any other line item.",
+      "AI is not a strategy; it is an operational engine. I integrate machine learning and automated workflows directly into business systems to optimize speed, accuracy, and P&L results.",
   },
   {
     n: "/02",
-    title: "Compounding beats virality.",
+    title: "I don't redesign brands. I build brands that create commercial value.",
     description:
-      "The work that wins a quarter is forgettable. The work that compounds across decades is what builds a category — and a legacy.",
+      "A logo change is superficial. Real brand transformation restructures positioning to command premium pricing, capture new demand, and defend margins against price wars.",
   },
   {
     n: "/03",
-    title: "AI is a craft tool, not a strategy.",
+    title: "I don't chase growth. I build systems that sustain it.",
     description:
-      "Generative AI, predictive analytics, and marketing automation extend the operator. They do not replace the operator's taste or judgment.",
+      "Chasing random acquisition channels leads to operational chaos and high costs. I design predictable growth systems that scale without breaking delivery models.",
   },
   {
     n: "/04",
-    title: "Reputation is rebuilt in public.",
+    title: "I don't deliver reports. I work until transformation happens.",
     description:
-      "Crisis communication is not a press release. It is a long, disciplined, evidence-led narrative shift — earned in front of every stakeholder.",
+      "Slide decks don't solve problems; operators do. My mandates are hands-on, focused on execution, and directly accountable to the CEO and board for metrics.",
   },
   {
     n: "/05",
-    title: "Decisions beat frameworks.",
+    title: "I don't copy global playbooks. I localise competitive advantage.",
     description:
-      "Operating models, governance, and org charts only matter when they force a better decision in the room. Everything else is decoration.",
+      "What works in mature Western markets fails in South Asia, APAC, and the GCC. I adapt global strategies to the specific cultural and operational realities of target expansion regions.",
   },
   {
     n: "/06",
-    title: "Geography is a category.",
+    title: "I don't lead from a distance. I operate in the field.",
     description:
-      "Operating across Bangladesh, South Asia, APAC, and GCC partnerships changes the strategy. The market does not flatten across borders — it thickens.",
-  },
-  {
-    n: "/07",
-    title: "Senior leaders are made in field.",
-    description:
-      "Authority is not granted by title. It is built by showing up in the field, in the crisis, in the boardroom — and shipping the work every time.",
+      "True insight is found on the ground, not in theoretical models. I work directly alongside your teams, in the market, in the crisis, and in the boardroom.",
   },
 ];
 

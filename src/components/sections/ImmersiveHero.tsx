@@ -17,15 +17,17 @@ export function ImmersiveHero() {
       <div className="immersive-hero__overlay" aria-hidden="true" />
       <Container>
         <div className="immersive-hero__copy">
+          <span className="eyebrow" style={{ color: "var(--color-accent)", display: "block", marginBottom: "var(--space-2)" }}>
+            Business Transformation Advisor & AI Business Strategist
+          </span>
           <h1 id="home-hero-title" className="immersive-hero__title">
             Abdullah Al <em>Alamin.</em>
           </h1>
           <p className="immersive-hero__subhead">
-            Building brands that outlast the businesses that made them. Group Chief Marketing Officer at
-            Betopia Group — with 14+ years turning FMCG, building-materials, and education portfolios into market leaders.
+            I transform ambitious businesses into AI-powered market leaders. An operator-first advisory practice built on fourteen years of scaling operations, rebuilding brand equity, and future-proofing organisations.
           </p>
           <div className="immersive-hero__actions">
-            <ButtonLink href="/contact">Let&rsquo;s Connect</ButtonLink>
+            <ButtonLink href="/contact">Discuss Transformation</ButtonLink>
           </div>
         </div>
       </Container>

@@ -1,46 +1,51 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
 const capabilities = [
   {
     number: "01",
-    title: "Grow the business",
-    body: "Sharpen the commercial agenda, unlock new geographies, and accelerate growth where it actually moves the P&L.",
-    href: "/services/fractional-cmo",
+    title: "AI Business Transformation",
+    body: "Build AI-powered operating models, automate operational workflows, and implement secure data frameworks that drive productivity and P&L results.",
+    href: "/services/ai-business-transformation",
   },
   {
     number: "02",
-    title: "Lead the brand",
-    body: "Reposition, architect, and govern brand across business units so it compounds &mdash; not just campaigns.",
-    href: "/services/growth-sprint",
+    title: "Brand Transformation",
+    body: "Reposition brand equity as a commercial instrument to command premium pricing, drive customer acquisition, and defend margins.",
+    href: "/services/brand-transformation",
   },
   {
     number: "03",
-    title: "Run AI in marketing",
-    body: "Build the operating model, governance, and capability for AI in marketing &mdash; with the rigour an operator demands.",
-    href: "/services/ai-marketing-transformation",
+    title: "Business Growth & Scaling",
+    body: "Construct predictable customer acquisition engines, optimize unit economics (CAC/LTV), and eliminate scaling bottlenecks.",
+    href: "/services/growth-scaling",
+  },
+  {
+    number: "04",
+    title: "International Expansion",
+    body: "Translate competitive advantages and value propositions to expand footprint and secure partners in South Asia, APAC, and the GCC.",
+    href: "/services/international-expansion",
   },
 ];
 
 export function WhatIDo() {
   return (
-    <section className="exec-section" id="services" aria-labelledby="what-title">
+    <section className="exec-section" id="capabilities" aria-labelledby="capabilities-heading">
       <Container>
         <div className="exec-head">
-          <span className="eyebrow">What I do</span>
-          <h2 id="what-title">Three ways the office helps.</h2>
+          <span className="eyebrow">Transformation Areas</span>
+          <h2 id="capabilities-heading">Four capabilities that create business value.</h2>
         </div>
-        <div className="cap-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {capabilities.map((item) => (
             <article key={item.title} className="cap-card">
               <span className="cap-card__num">{item.number}</span>
-              <h3 className="cap-card__title">{item.title}</h3>
+              <h3 className="cap-card__title" style={{ fontSize: "1.25rem", fontWeight: 600 }}>{item.title}</h3>
               <p
-                className="cap-card__body"
+                className="cap-card__body text-ink-soft text-sm leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: item.body }}
               />
-              <Link href={item.href} className="cap-card__link">
+              <Link href={item.href} className="cap-card__link mt-auto">
                 Explore →
               </Link>
             </article>
@@ -50,4 +55,6 @@ export function WhatIDo() {
     </section>
   );
 }
-// WCAG AAA definitions: AI = Artificial Intelligence
+
+// WCAG AAA definitions: AI = Artificial Intelligence, APAC = Asia-Pacific, GCC = Gulf Cooperation Council
+

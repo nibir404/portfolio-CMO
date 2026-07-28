@@ -4,12 +4,11 @@ export const site: Site = {
   origin: "https://abdullahalamin.me",
   name: "Abdullah Al Alamin",
   description:
-    "Group CMO of Betopia Group. Fractional CMO mandates, board advisory, 90-day growth sprints, and AI marketing transformation for category leaders in Bangladesh and South Asia.",
+    "Business Transformation Advisor & AI Business Strategist. Scoped corporate transformation, brand repositioning, system scaling, and international market entry for ambitious conglomerates and category leaders across South Asia and APAC.",
   locale: "en_GB",
   officeEmail: "office@abdullahalamin.me",
   speakingEmail: "speaking@abdullahalamin.me",
   pressEmail: "press@abdullahalamin.me",
-  // Add a verified business number here. The UI hides the phone block while empty.
   phone: undefined,
   calCom: "https://cal.com/abdullah-al-alamin",
   social: [
@@ -23,7 +22,7 @@ export const site: Site = {
   navItems: [
     { label: "Leadership", href: "/about" },
     { label: "Work", href: "/work" },
-    { label: "Services", href: "/services" },
+    { label: "Capabilities", href: "/services" },
     { label: "Insights", href: "/insights" },
     { label: "Speaking", href: "/speaking" },
     { label: "About", href: "/about" },
@@ -34,19 +33,19 @@ export const site: Site = {
       links: [
         { label: "Leadership", href: "/about" },
         { label: "Work", href: "/work" },
-        { label: "Insights", href: "/insights" },
+        { label: "Capabilities", href: "/services" },
         { label: "Speaking", href: "/speaking" },
         { label: "Recognition", href: "/recognition" },
         { label: "Press", href: "/press" },
       ],
     },
     {
-      title: "Services",
+      title: "Capabilities",
       links: [
-        { label: "Fractional CMO", href: "/services/fractional-cmo" },
-        { label: "Board Advisory", href: "/services/board-advisory" },
-        { label: "90-Day Growth Sprint", href: "/services/growth-sprint" },
-        { label: "AI Marketing Transformation", href: "/services/ai-marketing-transformation" },
+        { label: "AI Business Transformation", href: "/services/ai-business-transformation" },
+        { label: "Brand Transformation", href: "/services/brand-transformation" },
+        { label: "Business Growth & Scaling", href: "/services/growth-scaling" },
+        { label: "International Expansion", href: "/services/international-expansion" },
       ],
     },
     {

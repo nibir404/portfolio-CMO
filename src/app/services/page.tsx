@@ -12,50 +12,45 @@ import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Fractional CMO, Board Advisory & Growth Sprints | Abdullah Al Alamin",
+  title: "Business Transformation & AI Strategy Capabilities | Abdullah Al Alamin",
   description:
-    "Engagement models for organisations that need senior marketing leadership: fractional CMO mandates, board advisory, 90-day growth sprints, and AI marketing transformation.",
+    "Pragmatic transformation areas for ambitious organisations: AI Business Transformation, Brand Transformation, Business Growth & Scaling, and International Expansion.",
   path: "/services",
 });
 
 const overviewFaqs = [
   {
-    question: "What is a fractional CMO and when does a company need one?",
+    question: "What is your approach to AI transformation?",
     answer:
-      "A fractional CMO is a senior marketing executive who serves an organisation on a part-time, contracted basis — typically a fixed number of days per month — with full accountability to the CEO or board. Companies usually need one when marketing decisions are made in silos across business units, when the founder has become the de facto CMO, or when a group-level marketing function is being stood up and needs a credible leader before a permanent hire makes sense.",
+      "I don't recommend AI as a generic tool; I build AI-powered businesses. I work with leadership teams to design operating models, automate manual operations, construct data ingestion pipelines, and integrate predictive analytics directly into business operations.",
   },
   {
-    question: "How long is a typical mandate?",
+    question: "How is brand repositioning measured as a commercial strategy?",
     answer:
-      "The standard mandate is six months at three days per week or twelve months at two days per week. Shorter mandates are possible for transitional situations, but the work that compounds — brand architecture, operating model, team shape — usually needs at least six months to land.",
+      "Branding is a balance-sheet asset. I measure success by tracking metrics like customer acquisition cost (CAC) reduction, customer lifetime value (LTV) improvement, pricing elasticity, and search volume share. We establish baseline numbers on day one and measure progress against them.",
   },
   {
-    question: "Do you work with companies outside Bangladesh?",
+    question: "Do you advise companies outside Bangladesh?",
     answer:
-      "Yes. The office serves organisations across South Asia, APAC, and the GCC, with regular travel from Dhaka. Cross-border mandates are run on a hybrid cadence with remote work and short in-country sprints.",
+      "Yes. I help category leaders scale and partner across South Asia, APAC, and the GCC. Cross-border mandates are run on a hybrid cadence with strategic remote work and intensive on-site field visits.",
   },
   {
-    question: "What does a 90-day growth sprint actually deliver?",
+    question: "What does a typical business transformation engagement cost and look like?",
     answer:
-      "A sprint delivers a focused brand or campaign outcome that ships within ninety days. Typical deliverables include a brand strategy or repositioning, a campaign or product launch, a communications plan, and an internal activation plan so the team can carry the work forward. The exact scope is fixed in the proposal.",
+      "Engagements are run either as fixed-scope 90-day sprints or long-term embedded advisory mandates. Every engagement begins with a diagnostic audit to identify operational bottlenecks and align on KPIs, followed by a formal roadmap proposal with fixed pricing.",
   },
   {
-    question: "How is AI used in your marketing work?",
+    question: "What size of organization do you typically work with?",
     answer:
-      "AI is used as a craft tool inside the operator's workflow — for research synthesis, creative iteration, predictive segmentation, content production, and measurement. It does not replace the operator's judgment. Every AI move in market is first pressure-tested against governance, evaluation, and reproducibility criteria, then deployed with discipline in the field.",
-  },
-  {
-    question: "What size of organisation do you typically work with?",
-    answer:
-      "In practice, the model fits organisations between roughly fifty million and one billion US dollars in annual revenue, with multiple business units or brands. Above that range, a full-time Group CMO is usually the right answer; below it, a fractional Head of Marketing or a 90-day growth sprint is more proportionate.",
+      "My advisory practice fits mid-market businesses and conglomerates with annual revenues between roughly ten million and five hundred million US dollars. I work directly with the CEOs, founders, chairmen, and investors who hold the mandate for organizational change.",
   },
 ];
 
 const steps = [
-  { number: "01", title: "Discovery call", copy: "A 30-minute call to understand the work, the deadline, and the outcome." },
-  { number: "02", title: "Scope & diagnostic", copy: "A two-to-four-week diagnostic that confirms the brief and the success criteria." },
-  { number: "03", title: "Proposal & mandate", copy: "A written proposal with scope, fee, timeline, and reporting cadence." },
-  { number: "04", title: "Kickoff", copy: "A working kickoff with the team, the leadership, and the first measurable wave of work." },
+  { number: "01", title: "Diagnostic Brief", copy: "Submit your business parameters, operational bottlenecks, and growth targets." },
+  { number: "02", title: "Commercial Alignment", copy: "A structured 30-minute qualification call to evaluate fit and organizational readiness." },
+  { number: "03", title: "Roadmap Proposal", copy: "Within five working days, I deliver a detailed execution proposal with KPIs, timeline, and fee." },
+  { number: "04", title: "Active Mandate", copy: "A collaborative kickoff working directly alongside your team to ship the first wave of transformation." },
 ];
 
 export default function ServicesPage() {
@@ -67,20 +62,19 @@ export default function ServicesPage() {
           faqSchema(overviewFaqs),
           breadcrumbSchema([
             { name: "Home", href: "/" },
-            { name: "Services", href: "/services" },
+            { name: "Capabilities", href: "/services" },
           ]),
         ]}
       />
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }]} />
+      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Capabilities", href: "/services" }]} />
       <Section compact ariaLabelledBy="services-hero-title">
         <Container>
           <div className="page-hero__grid">
             <div>
-              <span className="eyebrow">Engagement models</span>
-              <h1 id="services-hero-title">Four ways to work with the office.</h1>
+              <span className="eyebrow">Transformation Areas</span>
+              <h1 id="services-hero-title">Four strategic growth capabilities.</h1>
               <p className="page-hero__intro">
-                Whether you need a marketing leader in the chair, a voice in the boardroom, a
-                quarter of focused transformation, or a defensible AI strategy.
+                Pragmatic, operator-led transformation to help your business automate operations, command pricing power, scale systems, and expand globally.
               </p>
             </div>
           </div>
@@ -90,8 +84,8 @@ export default function ServicesPage() {
       <Section surface="surface" ariaLabelledBy="service-blocks-title">
         <Container>
           <SectionHeading
-            eyebrow="Engagement models"
-            title="Four ways to work with the office."
+            eyebrow="Capabilities"
+            title="Four capabilities that create business value."
             id="service-blocks-title"
           />
           <div className="grid grid--2">
@@ -178,14 +172,14 @@ export default function ServicesPage() {
         <Container>
           <div className="split split--center">
             <div>
-              <h2 id="services-cta-title">Start a conversation.</h2>
+              <h2 id="services-cta-title">Start the transformation.</h2>
               <p style={{ color: "rgba(255,255,255,0.84)" }}>
-                Currently taking on a limited number of mandates with growth-driven organisations.
+                I partner with a limited number of organizations per quarter. Let's discuss your targets.
               </p>
             </div>
             <div className="actions">
               <ButtonLink href="/contact" variant="white">
-                Book a 30-min call
+                Submit Diagnostic Brief
               </ButtonLink>
             </div>
           </div>

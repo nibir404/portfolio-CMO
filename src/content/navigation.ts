@@ -2,7 +2,7 @@ export const navigation = {
   primary: [
     { label: "Leadership", href: "/about" },
     { label: "Work", href: "/work" },
-    { label: "Services", href: "/services" },
+    { label: "Capabilities", href: "/services" },
     { label: "Insights", href: "/insights" },
     { label: "Speaking", href: "/speaking" },
     { label: "About", href: "/about" },
@@ -10,16 +10,16 @@ export const navigation = {
   footerExplore: [
     { label: "Leadership", href: "/about" },
     { label: "Work", href: "/work" },
-    { label: "Insights", href: "/insights" },
+    { label: "Capabilities", href: "/services" },
     { label: "Speaking", href: "/speaking" },
     { label: "Recognition", href: "/recognition" },
     { label: "Press", href: "/press" },
   ],
   footerServices: [
-    { label: "Fractional CMO", href: "/services/fractional-cmo" },
-    { label: "Board Advisory", href: "/services/board-advisory" },
-    { label: "90-Day Growth Sprint", href: "/services/growth-sprint" },
-    { label: "AI Marketing Transformation", href: "/services/ai-marketing-transformation" },
+    { label: "AI Business Transformation", href: "/services/ai-business-transformation" },
+    { label: "Brand Transformation", href: "/services/brand-transformation" },
+    { label: "Business Growth & Scaling", href: "/services/growth-scaling" },
+    { label: "International Expansion", href: "/services/international-expansion" },
   ],
   footerConnect: [
     { label: "Book a call", href: "/contact" },

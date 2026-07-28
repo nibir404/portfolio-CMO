@@ -16,10 +16,10 @@ import type { FormFieldDef, ValidationError } from "@/types/forms";
 const CONSENT_KEY = "consent";
 
 const discussionOptions: Array<{ value: string; label: string }> = [
-  { value: "fractional-cmo", label: "Fractional CMO mandate" },
-  { value: "board-advisory", label: "Board advisory" },
-  { value: "growth-sprint", label: "90-day growth sprint" },
-  { value: "ai-marketing-transformation", label: "AI marketing transformation" },
+  { value: "ai-business-transformation", label: "AI Business Transformation" },
+  { value: "brand-transformation", label: "Brand Transformation" },
+  { value: "growth-scaling", label: "Business Growth & Scaling" },
+  { value: "international-expansion", label: "International Expansion" },
   { value: "speaking", label: "Speaking or event" },
   { value: "other", label: "Something else" },
 ];

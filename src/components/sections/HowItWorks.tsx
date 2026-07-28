@@ -4,18 +4,18 @@ import { Container } from "@/components/ui/Container";
 const steps = [
   {
     number: "01",
-    title: "Send a brief",
-    body: "Use the form to outline the work, the deadline, and the outcome. The office reads every enquiry personally.",
+    title: "Diagnostic Brief",
+    body: "Use the inquiry form to outline your current operational blockers, growth targets, and transformation timeline. I read and evaluate every brief personally.",
   },
   {
     number: "02",
-    title: "First call",
-    body: "A thirty-minute conversation to qualify fit, scope, and timing. If there is no fit, the office will say so.",
+    title: "Qualification & Fit",
+    body: "A structured 30-minute commercial alignment call to evaluate organizational readiness. If I am not the right advisor to solve your specific challenge, I will say so immediately.",
   },
   {
     number: "03",
-    title: "Proposal",
-    body: "Within five working days, a written proposal with scope, cadence, and a fixed fee &mdash; ready to sign.",
+    title: "Transformation Proposal",
+    body: "Within five working days, I deliver a detailed proposal outlining the operational roadmap, engagement milestones, KPI metrics, and a transparent fixed fee.",
   },
 ];
 
@@ -24,8 +24,8 @@ export function HowItWorks() {
     <section className="exec-section" aria-labelledby="how-title">
       <Container>
         <div className="exec-head">
-          <span className="eyebrow">How it works</span>
-          <h2 id="how-title">From brief to engagement in three steps.</h2>
+          <span className="eyebrow">Transformation Process</span>
+          <h2 id="how-title">From initial diagnostic to active engagement in three stages.</h2>
         </div>
         <ol className="how-grid">
           {steps.map((step) => (
@@ -38,7 +38,7 @@ export function HowItWorks() {
         </ol>
         <div className="how-cta">
           <p>
-            Ready to start? The office replies within two business days.
+            Ready to scale? I respond to qualifying briefs within two business days.
           </p>
           <Link href="#inquiry" className="btn btn--primary">
             Discuss Opportunity

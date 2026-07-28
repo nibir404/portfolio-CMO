@@ -1,25 +1,35 @@
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 
 const stats = [
-  { value: "14+", label: "Years in marketing leadership" },
-  { value: "9", label: "Businesses shaped" },
-  { value: "40+", label: "Brands built" },
-  { value: "11", label: "Transformations delivered" },
+  { value: "14+", label: "Years operating inside category leaders" },
+  { value: "12", label: "Business units architected & governed" },
+  { value: "350%", label: "Peak sales growth delivered in 45 days" },
+  { value: "3", label: "International awards for commercial research" },
 ];
 
 export function Proof() {
   return (
-    <section className="exec-section exec-section--surface" aria-labelledby="proof-title">
+    <section
+      className="exec-section exec-section--surface"
+      aria-labelledby="proof-title"
+    >
       <Container>
-        <div className="proof-copy" style={{ maxWidth: "44rem", margin: "0 auto 3rem auto", textAlign: "center" }}>
-          <h2 id="proof-title">Outcomes the board can measure.</h2>
-          <p>
-            Fourteen years inside the marketing function &mdash; from the field to the boardroom
-            &mdash; producing measurable commercial outcomes across operators and conglomerates.
+        <div
+          className="proof-copy"
+          style={{
+            maxWidth: "44rem",
+            margin: "0 auto 3rem auto",
+            textAlign: "center",
+          }}
+        >
+          <h2 id="proof-title">Track record and outcomes.</h2>
+          <p style={{ fontSize: "1.1rem", color: "var(--color-ink-soft)", lineHeight: "1.6" }}>
+            Fourteen years of operator experience — from field operations to group-level boardroom
+            governance — structuring systems that scale, automation that drives margin, and brand
+            equity that secures market share.
           </p>
         </div>
-        <div className="exec-metrics" aria-label="Outcomes">
+        <div className="exec-metrics" aria-label="Commercial outcomes">
           {stats.map((stat) => (
             <div key={stat.label} className="exec-metric">
               <span className="exec-metric__value">{stat.value}</span>
