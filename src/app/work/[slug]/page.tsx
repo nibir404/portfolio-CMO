@@ -12,6 +12,8 @@ import { getWorkBySlug, getAllWork, getAdjacentWork, getRelatedWork, getRelatedS
 import { buildPageMetadata } from "@/lib/metadata";
 import { caseStudySchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ShareButtons } from "@/components/ui/ShareButtons";
+import { site } from "@/content/site";
 
 type Params = { slug: string };
 
@@ -77,6 +79,11 @@ export default function CaseStudyPage({ params }: { params: Params }) {
                 <span>{item.timeframe}</span>
                 <span>Role: {item.role}</span>
               </div>
+              <ShareButtons
+                url={`${site.origin}${item.seo.path}`}
+                title={item.title}
+                variant="minimal"
+              />
             </div>
             <figure className="image-frame image-frame--landscape">
               <Image
@@ -176,6 +183,12 @@ export default function CaseStudyPage({ params }: { params: Params }) {
             <h2 id="transferred-title">What transferred.</h2>
             <p>{item.whatTransferred}</p>
           </div>
+          <ShareButtons
+            url={`${site.origin}${item.seo.path}`}
+            title={item.title}
+            variant="default"
+            label="Share this case study"
+          />
         </Container>
       </Section>
 

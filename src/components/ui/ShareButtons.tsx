@@ -5,9 +5,16 @@ import { useState } from "react";
 type ShareButtonsProps = {
   url: string;
   title: string;
+  variant?: "default" | "minimal";
+  label?: string;
 };
 
-export function ShareButtons({ url, title }: ShareButtonsProps) {
+export function ShareButtons({
+  url,
+  title,
+  variant = "default",
+  label = "Share this insight",
+}: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -77,13 +84,72 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
     },
   ];
 
+  if (variant === "minimal") {
+    return (
+      <div className="flex items-center gap-3 mt-4" aria-label="Share options">
+        {shareLinks.map((link) => (
+          <a
+            key={link.name}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full border border-line bg-surface hover:bg-canvas hover:border-ink text-ink transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 w-12 h-12"
+            aria-label={link.ariaLabel}
+          >
+            {link.icon}
+          </a>
+        ))}
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="inline-flex items-center justify-center rounded-full border border-line bg-surface hover:bg-canvas hover:border-ink text-ink transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 w-12 h-12"
+          aria-label="Copy post link to clipboard"
+        >
+          {copied ? (
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+              className="text-emerald-600 dark:text-emerald-400"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          ) : (
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+            </svg>
+          )}
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div
       className="my-10 py-6 border-t border-b border-line flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 max-w-[var(--reading)]"
       aria-label="Share options"
     >
       <span className="font-display font-medium text-ink text-base md:text-lg">
-        Share this insight
+        {label}
       </span>
       <div className="flex flex-wrap gap-3">
         {shareLinks.map((link) => (

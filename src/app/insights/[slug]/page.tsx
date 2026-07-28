@@ -99,6 +99,11 @@ export default function InsightDetailPage({ params }: { params: Params }) {
                 <span>{formatDate(insight.publishedAt)}</span>
                 <span>{insight.duration}</span>
               </div>
+              <ShareButtons
+                url={`${site.origin}${insight.seo.path}`}
+                title={insight.title}
+                variant="minimal"
+              />
             </div>
             <figure className="image-frame image-frame--landscape">
               <Image
@@ -149,6 +154,8 @@ export default function InsightDetailPage({ params }: { params: Params }) {
           <ShareButtons
             url={`${site.origin}${insight.seo.path}`}
             title={insight.title}
+            variant="default"
+            label="Share this insight"
           />
           {insight.verificationStatus !== "verified" ? (
             <div style={{ marginTop: "2rem" }}>
