@@ -34,8 +34,8 @@ export function SiteHeader() {
           />
         </Link>
         <div className="header-actions">
-          <Link href="/contact" className="btn btn--primary">
-            Discuss Opportunity
+          <Link href="#contact" className="btn btn--primary">
+            Book a 30-minute call
           </Link>
           <ThemeToggle />
           <MobileNav />

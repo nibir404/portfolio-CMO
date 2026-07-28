@@ -13,6 +13,7 @@ const config: Config = {
         surface: "var(--color-surface)",
         accent: "var(--color-accent)",
         "accent-soft": "var(--color-accent-soft)",
+        "accent-deep": "var(--color-accent-deep)",
         gold: "var(--color-gold)",
       },
       fontFamily: {

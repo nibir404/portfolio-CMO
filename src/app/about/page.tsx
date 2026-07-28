@@ -4,7 +4,9 @@ import { profile } from "@/content/profile";
 import { principles } from "@/content/principles";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
+import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
+import { ImageBlock } from "@/components/ui/ImageBlock";
 import { DraftClaimNotice } from "@/components/sections/DraftClaimNotice";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -26,29 +28,13 @@ export default function AboutPage() {
     <>
       <JsonLd data={personSchema()} />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
-      <Section compact ariaLabelledBy="about-hero-title" style={{ paddingTop: "var(--space-6)", paddingBottom: "var(--space-8)" }}>
-        <Container>
-          <div className="page-hero__grid" style={{ alignItems: "center" }}>
-            <div style={{ display: "grid", gap: "var(--space-4)" }}>
-              <h1 id="about-hero-title" style={{ fontSize: "clamp(2.5rem, 4vw, 4rem)", lineHeight: "1.1", fontWeight: 600 }}>
-                Abdullah Al <em>Alamin</em>.
-              </h1>
-              <p className="page-hero__intro" style={{ fontSize: "1.25rem", color: "var(--color-ink-soft)", lineHeight: "1.6" }}>
-                {profile.jobTitle} at {profile.worksFor}. Leading brand architecture, digital growth, and AI marketing transformation.
-              </p>
-            </div>
-            <figure className="image-frame image-frame--portrait" style={{ maxWidth: "380px", justifySelf: "end", border: "1px solid var(--color-line)" }}>
-              <Image
-                src="/images/boss.jpg"
-                alt="Abdullah Al Alamin — Group Chief Marketing Officer of Betopia Group."
-                fill
-                priority
-                sizes="(min-width: 900px) 35vw, 100vw"
-              />
-            </figure>
-          </div>
-        </Container>
-      </Section>
+      <PageHero
+        id="about"
+        kicker="About"
+        title={<>Abdullah Al <em>Alamin</em>.</>}
+        lead={`${profile.jobTitle} at ${profile.worksFor}. Leading brand architecture, digital growth, and AI marketing transformation.`}
+        image={{ src: "/images/boss.jpg", alt: "Abdullah Al Alamin — Group Chief Marketing Officer of Betopia Group." }}
+      />
 
       <Section surface="surface" ariaLabelledBy="about-bio-title">
         <Container>
@@ -84,9 +70,11 @@ export default function AboutPage() {
         </Container>
       </Section>
 
+      <ImageBlock src="/images/boss-2.jpg" alt="Abdullah on a working field visit." aspect="21:9" caption="From the field to the boardroom." />
+
       <Section ariaLabelledBy="career-title">
         <Container>
-          <SectionHeading
+          <EyebrowHeading
             eyebrow="Career"
             title="Fourteen years. One compounding arc."
             copy="From the field to the boardroom — every step a working apprenticeship in operator practice."
@@ -110,9 +98,9 @@ export default function AboutPage() {
 
       <Section surface="surface" ariaLabelledBy="principles-title">
         <Container>
-          <SectionHeading
-            title="How the office makes decisions."
-            copy="The decision framework behind every mandate."
+          <EyebrowHeading
+            eyebrow="How the office decides"
+            title="The decision framework behind every mandate."
             id="principles-title"
           />
           <div className="grid grid--3 mt-6">
@@ -127,19 +115,23 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-
-      <Section surface="surface" ariaLabelledBy="beyond-title">
+      <Section ariaLabelledBy="beyond-title">
         <Container>
-          <SectionHeading
-            eyebrow="Beyond the work"
-            title="Where the operator shows up."
-            id="beyond-title"
-          />
-          <ul className="prose">
-            {profile.beyond.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
+          <div className="split">
+            <ImageBlock src="/images/abdullah2.jpg" alt="Abdullah at a working session." aspect="4:5" />
+            <div>
+              <EyebrowHeading
+                eyebrow="Beyond the work"
+                title="Where the operator shows up."
+                id="beyond-title"
+              />
+              <ul className="prose">
+                {profile.beyond.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </Container>
       </Section>
 

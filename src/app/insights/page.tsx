@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
+import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
+import { ImageBlock } from "@/components/ui/ImageBlock";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { InsightCard } from "@/components/cards/InsightCard";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { InsightCard } from "@/components/cards/InsightCard";
 import { getAllInsights, getFeaturedInsights } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 import { insightCategories, insightCategoryLabels } from "@/lib/routes";
@@ -14,8 +15,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Insights on Brand Strategy, AI Marketing & Leadership | Abdullah Al Alamin",
-  description:
-    "Frameworks and field notes on brand strategy, AI in marketing, crisis communication, and marketing leadership — from fourteen years of operator work.",
+  description: "Frameworks and field notes on brand strategy, AI in marketing, crisis communication, and marketing leadership — from fourteen years of operator work.",
   path: "/insights",
 });
 
@@ -24,39 +24,23 @@ export default function InsightsIndexPage() {
   const rest = getAllInsights();
   return (
     <>
-      <JsonLd
-        data={[
-          blogSchema(),
-          breadcrumbSchema([
-            { name: "Home", href: "/" },
-            { name: "Insights", href: "/insights" },
-          ]),
-        ]}
-      />
+      <JsonLd data={[blogSchema(), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }])]} />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }]} />
-      <Section compact ariaLabelledBy="insights-hero-title">
-        <Container>
-          <span className="eyebrow">Field notes</span>
-          <h1 id="insights-hero-title">Field notes from the operator&rsquo;s desk.</h1>
-          <p className="page-hero__intro">
-            Frameworks, reversals, and the principle that earned its keep — from fourteen years of
-            operator work.
-          </p>
-        </Container>
-      </Section>
+      <PageHero
+        id="insights"
+        kicker="Field notes"
+        title={<>Field notes from the <em>operator&rsquo;s desk</em>.</>}
+        lead="Frameworks, reversals, and the principle that earned its keep — from fourteen years of operator work."
+        image={{ src: "/images/all side photo/c5307815-15e9-4005-addb-f5450988e31e.png", alt: "Working notes." }}
+        imagePosition="below"
+      />
 
       {featured ? (
         <Section surface="surface" ariaLabelledBy="featured-title">
           <Container>
             <div className="featured-blog-layout">
               <div className="featured-blog-image">
-                <Image
-                  src={featured.poster}
-                  alt={featured.posterAlt}
-                  fill
-                  priority
-                  sizes="(min-width: 900px) 50vw, 100vw"
-                />
+                <ImageBlock src={featured.poster} alt={featured.posterAlt} aspect="16:9" priority />
               </div>
               <div className="featured-blog-content">
                 <span className="card__meta" style={{ display: "inline-block", marginBottom: "var(--space-2)" }}>
@@ -69,9 +53,7 @@ export default function InsightsIndexPage() {
                   {featured.description}
                 </p>
                 <div>
-                  <ButtonLink href={`/insights/${featured.slug}`} variant="primary">
-                    Read insight
-                  </ButtonLink>
+                  <ButtonLink href={`/insights/${featured.slug}`} variant="primary">Read insight</ButtonLink>
                 </div>
               </div>
             </div>
@@ -81,15 +63,10 @@ export default function InsightsIndexPage() {
 
       <Section ariaLabelledBy="categories-title">
         <Container>
-          <SectionHeading eyebrow="Browse by topic" title="Five categories." id="categories-title" />
+          <EyebrowHeading eyebrow="Browse by topic" title="Five categories." id="categories-title" />
           <div className="filter-row" aria-label="Insight categories">
             {insightCategories.map((category) => (
-              <a
-                key={category}
-                className="filter-chip"
-                href={`/insights/category/${category}`}
-                aria-label={`Browse ${insightCategoryLabels[category]}`}
-              >
+              <a key={category} className="filter-chip" href={`/insights/category/${category}`} aria-label={`Browse ${insightCategoryLabels[category]}`}>
                 {insightCategoryLabels[category]}
               </a>
             ))}
@@ -97,13 +74,13 @@ export default function InsightsIndexPage() {
         </Container>
       </Section>
 
+      <ImageBlock src="/images/all side photo/e0c1ea85-745c-46e4-9b2c-121171f2d09c.png" alt="Working library." aspect="21:9" />
+
       <Section surface="surface" ariaLabelledBy="all-title">
         <Container>
-          <SectionHeading eyebrow="All insights" title="The full library." id="all-title" />
+          <EyebrowHeading eyebrow="All insights" title="The full library." id="all-title" />
           <div className="grid grid--3">
-            {rest.map((insight) => (
-              <InsightCard key={insight.slug} insight={insight} />
-            ))}
+            {rest.map((insight) => (<InsightCard key={insight.slug} insight={insight} />))}
           </div>
         </Container>
       </Section>
@@ -113,9 +90,7 @@ export default function InsightsIndexPage() {
           <div className="split" style={{ alignItems: "center" }}>
             <div>
               <h2 id="newsletter-title">AlaminWeekly.</h2>
-              <p className="section-heading__copy">
-                One brand-strategy insight a week — in your inbox every Monday.
-              </p>
+              <p className="section-heading__copy">One brand-strategy insight a week — in your inbox every Monday.</p>
             </div>
             <div className="actions">
               <ButtonLink href="/newsletter">Join the list</ButtonLink>

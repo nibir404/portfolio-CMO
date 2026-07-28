@@ -1,23 +1,23 @@
-import { ImmersiveHero } from "@/components/sections/ImmersiveHero";
-import { BrandStrip } from "@/components/sections/BrandStrip";
-import { Challenges } from "@/components/sections/Challenges";
-import { WhatIDo } from "@/components/sections/WhatIDo";
-import { Proof } from "@/components/sections/Proof";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { FeaturedInsights } from "@/components/sections/FeaturedInsights";
-import { ExecutiveInquiry } from "@/components/sections/ExecutiveInquiry";
+import { EditorialHero } from "@/components/sections/EditorialHero";
+import { Audience } from "@/components/sections/Audience";
+import { Services } from "@/components/sections/Services";
+import { EditorialProof } from "@/components/sections/EditorialProof";
+import { About } from "@/components/sections/About";
+import { Process } from "@/components/sections/Process";
+import { Insights } from "@/components/sections/Insights";
+import { Contact } from "@/components/sections/Contact";
 
 export default function HomePage() {
   return (
     <>
-      <ImmersiveHero />
-      <BrandStrip />
-      <Challenges />
-      <WhatIDo />
-      <Proof />
-      <HowItWorks />
-      <FeaturedInsights />
-      <ExecutiveInquiry />
+      <EditorialHero />
+      <Audience />
+      <Services />
+      <EditorialProof />
+      <About />
+      <Process />
+      <Insights />
+      <Contact />
     </>
   );
 }

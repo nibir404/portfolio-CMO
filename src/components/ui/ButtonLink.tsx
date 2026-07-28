@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "white";
+type Variant = "primary" | "secondary" | "ghost" | "white" | "accent";
 
 type CommonProps = {
   children: ReactNode;
@@ -30,13 +30,14 @@ const variantClass: Record<Variant, string> = {
   secondary: "btn btn--secondary",
   ghost: "btn btn--ghost",
   white: "btn btn--white",
+  accent: "btn btn--accent",
 };
 
 export function ButtonLink(props: AsLinkProps | AsButtonProps) {
   const { children, className = "", variant = "primary", trailingArrow = true, ...rest } = props;
   const baseClass = `${variantClass[variant]} ${className}`.trim();
   const showTrailingArrow =
-    trailingArrow && variant !== "primary" && variant !== "white";
+    trailingArrow && variant !== "primary" && variant !== "white" && variant !== "accent";
   const content = (
     <>
       <span>{children}</span>
