@@ -23,6 +23,8 @@ import { formatDate } from "@/lib/format";
 import { buildPageMetadata } from "@/lib/metadata";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ShareButtons } from "@/components/ui/ShareButtons";
+import { site } from "@/content/site";
 
 type Params = { slug: string };
 
@@ -144,6 +146,10 @@ export default function InsightDetailPage({ params }: { params: Params }) {
               </section>
             ))}
           </Prose>
+          <ShareButtons
+            url={`${site.origin}${insight.seo.path}`}
+            title={insight.title}
+          />
           {insight.verificationStatus !== "verified" ? (
             <div style={{ marginTop: "2rem" }}>
               <DraftClaimNotice />
