@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
@@ -22,8 +23,14 @@ export function SiteHeader() {
     <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
       <div className="container site-header__inner">
         <Link className="site-logo" href="/" aria-label="Abdullah Al Alamin — home">
-          <span className="site-logo__name">Abdullah Al Alamin</span>
-          <span className="site-logo__title">Group CMO · Betopia Group</span>
+          <Image
+            src="/images/A.png"
+            alt="Abdullah Al Alamin Logo"
+            width={120}
+            height={32}
+            style={{ height: "32px", width: "auto", objectFit: "contain" }}
+            priority
+          />
         </Link>
         <div className="header-actions">
           <Link href="/contact" className="btn btn--primary">
