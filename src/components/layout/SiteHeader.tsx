@@ -26,9 +26,10 @@ export function SiteHeader() {
           <Image
             src="/images/A.png"
             alt="Abdullah Al Alamin Logo"
-            width={120}
-            height={32}
-            style={{ height: "32px", width: "auto", objectFit: "contain" }}
+            className="logo-img"
+            width={150}
+            height={42}
+            style={{ height: "42px", width: "auto", objectFit: "contain" }}
             priority
           />
         </Link>

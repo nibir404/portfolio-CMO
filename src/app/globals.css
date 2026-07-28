@@ -705,8 +705,10 @@ main {
    ============================================================ */
 
 .site-header {
-  position: sticky;
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   height: var(--header-h);
   border-bottom: 1px solid transparent;
@@ -717,10 +719,11 @@ main {
 }
 
 .site-header--scrolled {
-  border-bottom-color: var(--color-line);
-  background: color-mix(in srgb, var(--color-canvas) 78%, transparent);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  position: fixed;
+  border-bottom-color: transparent;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .site-header__inner {
@@ -734,26 +737,18 @@ main {
 .site-logo {
   display: flex;
   min-width: max-content;
-  flex-direction: column;
+  align-items: center;
   text-decoration: none;
   line-height: 1;
 }
 
-.site-logo__name {
-  font-family: var(--font-display), var(--font-body), Georgia, serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+.logo-img {
+  transition: filter 200ms ease;
+  filter: brightness(0); /* Pure black logo by default in light mode */
 }
 
-.site-logo__title {
-  margin-top: var(--space-1);
-  color: var(--color-ink-mute);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-family: var(--font-body), sans-serif;
+[data-theme="dark"] .logo-img {
+  filter: brightness(0) invert(1); /* Pure white logo in dark mode */
 }
 
 .header-actions {
