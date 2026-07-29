@@ -37,16 +37,13 @@ export default function LiveSessionPage() {
           <EyebrowHeading eyebrow="Formats" title="Three ways to work with the office live." id="formats-title" />
           <div className="grid grid--3">
             {upcoming.map((session) => (
-              <article key={session.title} className="card card--media">
-                <div className="card--media__image">
-                  <ImageBlock src={session.image} alt={session.title} aspect="16:9" />
-                </div>
-                <div className="card--media__body">
-                  <span className="card__meta">{session.date}</span>
-                  <h3>{session.title}</h3>
+              <article key={session.title} className="card-format-pipely">
+                <span className="format-meta">{session.date}</span>
+                <h3>{session.title}</h3>
+                <p className="format-body">{session.note}</p>
+                <div className="format-details">
                   <p><strong>For:</strong> {session.audience}</p>
                   <p><strong>Format:</strong> {session.format}</p>
-                  <p>{session.note}</p>
                 </div>
               </article>
             ))}

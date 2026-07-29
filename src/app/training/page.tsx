@@ -44,18 +44,13 @@ export default function TrainingPage() {
           <EyebrowHeading eyebrow="Programmes" title="Three formats, one operating discipline." id="programmes-title" />
           <div className="grid grid--3">
             {programmes.map((programme) => (
-              <article key={programme.title} className="card card--media">
-                <div className="card--media__image">
-                  <ImageBlock src={programme.image} alt={programme.title} aspect="16:9" />
-                </div>
-                <div className="card--media__body">
-                  <span className="card__meta">{programme.eyebrow}</span>
-                  <h3>{programme.title}</h3>
-                  <p>{programme.body}</p>
-                  <p style={{ marginTop: "1rem", fontSize: "0.85rem", color: "var(--color-ink-mute)" }}>
-                    <strong style={{ color: "var(--color-ink)" }}>For:</strong> {programme.audience}<br />
-                    <strong style={{ color: "var(--color-ink)" }}>Format:</strong> {programme.format}
-                  </p>
+              <article key={programme.title} className="card-format-pipely">
+                <span className="format-meta">{programme.eyebrow}</span>
+                <h3>{programme.title}</h3>
+                <p className="format-body">{programme.body}</p>
+                <div className="format-details">
+                  <p><strong>For:</strong> {programme.audience}</p>
+                  <p><strong>Format:</strong> {programme.format}</p>
                 </div>
               </article>
             ))}

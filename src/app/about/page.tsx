@@ -70,7 +70,6 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <ImageBlock src="/images/boss-2.jpg" alt="Abdullah on a working field visit." aspect="21:9" caption="From the field to the boardroom." />
 
       <Section ariaLabelledBy="career-title">
         <Container>

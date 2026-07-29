@@ -61,7 +61,7 @@ export default function ResourcesPage() {
                   <p style={{ fontSize: "0.85rem", color: "var(--color-ink-mute)" }}>{item.format}</p>
                   <p>{item.note}</p>
                   <div className="actions mt-4">
-                    <ButtonLink href={item.href} variant="ghost">Open →</ButtonLink>
+                    <ButtonLink href={item.href} variant="ghost">Open</ButtonLink>
                   </div>
                 </article>
               ))}
