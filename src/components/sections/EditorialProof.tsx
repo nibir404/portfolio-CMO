@@ -19,37 +19,32 @@ export function EditorialProof() {
 
   return (
     <section
-      className="section-card section-card--cream"
       id="proof"
       aria-labelledby="proof-title"
+      className="max-w-[var(--container)] mx-auto px-4 sm:px-6 lg:px-8 py-16 text-left"
     >
       {/* Top Client Logos Strip */}
       <Reveal>
-        <div className="logos-strip-pipely">
-          <h3>World-class corporate groups shaped by Abdullah</h3>
-          <div className="logo-marquee-container">
-            <div className="logo-marquee-track" aria-hidden="true">
-              {/* Copy 1 */}
-              {brandLogos.map((brandFile, index) => (
-                <Image
-                  key={`c1-${brandFile}`}
-                  src={`/images/${brandFile}`}
-                  alt=""
-                  width={140}
-                  height={45}
-                  className="brand-logo-img"
-                />
-              ))}
-              {/* Copy 2 for Seamless Loop */}
-              {brandLogos.map((brandFile, index) => (
-                <Image
-                  key={`c2-${brandFile}`}
-                  src={`/images/${brandFile}`}
-                  alt=""
-                  width={140}
-                  height={45}
-                  className="brand-logo-img"
-                />
+        <div className="border-b border-[var(--color-line)] pb-12 mb-12 overflow-hidden">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-ink-soft)] mb-8">
+            World-class corporate groups shaped by Abdullah
+          </h3>
+          <div className="overflow-hidden w-full relative [mask-image:linear-gradient(to_right,transparent_0%,black_12%,black_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_12%,black_88%,transparent_100%)]">
+            {/* Soft Edge Fade Overlays */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white dark:from-[var(--color-surface)] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white dark:from-[var(--color-surface)] to-transparent z-10 pointer-events-none" />
+
+            <div className="flex w-max items-center gap-6 animate-[marquee_25s_linear_infinite] hover:[animation-play-state:paused]">
+              {[...brandLogos, ...brandLogos, ...brandLogos].map((brandFile, index) => (
+                <div key={`${brandFile}-${index}`} className="flex items-center justify-center h-14 min-w-[140px] px-4 py-2 bg-white dark:bg-[var(--color-surface)] rounded-xl border border-[rgba(8,8,10,0.08)] shadow-sm shrink-0">
+                  <Image
+                    src={`/images/${brandFile}`}
+                    alt="Corporate partner brand"
+                    width={140}
+                    height={45}
+                    className="max-h-8 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-200"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -57,16 +52,18 @@ export function EditorialProof() {
       </Reveal>
 
       {/* Bottom Split Stats Layout */}
-      <div className="stats-split-pipely">
+      <div className="grid grid-cols-1 min-[900px]:grid-cols-[1.1fr_0.9fr] gap-12 min-[900px]:gap-16 items-start">
         
         {/* Left Column: Bio / Pitch */}
         <Reveal>
           <div>
-            <span className="kicker" style={{ marginBottom: "16px" }}>{proof.kicker}</span>
-            <h2 id="proof-title" className="stats-bio-pipely">
+            <span className="inline-block text-xs font-bold uppercase tracking-wider text-[var(--color-ink-soft)] mb-3">
+              {proof.kicker}
+            </span>
+            <h2 id="proof-title" className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-snug tracking-[-0.02em] text-[var(--color-ink)] mb-6">
               With over a decade of executive growth and P&amp;L leadership, Abdullah delivers scale-up solutions that empower corporate groups.
             </h2>
-            <p className="sectors" style={{ color: "var(--color-ink-soft)", fontSize: "14px", marginTop: "24px" }}>
+            <p className="text-sm leading-relaxed text-[var(--color-ink-soft)] max-w-xl">
               {proof.sectors}
             </p>
           </div>
@@ -74,11 +71,16 @@ export function EditorialProof() {
 
         {/* Right Column: 2x2 Metric Grid */}
         <Reveal>
-          <div className="stats-grid-pipely" aria-label="Commercial outcomes">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6" aria-label="Commercial outcomes">
             {proof.stats.map((stat) => (
-              <div key={stat.label} className="stat-card-pipely">
-                <span className="kicker-stat">{stat.label}</span>
-                <div className="metric-stat">
+              <div
+                key={stat.label}
+                className="bg-[var(--color-surface-cream)] dark:bg-[var(--color-surface)] border border-[var(--color-line)] rounded-2xl p-6 sm:p-8 flex flex-col justify-between min-h-[140px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-ink-soft)] mb-4">
+                  {stat.label}
+                </span>
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[var(--color-ink)]">
                   <CountUp value={stat.value} />
                 </div>
               </div>

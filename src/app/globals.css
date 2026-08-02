@@ -139,8 +139,13 @@ body.menu-open {
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
+  background: var(--color-accent-soft);
+  color: #08080a;
+}
+
+::-moz-selection {
+  background: var(--color-accent-soft);
+  color: #08080a;
 }
 
 img,
@@ -201,7 +206,6 @@ h4 {
 
 h1 {
   font-size: clamp(2.375rem, 3.6vw + 1rem, 4rem);
-  line-height: 1.15;
   letter-spacing: -0.022em;
   font-weight: 500;
 }
@@ -1801,7 +1805,6 @@ body.menu-open .mobile-cta {
    ============================================================ */
 
 .site-footer {
-  margin-bottom: var(--mobile-cta-h);
   background: var(--footer-bg);
   color: var(--footer-ink);
   /* Generous top padding so the banner sits as a deliberate
@@ -3103,9 +3106,9 @@ body.menu-open .mobile-cta {
 @media (min-width: 1100px) {}
 
 @media (max-width: 899px) {
-  body {
+  /* body {
     padding-bottom: var(--mobile-cta-h);
-  }
+  } */
 
   .site-header__inner .btn {
     display: none;
@@ -3702,11 +3705,24 @@ body.menu-open .mobile-cta {
   background-color: var(--color-surface-cream);
 }
 
+.section-card--frameless {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 @media (max-width: 768px) {
   .section-card {
     padding: 32px 24px;
     border-radius: 16px;
     margin-bottom: 16px;
+  }
+
+  .section-card--frameless {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -3778,13 +3794,19 @@ body.menu-open .mobile-cta {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* ---------- Pipely Hero split-card ---------- */
+.hero-section-screen {
+  min-height: calc(100vh - 110px);
+  min-height: calc(100dvh - 110px);
+  display: flex;
+  align-items: center;
+}
 
 .hero-pipely {
   display: grid;
   grid-template-columns: 1fr;
   gap: 48px;
   align-items: center;
+  width: 100%;
 }
 
 @media (min-width: 900px) {
@@ -3794,14 +3816,32 @@ body.menu-open .mobile-cta {
   }
 }
 
-.hero-pipely h1 {
-  font-size: clamp(38px, 5.5vw, 58px);
+/* Hero typography handled via inline Tailwind CSS */
+
+.hero-subtitle {
+  font-size: clamp(20px, 2.4vw, 28px);
   font-family: var(--font-body), sans-serif;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-ink);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  margin: 0 0 var(--space-4) 0;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px 0;
+}
+
+.hero-subtitle em,
+.hero-pipely h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, #10b981 0%, #059669 45%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+[data-theme="dark"] .hero-subtitle em,
+[data-theme="dark"] .hero-pipely h1 em {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 45%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-pipely p.lead {
@@ -3874,11 +3914,11 @@ body.menu-open .mobile-cta {
 .hero-portrait-card-pipely {
   position: relative;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: var(--shadow-strong);
   display: flex;
-  background-color: var(--color-canvas);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(2, 132, 199, 0.06) 100%);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.07);
 }
 
 .hero-portrait-card-pipely img {
@@ -3886,6 +3926,7 @@ body.menu-open .mobile-cta {
   height: auto;
   object-fit: cover;
   aspect-ratio: 4/5;
+  border-radius: 24px;
 }
 
 /* ---------- Pipely Proof (Cream background block) ---------- */

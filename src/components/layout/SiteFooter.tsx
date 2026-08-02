@@ -7,8 +7,8 @@ export function SiteFooter() {
     <footer className="site-footer" aria-labelledby="site-footer-title">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-12 overflow-hidden border border-line rounded-3xl min-h-[460px] mb-12">
-          {/* Left Column (Solid Color + Copy + CTA Button) */}
-          <div className="col-span-12 md:col-span-7 bg-[#16130f] text-white p-8 md:p-12 lg:p-16 flex flex-col justify-center gap-6 md:gap-8">
+          {/* Left Column (Copy + CTA Button) */}
+          <div className="col-span-12 md:col-span-7 bg-transparent text-white p-8 md:p-12 lg:p-16 flex flex-col justify-center gap-6 md:gap-8">
             <span className="kicker kicker--inverse">Start a conversation</span>
             <h2
               id="site-footer-title"

@@ -1,11 +1,12 @@
 export const editorial = {
   hero: {
-    kicker: "Helping businesses grow sustainably.",
-    titleHtml: 'I help businesses scale, transform with AI, and <em>expand globally.</em>',
-    lead: "Strategic growth, operational transformation, and market expansion backed by practical leadership experience.",
+    kicker: "Strategic Fractional CMO & AI Growth Leadership",
+    titleHtml: "Struggling to<br />Scale Your Brand?",
+    subtitleHtml: "I Turn Growth Bottlenecks into <em>8-Figure Results.</em>",
+    lead: "Stop wasting capital on fragmented marketing and guesswork. I partner with ambitious CEOs to eliminate acquisition inefficiencies, deploy AI growth frameworks, and expand into global markets.",
     primaryCta: { label: "Book a Strategy Call", href: "#contact" },
     secondaryCta: { label: "Explore Case Studies", href: "#services" },
-    role: "Group Chief Marketing Officer, Betopia Group \u00b7 Dhaka, Bangladesh",
+    role: "Group Chief Marketing Officer, Betopia Group · Dhaka, Bangladesh",
   },
 
   audience: {
