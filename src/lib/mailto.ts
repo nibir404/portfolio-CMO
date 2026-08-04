@@ -58,14 +58,14 @@ export function buildMailto(input: MailtoInput): MailtoOutput {
   const body = input.body.trim();
   const subjectEncoded = encodeSubjectComponent(subject);
   const bodyEncoded = encodeBodyComponent(body);
-  const to = input.to.trim();
-  const href = `mailto:${encodeRecipientComponent(to)}?subject=${subjectEncoded}&body=${bodyEncoded}`;
+  const to = resolveRecipient(input.to);
+  const href = `mailto:${encodeURIComponent(to)}?subject=${subjectEncoded}&body=${bodyEncoded}`;
   const length = href.length;
   return {
     href,
     subject,
     body,
-    to: input.to,
+    to,
     length,
     exceeds: length > MAILTO_LIMIT,
   };
@@ -92,8 +92,13 @@ function encodeBodyComponent(value: string): string {
   return encodeURIComponent(value).replace(/%0A/g, "%0A");
 }
 
-function encodeRecipientComponent(value: string): string {
-  return value;
+function resolveRecipient(value: string): MailtoAddress {
+  const candidate = value.trim();
+  const allowed = MAILTO_TO.find((address) => address === candidate);
+  if (!allowed) {
+    throw new Error("Unknown mailto recipient.");
+  }
+  return allowed;
 }
 
 // WCAG AAA definitions: CMO = Chief Marketing Officer, AI = Artificial Intelligence
