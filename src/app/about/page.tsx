@@ -13,6 +13,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { buildPageMetadata } from "@/lib/metadata";
 import { personSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "About Abdullah Al Alamin — Group CMO, Betopia Group",
@@ -27,7 +28,7 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={personSchema()} />
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
+      <Breadcrumbs items={trail({ name: "About", href: "/about" })} />
       <PageHero
         id="about"
         kicker="About"

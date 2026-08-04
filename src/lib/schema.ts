@@ -1,6 +1,7 @@
 import { site } from "@/content/site";
 import { profile } from "@/content/profile";
 import { recognitionSummary } from "@/content/recognition";
+import { absoluteUrl } from "@/lib/url";
 import type {
   FaqEntry,
   Insight,
@@ -49,7 +50,7 @@ export function breadcrumbSchema(items: Array<{ name: string; href: string }>): 
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `${site.origin}${item.href}`,
+      item: absoluteUrl(item.href),
     })),
   };
 }
@@ -83,7 +84,7 @@ export function serviceSchema(service: Service): JsonLdObject {
     },
     areaServed: ["Bangladesh", "South Asia", "APAC", "GCC"],
     serviceType: service.keywords.primary,
-    url: `${site.origin}${service.seo.path}`,
+    url: absoluteUrl(service.seo.path),
   };
 }
 
@@ -106,10 +107,8 @@ export function caseStudySchema(item: WorkCaseStudy): JsonLdObject {
       name: item.company,
     },
     keywords: item.keywords.primary,
-    url: `${site.origin}${item.seo.path}`,
-    image: item.image.startsWith("http")
-      ? item.image
-      : `${site.origin}${item.image}`,
+    url: absoluteUrl(item.seo.path),
+    image: absoluteUrl(item.image),
     datePublished: item.seo.publishedAt ?? "2024-01-01",
   };
 }
@@ -129,10 +128,8 @@ export function articleSchema(item: Insight): JsonLdObject {
       name: profile.name,
     },
     keywords: item.keywords.primary,
-    url: `${site.origin}${item.seo.path}`,
-    image: item.poster.startsWith("http")
-      ? item.poster
-      : `${site.origin}${item.poster}`,
+    url: absoluteUrl(item.seo.path),
+    image: absoluteUrl(item.poster),
     datePublished: item.publishedAt,
     dateModified: item.updatedAt ?? item.publishedAt,
     articleSection: item.category.replace(/-/g, " "),
@@ -155,7 +152,7 @@ export function blogSchema(): JsonLdObject {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: `${site.name} — Insights`,
-    url: `${site.origin}/insights`,
+    url: absoluteUrl("/insights"),
     inLanguage: "en-GB",
   };
 }

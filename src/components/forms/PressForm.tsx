@@ -1,42 +1,44 @@
 "use client";
 
 import { MailtoForm } from "@/components/forms/MailtoForm";
+import {
+  labelledLines,
+  nameField,
+  selectField,
+  subjectLine,
+  textBlock,
+  workEmailField,
+} from "@/lib/formFields";
 import type { FormFieldDef } from "@/types/forms";
 
 const fields: FormFieldDef[] = [
-  { name: "name", label: "Your name", required: true, maxLength: 120 },
-  { name: "email", label: "Work email", type: "email", required: true, maxLength: 160 },
+  nameField,
+  workEmailField,
   { name: "outlet", label: "Outlet", required: true, maxLength: 200 },
   { name: "deadline", label: "Deadline", type: "date" },
-  {
-    name: "topic",
-    label: "Topic or angle",
-    type: "select",
-    required: true,
-    options: [
-      { value: "ai-cmo", label: "The AI-first CMO and the board's question" },
-      { value: "compounding", label: "Compounding brand equity in emerging markets" },
-      { value: "crisis", label: "Reputation rebuilt in public — crisis communication" },
-      { value: "ai-operating-model", label: "AI marketing operating models" },
-    ],
-  },
+  selectField("topic", "Topic or angle", [
+    { value: "ai-cmo", label: "The AI-first CMO and the board's question" },
+    { value: "compounding", label: "Compounding brand equity in emerging markets" },
+    { value: "crisis", label: "Reputation rebuilt in public — crisis communication" },
+    { value: "ai-operating-model", label: "AI marketing operating models" },
+  ]),
   { name: "notes", label: "Brief", type: "textarea", rows: 4, maxLength: 1200 },
 ];
 
 function subject(values: Record<string, string>) {
-  return `Press request — ${values.outlet ?? "—"} — ${values.name ?? ""}`.trim();
+  return subjectLine("Press request", values.outlet, values.name);
 }
 
 function bodyLines(values: Record<string, string>) {
   return [
-    { label: "Name", value: values.name ?? "" },
-    { label: "Work email", value: values.email ?? "" },
-    { label: "Outlet", value: values.outlet ?? "" },
-    { label: "Deadline", value: values.deadline ?? "" },
-    { label: "Topic", value: values.topic ?? "" },
-    "",
-    "Brief:",
-    values.notes ?? "",
+    ...labelledLines(values, [
+      ["Name", "name"],
+      ["Work email", "email"],
+      ["Outlet", "outlet"],
+      ["Deadline", "deadline"],
+      ["Topic", "topic"],
+    ]),
+    ...textBlock("Brief", values.notes),
   ];
 }
 

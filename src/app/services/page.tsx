@@ -12,6 +12,7 @@ import { getAllServices } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Business Transformation & AI Strategy Capabilities | Abdullah Al Alamin",
@@ -39,10 +40,11 @@ const serviceImages = ["/images/img1.jpg", "/images/ab4.jpg", "/images/img2.jpg"
 
 export default function ServicesPage() {
   const services = getAllServices();
+  const crumbs = trail({ name: "Capabilities", href: "/services" });
   return (
     <>
-      <JsonLd data={[faqSchema(overviewFaqs), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Capabilities", href: "/services" }])]} />
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Capabilities", href: "/services" }]} />
+      <JsonLd data={[faqSchema(overviewFaqs), breadcrumbSchema(crumbs)]} />
+      <Breadcrumbs items={crumbs} />
       <PageHero
         id="services"
         kicker="Transformation areas"

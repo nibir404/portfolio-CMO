@@ -9,6 +9,7 @@ import { RecognitionCard } from "@/components/cards/RecognitionCard";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { recognition, recognitionSummary } from "@/content/recognition";
 import { buildPageMetadata } from "@/lib/metadata";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Recognition & Awards | Abdullah Al Alamin",
@@ -19,7 +20,7 @@ export const metadata: Metadata = buildPageMetadata({
 export default function RecognitionPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Recognition", href: "/recognition" }]} />
+      <Breadcrumbs items={trail({ name: "Recognition", href: "/recognition" })} />
       <PageHero
         id="recognition"
         kicker="Recognition"

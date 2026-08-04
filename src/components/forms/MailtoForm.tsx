@@ -1,18 +1,12 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import { usePreservedForm } from "@/hooks/usePreservedForm";
-import { FormField } from "@/components/forms/FormField";
 import { ConsentField } from "@/components/forms/ConsentField";
+import { FormErrorSummary } from "@/components/forms/FormErrorSummary";
+import { FormFieldGrid } from "@/components/forms/FormFieldGrid";
 import { MailtoStatus } from "@/components/forms/MailtoStatus";
-import {
-  buildMailto,
-  buildPlainBody,
-  MAILTO_ROUTING,
-  type MailtoOutput,
-} from "@/lib/mailto";
-import { validateForm } from "@/lib/validation";
-import type { EnquiryKind, FormFieldDef, ValidationError } from "@/types/forms";
+import { CONSENT_KEY, useMailtoForm, type BodyLine } from "@/hooks/useMailtoForm";
+import { MAILTO_ROUTING } from "@/lib/mailto";
+import type { EnquiryKind, FormFieldDef } from "@/types/forms";
 
 type MailtoFormProps = {
   formKey: string;
@@ -20,7 +14,7 @@ type MailtoFormProps = {
   fields: FormFieldDef[];
   initialValues?: Record<string, string>;
   subject: (values: Record<string, string>) => string;
-  bodyLines: (values: Record<string, string>) => Array<{ label: string; value: string } | string>;
+  bodyLines: (values: Record<string, string>) => BodyLine[];
   submitLabel: string;
   consentLabel?: React.ReactNode;
   conditionalFields?: (values: Record<string, string>) => FormFieldDef[];
@@ -28,126 +22,62 @@ type MailtoFormProps = {
   gridClassName?: string;
 };
 
-const CONSENT_KEY = "consent";
+export const DEFAULT_CONSENT_LABEL = (
+  <>
+    I consent to the office using these details to respond to this enquiry. See the privacy note below.
+  </>
+);
 
 export function MailtoForm({
   formKey,
   enquiryKind,
   fields,
-  initialValues = {},
+  initialValues,
   subject,
   bodyLines,
   submitLabel,
-  consentLabel = (
-    <>
-      I consent to the office using these details to respond to this enquiry. See the privacy note below.
-    </>
-  ),
+  consentLabel = DEFAULT_CONSENT_LABEL,
   conditionalFields,
   className = "",
   gridClassName = "form-grid form-grid--2",
 }: MailtoFormProps) {
-  const defaults = useMemo(() => {
-    const base: Record<string, string> = { [CONSENT_KEY]: "" };
-    for (const field of fields) base[field.name] = initialValues[field.name] ?? "";
-    return { ...base, ...initialValues };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formKey]);
-
-  const { values, setField, reset } = usePreservedForm(formKey, defaults);
-  const [errors, setErrors] = useState<ValidationError[]>([]);
-  const [result, setResult] = useState<MailtoOutput | null>(null);
-  const errorRef = useRef<HTMLDivElement | null>(null);
-
-  const extraFields = conditionalFields?.(values) ?? [];
-  const activeFields = [...fields, ...extraFields];
-
-  function fieldError(name: string) {
-    return errors.find((error) => error.field === name)?.message;
+  function routingFor(values: Record<string, string>) {
+    return MAILTO_ROUTING[typeof enquiryKind === "function" ? enquiryKind(values) : enquiryKind];
   }
+
+  const form = useMailtoForm({
+    formKey,
+    fields,
+    initialValues,
+    recipient: (values) => routingFor(values).to,
+    subject,
+    bodyLines,
+    preparedVia: "abdullahalamin.me",
+  });
+
+  const activeFields = [...fields, ...(conditionalFields?.(form.values) ?? [])];
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const nextErrors = validateForm(activeFields, values);
-    if (values[CONSENT_KEY] !== "true") {
-      nextErrors.push({
-        field: CONSENT_KEY,
-        message: "Consent is required before the enquiry can be prepared.",
-      });
-    }
-    setErrors(nextErrors);
-    if (nextErrors.length) {
-      window.requestAnimationFrame(() => errorRef.current?.focus());
-      return;
-    }
-
-    const kind = typeof enquiryKind === "function" ? enquiryKind(values) : enquiryKind;
-    const routing = MAILTO_ROUTING[kind];
-    const emailSubject = subject(values);
-    const emailBody = buildPlainBody([
-      ...bodyLines(values),
-      "",
-      { label: "Consent", value: "Yes — details may be used to respond to this enquiry" },
-      { label: "Prepared via", value: "abdullahalamin.me" },
-    ]);
-    const mailto = buildMailto({
-      to: routing.to,
-      subject: emailSubject,
-      body: emailBody,
-    });
-    setResult(mailto);
-    if (!mailto.exceeds) {
-      window.location.href = mailto.href;
-    }
-  }
-
-  function clearForm() {
-    reset();
-    setErrors([]);
-    setResult(null);
+    form.submit(activeFields);
   }
 
   return (
     <div className={className}>
       <form className="form" noValidate onSubmit={handleSubmit}>
-        {errors.length ? (
-          <div ref={errorRef} className="error-summary" role="alert" tabIndex={-1}>
-            <h3>Please correct the highlighted fields.</h3>
-            <ul>
-              {errors.map((error) => (
-                <li key={`${error.field}-${error.message}`}>
-                  <a href={`#field-${error.field}`}>{error.message}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-        <div className={gridClassName}>
-          {activeFields.map((field) => (
-            <FormField
-              key={field.name}
-              field={field}
-              value={values[field.name] ?? ""}
-              onChange={(value) => {
-                setField(field.name, value);
-                if (fieldError(field.name)) {
-                  setErrors((current) => current.filter((error) => error.field !== field.name));
-                }
-              }}
-              error={fieldError(field.name)}
-            />
-          ))}
-        </div>
+        <FormErrorSummary ref={form.errorRef} errors={form.errors} />
+        <FormFieldGrid
+          fields={activeFields}
+          values={form.values}
+          onChange={form.changeField}
+          fieldError={form.fieldError}
+          className={gridClassName}
+        />
         <ConsentField
           name={CONSENT_KEY}
-          checked={values[CONSENT_KEY] === "true"}
-          onChange={(checked) => {
-            setField(CONSENT_KEY, checked ? "true" : "");
-            if (fieldError(CONSENT_KEY)) {
-              setErrors((current) => current.filter((error) => error.field !== CONSENT_KEY));
-            }
-          }}
-          error={fieldError(CONSENT_KEY)}
+          checked={form.consented}
+          onChange={form.setConsent}
+          error={form.fieldError(CONSENT_KEY)}
         >
           {consentLabel}
         </ConsentField>
@@ -155,7 +85,7 @@ export function MailtoForm({
           <button type="submit" className="btn btn--primary">
             {submitLabel}
           </button>
-          <button type="button" className="btn btn--ghost" onClick={clearForm}>
+          <button type="button" className="btn btn--ghost" onClick={form.clearForm}>
             Clear form
           </button>
         </div>
@@ -164,16 +94,13 @@ export function MailtoForm({
           the enquiry prepared. Your draft is kept only in this browser session until you clear it.
         </p>
       </form>
-      {result ? (
+      {form.result ? (
         <div className="mt-5">
           <MailtoStatus
-            result={result}
-            subject={result.subject}
-            body={result.body}
-            recipientLabel={
-              MAILTO_ROUTING[typeof enquiryKind === "function" ? enquiryKind(values) : enquiryKind]
-                .label
-            }
+            result={form.result}
+            subject={form.result.subject}
+            body={form.result.body}
+            recipientLabel={routingFor(form.values).label}
           />
         </div>
       ) : null}

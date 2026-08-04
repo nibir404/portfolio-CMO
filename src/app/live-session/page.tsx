@@ -7,6 +7,7 @@ import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
 import { ImageBlock } from "@/components/ui/ImageBlock";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { buildPageMetadata } from "@/lib/metadata";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Live Sessions | Abdullah Al Alamin",
@@ -23,7 +24,7 @@ const upcoming = [
 export default function LiveSessionPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/insights" }, { name: "Live Sessions", href: "/live-session" }]} />
+      <Breadcrumbs items={trail({ name: "Blog", href: "/insights" }, { name: "Live Sessions", href: "/live-session" })} />
       <PageHero
         id="live-session"
         kicker="Live Sessions"

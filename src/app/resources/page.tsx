@@ -7,6 +7,7 @@ import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
 import { ImageBlock } from "@/components/ui/ImageBlock";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { buildPageMetadata } from "@/lib/metadata";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Resources | Abdullah Al Alamin",
@@ -37,7 +38,7 @@ const groups: Array<{ eyebrow: string; title: string; image: string; items: Reso
 export default function ResourcesPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/insights" }, { name: "Resources", href: "/resources" }]} />
+      <Breadcrumbs items={trail({ name: "Blog", href: "/insights" }, { name: "Resources", href: "/resources" })} />
       <PageHero
         id="resources"
         kicker="Resources"

@@ -1,30 +1,8 @@
-import type { ReactNode } from "react";
+import { HeadingBlock, type HeadingBlockProps } from "@/components/ui/HeadingBlock";
 
-type SectionHeadingProps = {
-  eyebrow?: string;
-  title: ReactNode;
-  copy?: ReactNode;
-  align?: "left" | "center";
-  invert?: boolean;
-  id?: string;
-};
-
-export function SectionHeading({
-  eyebrow,
-  title,
-  copy,
-  align = "left",
-  invert,
-  id,
-}: SectionHeadingProps) {
-  const style = align === "center" ? { textAlign: "center" as const } : undefined;
-  const headingStyle = invert ? { color: "#fff" } : undefined;
+/** Title-only heading: the `eyebrow` prop is accepted but not rendered in this variant. */
+export function SectionHeading(props: HeadingBlockProps) {
   return (
-    <header className="section-heading" style={style}>
-      <h2 id={id} style={headingStyle}>
-        {title}
-      </h2>
-      {copy ? <p className="section-heading__copy">{copy}</p> : null}
-    </header>
+    <HeadingBlock {...props} block="section-heading" showEyebrow={false} centerWith="style" />
   );
 }

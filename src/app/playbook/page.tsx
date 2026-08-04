@@ -9,6 +9,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { PlaybookForm } from "@/components/forms/PlaybookForm";
 import { playbook } from "@/content/playbook";
 import { buildPageMetadata } from "@/lib/metadata";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "The 90-Day CMO Playbook | Abdullah Al Alamin",
@@ -19,7 +20,7 @@ export const metadata: Metadata = buildPageMetadata({
 export default function PlaybookPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Playbook", href: "/playbook" }]} />
+      <Breadcrumbs items={trail({ name: "Playbook", href: "/playbook" })} />
       <PageHero
         id="playbook"
         kicker="Free working playbook"

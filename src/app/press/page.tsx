@@ -10,6 +10,8 @@ import { PressCard } from "@/components/cards/PressCard";
 import { PressForm } from "@/components/forms/PressForm";
 import { pressCoverage, pressKit, interviewTopics } from "@/content/press";
 import { buildPageMetadata } from "@/lib/metadata";
+import { sidePhotos } from "@/content/images";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Press & Media | Abdullah Al Alamin",
@@ -17,12 +19,12 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/press",
 });
 
-const pressImages = ["/images/all side photo/281c4ba9-98ef-4e55-9218-1c70669e5558.png", "/images/all side photo/60b933f1-ce48-40db-8e69-d47caddbf9c3.png", "/images/all side photo/69ad2fc3-8a45-4119-82fe-5e94b9675ddd.png"];
+const pressImages = sidePhotos.slice(0, 3);
 
 export default function PressPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Press", href: "/press" }]} />
+      <Breadcrumbs items={trail({ name: "Press", href: "/press" })} />
       <PageHero
         id="press"
         kicker="Press & media"
