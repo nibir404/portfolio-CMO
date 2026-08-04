@@ -10,6 +10,7 @@ import {
   buildPlainBody,
   type MailtoOutput,
 } from "@/lib/mailto";
+import { reportError } from "@/lib/logging";
 import { validateForm } from "@/lib/validation";
 import type { FormFieldDef, ValidationError } from "@/types/forms";
 
@@ -104,9 +105,10 @@ export function ExecutiveInquiryForm() {
     return base;
   }, []);
 
-  const { values, setField, reset } = usePreservedForm("executive-inquiry", defaults);
+  const { values, setField, reset, storageError } = usePreservedForm("executive-inquiry", defaults);
   const [errors, setErrors] = useState<ValidationError[]>([]);
   const [result, setResult] = useState<MailtoOutput | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const errorRef = useRef<HTMLDivElement | null>(null);
 
@@ -125,26 +127,38 @@ export function ExecutiveInquiryForm() {
     }
     setErrors(nextErrors);
     if (nextErrors.length) {
+      setSubmitError(null);
       window.requestAnimationFrame(() => errorRef.current?.focus());
       return;
     }
 
-    const emailSubject = subject(values);
-    const emailBody = buildPlainBody([
-      ...bodyLines(values),
-      "",
-      { label: "Consent", value: "Yes — details may be used to respond to this enquiry" },
-      { label: "Prepared via", value: "abdullahalamin.me / Discuss Opportunity" },
-    ]);
-    const mailto = buildMailto({
-      to: "office@abdullahalamin.me",
-      subject: emailSubject,
-      body: emailBody,
-    });
-    setResult(mailto);
-    setSubmitted(true);
-    if (!mailto.exceeds) {
-      window.location.href = mailto.href;
+    try {
+      const emailSubject = subject(values);
+      const emailBody = buildPlainBody([
+        ...bodyLines(values),
+        "",
+        { label: "Consent", value: "Yes — details may be used to respond to this enquiry" },
+        { label: "Prepared via", value: "abdullahalamin.me / Discuss Opportunity" },
+      ]);
+      const mailto = buildMailto({
+        to: "office@abdullahalamin.me",
+        subject: emailSubject,
+        body: emailBody,
+      });
+      setSubmitError(null);
+      setResult(mailto);
+      setSubmitted(true);
+      if (!mailto.exceeds) {
+        window.location.href = mailto.href;
+      }
+    } catch (error) {
+      reportError("ExecutiveInquiryForm", error);
+      setResult(null);
+      setSubmitted(false);
+      setSubmitError(
+        "The enquiry could not be prepared. Email office@abdullahalamin.me directly and we will pick it up from there.",
+      );
+      window.requestAnimationFrame(() => errorRef.current?.focus());
     }
   }
 
@@ -152,6 +166,7 @@ export function ExecutiveInquiryForm() {
     reset();
     setErrors([]);
     setResult(null);
+    setSubmitError(null);
     setSubmitted(false);
   }
 
@@ -161,9 +176,9 @@ export function ExecutiveInquiryForm() {
         <span className="eyebrow">Prepared</span>
         <h3>Your enquiry is ready to send.</h3>
         <p>
-          Your email application has opened with the enquiry prepared and addressed to the office.
-          If it did not open automatically, the prepared mailto link is below — copy it into your
-          client to send.
+          {result.exceeds
+            ? "The enquiry is too long for an email link, so your email application was not opened. Copy the prepared message below and send it to the office."
+            : "Your email application has opened with the enquiry prepared and addressed to the office. If it did not open automatically, the prepared mailto link is below — copy it into your client to send."}
         </p>
         <MailtoStatus
           result={result}
@@ -183,6 +198,11 @@ export function ExecutiveInquiryForm() {
   return (
     <div>
       <form className="form" noValidate onSubmit={handleSubmit}>
+        {submitError ? (
+          <div ref={errorRef} className="error-summary" role="alert" tabIndex={-1}>
+            <h3>{submitError}</h3>
+          </div>
+        ) : null}
         {errors.length ? (
           <div ref={errorRef} className="error-summary" role="alert" tabIndex={-1}>
             <h3>Please correct the highlighted fields.</h3>
@@ -233,6 +253,11 @@ export function ExecutiveInquiryForm() {
             Clear form
           </button>
         </div>
+        {storageError ? (
+          <p className="form-note" role="status">
+            {storageError}
+          </p>
+        ) : null}
         <p className="form-note">
           This form does not send data to a server. On submit, it opens your email application with
           the enquiry prepared and addressed to office@abdullahalamin.me. Your draft stays in this

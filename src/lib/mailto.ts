@@ -1,3 +1,4 @@
+import { reportWarning } from "@/lib/logging";
 import type { EnquiryKind } from "@/types/forms";
 
 export const MAILTO_FROM = "office@abdullahalamin.me";
@@ -37,6 +38,13 @@ export const MAILTO_ROUTING: Record<
 };
 
 export const MAILTO_LIMIT = 1800;
+
+export function resolveRouting(kind: EnquiryKind): { to: MailtoAddress; label: string } {
+  const routing = MAILTO_ROUTING[kind];
+  if (routing) return routing;
+  reportWarning("mailto", "Unknown enquiry kind — routing to the office.", { kind });
+  return MAILTO_ROUTING.other;
+}
 
 export type MailtoInput = {
   to: MailtoAddress;

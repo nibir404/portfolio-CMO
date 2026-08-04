@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { reportError } from "@/lib/logging";
 
 type Theme = "light" | "dark";
 
@@ -16,8 +17,8 @@ function applyTheme(next: Theme) {
   document.documentElement.style.colorScheme = next;
   try {
     localStorage.setItem("theme", next);
-  } catch {
-    /* storage unavailable */
+  } catch (error) {
+    reportError("ThemeToggle", error, { operation: "persist", theme: next });
   }
 }
 
