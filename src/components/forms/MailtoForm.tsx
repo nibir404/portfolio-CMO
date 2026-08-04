@@ -8,9 +8,10 @@ import { MailtoStatus } from "@/components/forms/MailtoStatus";
 import {
   buildMailto,
   buildPlainBody,
-  MAILTO_ROUTING,
+  resolveRouting,
   type MailtoOutput,
 } from "@/lib/mailto";
+import { reportError } from "@/lib/logging";
 import { validateForm } from "@/lib/validation";
 import type { EnquiryKind, FormFieldDef, ValidationError } from "@/types/forms";
 
@@ -54,9 +55,10 @@ export function MailtoForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formKey]);
 
-  const { values, setField, reset } = usePreservedForm(formKey, defaults);
+  const { values, setField, reset, storageError } = usePreservedForm(formKey, defaults);
   const [errors, setErrors] = useState<ValidationError[]>([]);
   const [result, setResult] = useState<MailtoOutput | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const errorRef = useRef<HTMLDivElement | null>(null);
 
   const extraFields = conditionalFields?.(values) ?? [];
@@ -77,27 +79,38 @@ export function MailtoForm({
     }
     setErrors(nextErrors);
     if (nextErrors.length) {
+      setSubmitError(null);
       window.requestAnimationFrame(() => errorRef.current?.focus());
       return;
     }
 
-    const kind = typeof enquiryKind === "function" ? enquiryKind(values) : enquiryKind;
-    const routing = MAILTO_ROUTING[kind];
-    const emailSubject = subject(values);
-    const emailBody = buildPlainBody([
-      ...bodyLines(values),
-      "",
-      { label: "Consent", value: "Yes — details may be used to respond to this enquiry" },
-      { label: "Prepared via", value: "abdullahalamin.me" },
-    ]);
-    const mailto = buildMailto({
-      to: routing.to,
-      subject: emailSubject,
-      body: emailBody,
-    });
-    setResult(mailto);
-    if (!mailto.exceeds) {
-      window.location.href = mailto.href;
+    try {
+      const kind = typeof enquiryKind === "function" ? enquiryKind(values) : enquiryKind;
+      const routing = resolveRouting(kind);
+      const emailSubject = subject(values);
+      const emailBody = buildPlainBody([
+        ...bodyLines(values),
+        "",
+        { label: "Consent", value: "Yes — details may be used to respond to this enquiry" },
+        { label: "Prepared via", value: "abdullahalamin.me" },
+      ]);
+      const mailto = buildMailto({
+        to: routing.to,
+        subject: emailSubject,
+        body: emailBody,
+      });
+      setSubmitError(null);
+      setResult(mailto);
+      if (!mailto.exceeds) {
+        window.location.href = mailto.href;
+      }
+    } catch (error) {
+      reportError("MailtoForm", error, { formKey });
+      setResult(null);
+      setSubmitError(
+        "The enquiry could not be prepared. Email office@abdullahalamin.me directly and we will pick it up from there.",
+      );
+      window.requestAnimationFrame(() => errorRef.current?.focus());
     }
   }
 
@@ -105,11 +118,17 @@ export function MailtoForm({
     reset();
     setErrors([]);
     setResult(null);
+    setSubmitError(null);
   }
 
   return (
     <div className={className}>
       <form className="form" noValidate onSubmit={handleSubmit}>
+        {submitError ? (
+          <div ref={errorRef} className="error-summary" role="alert" tabIndex={-1}>
+            <h3>{submitError}</h3>
+          </div>
+        ) : null}
         {errors.length ? (
           <div ref={errorRef} className="error-summary" role="alert" tabIndex={-1}>
             <h3>Please correct the highlighted fields.</h3>
@@ -159,6 +178,11 @@ export function MailtoForm({
             Clear form
           </button>
         </div>
+        {storageError ? (
+          <p className="form-note" role="status">
+            {storageError}
+          </p>
+        ) : null}
         <p className="form-note">
           This form does not send data to a server. On submit, it opens your email application with
           the enquiry prepared. Your draft is kept only in this browser session until you clear it.
@@ -171,7 +195,7 @@ export function MailtoForm({
             subject={result.subject}
             body={result.body}
             recipientLabel={
-              MAILTO_ROUTING[typeof enquiryKind === "function" ? enquiryKind(values) : enquiryKind]
+              resolveRouting(typeof enquiryKind === "function" ? enquiryKind(values) : enquiryKind)
                 .label
             }
           />

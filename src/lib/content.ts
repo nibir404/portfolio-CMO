@@ -4,6 +4,7 @@ import { work } from "@/content/work";
 import { speakingTopics } from "@/content/speaking";
 import { recognition } from "@/content/recognition";
 import { routes, insightCategories } from "@/lib/routes";
+import { reportWarning } from "@/lib/logging";
 import { site } from "@/content/site";
 import { profile } from "@/content/profile";
 import { recognitionSummary } from "@/content/recognition";
@@ -68,24 +69,33 @@ export function getInsightsByCategory(category: InsightCategory): Insight[] {
 }
 
 export function getRelatedInsights(slugs: string[]): Insight[] {
-  if (!slugs.length) return [];
-  return slugs
-    .map((slug) => getInsightBySlug(slug))
-    .filter((item): item is Insight => Boolean(item));
+  return resolveSlugs(slugs, getInsightBySlug, "insight");
 }
 
 export function getRelatedWork(slugs: string[]): WorkCaseStudy[] {
-  if (!slugs.length) return [];
-  return slugs
-    .map((slug) => getWorkBySlug(slug))
-    .filter((item): item is WorkCaseStudy => Boolean(item));
+  return resolveSlugs(slugs, getWorkBySlug, "work");
 }
 
 export function getRelatedServices(slugs: string[]): Service[] {
-  if (!slugs.length) return [];
-  return slugs
-    .map((slug) => getServiceBySlug(slug))
-    .filter((item): item is Service => Boolean(item));
+  return resolveSlugs(slugs, getServiceBySlug, "service");
+}
+
+function resolveSlugs<T>(
+  slugs: string[],
+  lookup: (slug: string) => T | undefined,
+  collection: string,
+): T[] {
+  if (!slugs?.length) return [];
+  const resolved: T[] = [];
+  for (const slug of slugs) {
+    const item = lookup(slug);
+    if (item) {
+      resolved.push(item);
+      continue;
+    }
+    reportWarning("content", "Related entry references an unknown slug.", { collection, slug });
+  }
+  return resolved;
 }
 
 export function isInsightCategory(value: string): value is InsightCategory {

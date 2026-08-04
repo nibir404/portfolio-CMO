@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { reportError } from "@/lib/logging";
 
 type ShareButtonsProps = {
   url: string;
@@ -16,16 +17,28 @@ export function ShareButtons({
   label = "Share this insight",
 }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
 
   const handleCopy = async () => {
+    if (typeof navigator === "undefined" || !navigator.clipboard) {
+      setCopyFailed(true);
+      return;
+    }
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
+      setCopyFailed(false);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy link: ", err);
+    } catch (error) {
+      reportError("ShareButtons", error, { url });
+      setCopied(false);
+      setCopyFailed(true);
     }
   };
+
+  const copyStatus = copyFailed
+    ? `Copying is blocked in this browser. The link is ${url}`
+    : null;
 
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
@@ -139,6 +152,11 @@ export function ShareButtons({
             </svg>
           )}
         </button>
+        {copyStatus ? (
+          <span className="form-note" role="alert">
+            {copyStatus}
+          </span>
+        ) : null}
       </div>
     );
   }
@@ -207,6 +225,11 @@ export function ShareButtons({
           <span>{copied ? "Link Copied!" : "Copy Link"}</span>
         </button>
       </div>
+      {copyStatus ? (
+        <p className="form-note" role="alert">
+          {copyStatus}
+        </p>
+      ) : null}
     </div>
   );
 }
