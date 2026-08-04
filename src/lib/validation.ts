@@ -2,8 +2,16 @@ import type { FormFieldDef, ValidationError } from "@/types/forms";
 
 export const EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
+export const EMAIL_MAX_LENGTH = 254;
+
+// Fallback cap for fields that declare no maxLength, so a single field cannot
+// grow the generated mailto link without bound.
+export const FIELD_MAX_LENGTH = 2000;
+
 export function validateEmail(value: string): boolean {
-  return /^[a-zA-Z0-9._%+-]+@[a-zA-ZA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value.trim());
+  const candidate = value.trim();
+  if (candidate.length > EMAIL_MAX_LENGTH) return false;
+  return new RegExp(EMAIL_PATTERN).test(candidate);
 }
 
 export function validateRequired(value: string): boolean {
@@ -43,18 +51,13 @@ export function validateForm(
       });
       continue;
     }
-    if (field.maxLength && value.length > field.maxLength) {
+    const maxLength = field.maxLength ?? FIELD_MAX_LENGTH;
+    if (value.length > maxLength) {
       errors.push({
         field: field.name,
-        message: `${field.label} must be ${field.maxLength} characters or fewer.`,
+        message: `${field.label} must be ${maxLength} characters or fewer.`,
       });
       continue;
-    }
-    if (field.type === "textarea" && field.maxLength && value.length > field.maxLength) {
-      errors.push({
-        field: field.name,
-        message: `${field.label} must be ${field.maxLength} characters or fewer.`,
-      });
     }
   }
 
