@@ -12,6 +12,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 import { insightCategories, insightCategoryLabels } from "@/lib/routes";
 import { blogSchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Insights on Brand Strategy, AI Marketing & Leadership | Abdullah Al Alamin",
@@ -22,10 +23,11 @@ export const metadata: Metadata = buildPageMetadata({
 export default function InsightsIndexPage() {
   const featured = getFeaturedInsights()[0];
   const rest = getAllInsights();
+  const crumbs = trail({ name: "Insights", href: "/insights" });
   return (
     <>
-      <JsonLd data={[blogSchema(), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }])]} />
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }]} />
+      <JsonLd data={[blogSchema(), breadcrumbSchema(crumbs)]} />
+      <Breadcrumbs items={crumbs} />
       <PageHero
         id="insights"
         kicker="Field notes"

@@ -7,6 +7,7 @@ import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
 import { ImageBlock } from "@/components/ui/ImageBlock";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { buildPageMetadata } from "@/lib/metadata";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Training | Abdullah Al Alamin",
@@ -30,7 +31,7 @@ const modules = [
 export default function TrainingPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/insights" }, { name: "Training", href: "/training" }]} />
+      <Breadcrumbs items={trail({ name: "Blog", href: "/insights" }, { name: "Training", href: "/training" })} />
       <PageHero
         id="training"
         kicker="Training"

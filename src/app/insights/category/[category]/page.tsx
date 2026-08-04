@@ -12,6 +12,7 @@ import { insightCategories, insightCategoryLabels, insightCategoryDescriptions }
 import { buildPageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { trail } from "@/lib/breadcrumbs";
 
 type Params = { category: string };
 
@@ -43,10 +44,15 @@ export default function InsightCategoryPage({ params }: { params: Params }) {
   const items = getInsightsByCategory(params.category);
   const heroImage = categoryImages[params.category] ?? "/images/all side photo/c5307815-15e9-4005-addb-f5450988e31e.png";
 
+  const crumbs = trail(
+    { name: "Insights", href: "/insights" },
+    { name: label, href: `/insights/category/${params.category}` },
+  );
+
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }, { name: label, href: `/insights/category/${params.category}` }])} />
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }, { name: label, href: `/insights/category/${params.category}` }]} />
+      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <Breadcrumbs items={crumbs} />
       <PageHero
         id="category"
         kicker={`Insights · ${label}`}

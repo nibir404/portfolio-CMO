@@ -24,7 +24,8 @@ import { buildPageMetadata } from "@/lib/metadata";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ShareButtons } from "@/components/ui/ShareButtons";
-import { site } from "@/content/site";
+import { trail } from "@/lib/breadcrumbs";
+import { absoluteUrl } from "@/lib/url";
 
 type Params = { slug: string };
 
@@ -57,34 +58,20 @@ export default function InsightDetailPage({ params }: { params: Params }) {
     .slice(0, 3);
   const relatedWork = getRelatedWork(insight.relatedWorkSlugs).slice(0, 3);
   const relatedServices = getRelatedServices(insight.relatedServiceSlugs);
+  const crumbs = trail(
+    { name: "Insights", href: "/insights" },
+    {
+      name: insightCategoryLabels[insight.category],
+      href: `/insights/category/${insight.category}`,
+    },
+    { name: insight.title, href: insight.seo.path },
+  );
+  const shareUrl = absoluteUrl(insight.seo.path);
 
   return (
     <>
-      <JsonLd
-        data={[
-          articleSchema(insight),
-          breadcrumbSchema([
-            { name: "Home", href: "/" },
-            { name: "Insights", href: "/insights" },
-            {
-              name: insightCategoryLabels[insight.category],
-              href: `/insights/category/${insight.category}`,
-            },
-            { name: insight.title, href: insight.seo.path },
-          ]),
-        ]}
-      />
-      <Breadcrumbs
-        items={[
-          { name: "Home", href: "/" },
-          { name: "Insights", href: "/insights" },
-          {
-            name: insightCategoryLabels[insight.category],
-            href: `/insights/category/${insight.category}`,
-          },
-          { name: insight.title, href: insight.seo.path },
-        ]}
-      />
+      <JsonLd data={[articleSchema(insight), breadcrumbSchema(crumbs)]} />
+      <Breadcrumbs items={crumbs} />
       <Section compact ariaLabelledBy="insight-title">
         <Container>
           <div className="page-hero__grid">
@@ -99,11 +86,7 @@ export default function InsightDetailPage({ params }: { params: Params }) {
                 <span>{formatDate(insight.publishedAt)}</span>
                 <span>{insight.duration}</span>
               </div>
-              <ShareButtons
-                url={`${site.origin}${insight.seo.path}`}
-                title={insight.title}
-                variant="minimal"
-              />
+              <ShareButtons url={shareUrl} title={insight.title} variant="minimal" />
             </div>
             <figure className="image-frame image-frame--landscape">
               <Image
@@ -152,7 +135,7 @@ export default function InsightDetailPage({ params }: { params: Params }) {
             ))}
           </Prose>
           <ShareButtons
-            url={`${site.origin}${insight.seo.path}`}
+            url={shareUrl}
             title={insight.title}
             variant="default"
             label="Share this insight"

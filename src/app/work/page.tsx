@@ -9,6 +9,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { DraftClaimNotice } from "@/components/sections/DraftClaimNotice";
 import { getAllWork } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Case Studies — Brand & Marketing Transformations | Abdullah Al Alamin",
@@ -21,7 +22,7 @@ export default function WorkIndexPage() {
   const items = getAllWork();
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Work", href: "/work" }]} />
+      <Breadcrumbs items={trail({ name: "Work", href: "/work" })} />
       <PageHero
         id="work"
         kicker="Case studies"

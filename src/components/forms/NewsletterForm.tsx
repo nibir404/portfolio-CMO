@@ -1,11 +1,12 @@
 "use client";
 
 import { MailtoForm } from "@/components/forms/MailtoForm";
+import { labelledLines, nameField, workEmailField } from "@/lib/formFields";
 import type { FormFieldDef } from "@/types/forms";
 
 const fields: FormFieldDef[] = [
-  { name: "name", label: "Your name", required: true, maxLength: 120 },
-  { name: "email", label: "Work email", type: "email", required: true, maxLength: 160 },
+  nameField,
+  workEmailField,
   { name: "company", label: "Company or organisation", maxLength: 200 },
   {
     name: "topics",
@@ -19,12 +20,12 @@ function subject(values: Record<string, string>) {
 }
 
 function bodyLines(values: Record<string, string>) {
-  return [
-    { label: "Name", value: values.name ?? "" },
-    { label: "Email", value: values.email ?? "" },
-    { label: "Company", value: values.company ?? "" },
-    { label: "Topics", value: values.topics ?? "" },
-  ];
+  return labelledLines(values, [
+    ["Name", "name"],
+    ["Email", "email"],
+    ["Company", "company"],
+    ["Topics", "topics"],
+  ]);
 }
 
 export function NewsletterForm() {

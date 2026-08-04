@@ -9,6 +9,8 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { site } from "@/content/site";
 import { buildPageMetadata } from "@/lib/metadata";
+import { sidePhotos } from "@/content/images";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Contact Abdullah Al Alamin | Group CMO & AI Researcher",
@@ -16,12 +18,12 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/contact",
 });
 
-const channelImages = ["/images/all side photo/281c4ba9-98ef-4e55-9218-1c70669e5558.png", "/images/all side photo/60b933f1-ce48-40db-8e69-d47caddbf9c3.png", "/images/all side photo/69ad2fc3-8a45-4119-82fe-5e94b9675ddd.png"];
+const channelImages = sidePhotos.slice(0, 3);
 
 export default function ContactPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Contact", href: "/contact" }]} />
+      <Breadcrumbs items={trail({ name: "Contact", href: "/contact" })} />
       <PageHero
         id="contact"
         kicker="Contact"

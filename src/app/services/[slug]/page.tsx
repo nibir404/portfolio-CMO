@@ -14,6 +14,7 @@ import { getServiceBySlug, getAllServices, getRelatedInsights, getRelatedWork } 
 import { buildPageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { trail } from "@/lib/breadcrumbs";
 
 type Params = { slug: string };
 
@@ -42,11 +43,15 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
   const relatedWork = getRelatedWork(service.relatedWorkSlugs).slice(0, 3);
   const relatedInsights = getRelatedInsights(service.relatedInsightSlugs).slice(0, 3);
   const banner = serviceBanners[service.slug] ?? "/images/hero.webp";
+  const crumbs = trail(
+    { name: "Services", href: "/services" },
+    { name: service.name, href: service.seo.path },
+  );
 
   return (
     <>
-      <JsonLd data={[serviceSchema(service), faqSchema(service.faqs), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: service.name, href: service.seo.path }])]} />
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: service.name, href: service.seo.path }]} />
+      <JsonLd data={[serviceSchema(service), faqSchema(service.faqs), breadcrumbSchema(crumbs)]} />
+      <Breadcrumbs items={crumbs} />
       <PageHero
         id="service"
         kicker={service.keywords.primary}

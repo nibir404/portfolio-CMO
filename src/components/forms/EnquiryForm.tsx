@@ -1,24 +1,12 @@
 "use client";
 
 import { MailtoForm } from "@/components/forms/MailtoForm";
+import { labelledLines, nameField, subjectLine, textBlock, workEmailField } from "@/lib/formFields";
 import type { FormFieldDef } from "@/types/forms";
 
 const fields: FormFieldDef[] = [
-  {
-    name: "name",
-    label: "Your name",
-    required: true,
-    maxLength: 120,
-    placeholder: "Full name",
-  },
-  {
-    name: "email",
-    label: "Work email",
-    type: "email",
-    required: true,
-    maxLength: 160,
-    placeholder: "you@company.com",
-  },
+  { ...nameField, placeholder: "Full name" },
+  { ...workEmailField, placeholder: "you@company.com" },
   {
     name: "company",
     label: "Company",
@@ -39,19 +27,17 @@ const fields: FormFieldDef[] = [
 ];
 
 function subject(values: Record<string, string>) {
-  const name = values.name?.trim() || "—";
-  const company = values.company?.trim() || "—";
-  return `Brief from ${name} — ${company}`;
+  return subjectLine(`Brief from ${values.name?.trim() || "—"}`, values.company?.trim() || "—");
 }
 
 function bodyLines(values: Record<string, string>) {
   return [
-    { label: "Name", value: values.name ?? "" },
-    { label: "Work email", value: values.email ?? "" },
-    { label: "Company", value: values.company ?? "" },
-    "",
-    "Brief:",
-    values.message ?? "",
+    ...labelledLines(values, [
+      ["Name", "name"],
+      ["Work email", "email"],
+      ["Company", "company"],
+    ]),
+    ...textBlock("Brief", values.message),
   ];
 }
 

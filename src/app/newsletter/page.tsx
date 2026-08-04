@@ -9,6 +9,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { newsletter } from "@/content/newsletter";
 import { buildPageMetadata } from "@/lib/metadata";
+import { trail } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "AlaminWeekly | Abdullah Al Alamin",
@@ -19,7 +20,7 @@ export const metadata: Metadata = buildPageMetadata({
 export default function NewsletterPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "AlaminWeekly", href: "/newsletter" }]} />
+      <Breadcrumbs items={trail({ name: "AlaminWeekly", href: "/newsletter" })} />
       <PageHero
         id="newsletter"
         kicker="AlaminWeekly"

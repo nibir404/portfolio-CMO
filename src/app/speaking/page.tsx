@@ -11,6 +11,8 @@ import { SpeakingForm } from "@/components/forms/SpeakingForm";
 import { speakingTopics, pastStages } from "@/content/speaking";
 import { buildPageMetadata } from "@/lib/metadata";
 import { profile } from "@/content/profile";
+import { trail } from "@/lib/breadcrumbs";
+import { sidePhotos } from "@/content/images";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Keynote Speaker on AI Marketing & Brand Strategy | Abdullah Al Alamin",
@@ -25,12 +27,12 @@ const logistics = [
   { label: "Travel", value: "Based in Dhaka. Travel from Dhaka included in the engagement fee." },
 ];
 
-const topicImages = ["/images/all side photo/281c4ba9-98ef-4e55-9218-1c70669e5558.png", "/images/all side photo/60b933f1-ce48-40db-8e69-d47caddbf9c3.png", "/images/all side photo/69ad2fc3-8a45-4119-82fe-5e94b9675ddd.png", "/images/all side photo/7f48d23f-b588-426c-86b7-05ca1b3bfab5.png"];
+const topicImages = sidePhotos.slice(0, 4);
 
 export default function SpeakingPage() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Speaking", href: "/speaking" }]} />
+      <Breadcrumbs items={trail({ name: "Speaking", href: "/speaking" })} />
       <PageHero
         id="speaking"
         kicker="Speaking & keynotes"
