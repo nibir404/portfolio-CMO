@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { profile } from "@/content/profile";
-import { principles } from "@/content/principles";
+import { getProfile } from "@/lib/content";
+import { principles as staticPrinciples } from "@/content/principles"; // fallback
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { PageHero } from "@/components/ui/PageHero";
@@ -13,20 +13,31 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { buildPageMetadata } from "@/lib/metadata";
 import { personSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getDb } from "@/lib/mongodb";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "About Abdullah Al Alamin — Group CMO, Betopia Group",
-  description:
-    "Group Chief Marketing Officer of Betopia Group. Fourteen years building category-defining brands across FMCG, building materials, and conglomerate portfolios.",
-  path: "/about",
-  type: "profile",
-  image: "/images/abdullah1.jpg",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await getProfile();
+  return buildPageMetadata({
+    title: `About ${profile.name} — ${profile.jobTitle}, ${profile.worksFor}`,
+    description: profile.shortBio || "Group Chief Marketing Officer.",
+    path: "/about",
+    type: "profile",
+    image: "/images/abdullah1.jpg",
+  });
+}
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const profile = await getProfile();
+  let principles = staticPrinciples;
+  try {
+    const db = await getDb();
+    const docs = await db.collection("principles").find({}).toArray();
+    if (docs.length > 0) principles = docs as any;
+  } catch {}
+  
   return (
     <>
-      <JsonLd data={personSchema()} />
+      <JsonLd data={await personSchema()} />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
       <PageHero
         id="about"

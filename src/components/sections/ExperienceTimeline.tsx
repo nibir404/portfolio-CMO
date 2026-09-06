@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { profile } from "@/content/profile";
+import { getProfile } from "@/lib/content";
 
-export function ExperienceTimeline() {
+export async function ExperienceTimeline() {
+  const profile = await getProfile();
   const roles = profile.career.slice(0, 4);
 
   return (

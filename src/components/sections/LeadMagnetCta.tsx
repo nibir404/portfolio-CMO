@@ -1,9 +1,16 @@
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { playbook } from "@/content/playbook";
+import { getDb } from "@/lib/mongodb";
+import { playbook as staticPlaybook } from "@/content/playbook";
 
-export function LeadMagnetCta() {
+export async function LeadMagnetCta() {
+  let playbook = staticPlaybook;
+  try {
+    const db = await getDb();
+    const doc = await db.collection("playbook").findOne({});
+    if (doc) playbook = doc as any;
+  } catch {}
   return (
     <Section surface="accent" ariaLabelledBy="lead-magnet-title">
       <Container>

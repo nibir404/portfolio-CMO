@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
-import { editorial } from "@/content/editorial";
 
-export function Audience() {
-  const { audience } = editorial;
+type AudienceData = { kicker: string; title: string; cards: Array<{ num: string; title: string; body: string }> };
+
+export function Audience({ data: audience }: { data: AudienceData }) {
 
   // Custom vector illustrations representing Canvas (01), Studio (02), and IQ (03) in neon lime style
   const illustrations = [

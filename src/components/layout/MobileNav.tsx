@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { site } from "@/content/site";
 
 type NavItem = { label: string; href: string };
 type NavGroup = { label: string; href?: string; children: NavItem[] };
@@ -32,11 +31,15 @@ function DrawerPanel({
   expanded,
   setExpanded,
   close,
+  officeEmail,
+  speakingEmail,
 }: {
   open: boolean;
   expanded: string | null;
   setExpanded: (value: string | null) => void;
   close: () => void;
+  officeEmail: string;
+  speakingEmail: string;
 }) {
   return (
     <>
@@ -107,11 +110,11 @@ function DrawerPanel({
           </ul>
           <div className="mobile-nav__contact">
             <span className="eyebrow">Office</span>
-            <a href={`mailto:${site.officeEmail}`} tabIndex={open ? 0 : -1}>
-              {site.officeEmail}
+            <a href={`mailto:${officeEmail}`} tabIndex={open ? 0 : -1}>
+              {officeEmail}
             </a>
-            <a href={`mailto:${site.speakingEmail}`} tabIndex={open ? 0 : -1}>
-              {site.speakingEmail}
+            <a href={`mailto:${speakingEmail}`} tabIndex={open ? 0 : -1}>
+              {speakingEmail}
             </a>
           </div>
         </div>
@@ -120,7 +123,7 @@ function DrawerPanel({
   );
 }
 
-export function MobileNav() {
+export function MobileNav({ officeEmail, speakingEmail }: { officeEmail: string, speakingEmail: string }) {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -156,6 +159,8 @@ export function MobileNav() {
       expanded={expanded}
       setExpanded={setExpanded}
       close={close}
+      officeEmail={officeEmail}
+      speakingEmail={speakingEmail}
     />
   );
 

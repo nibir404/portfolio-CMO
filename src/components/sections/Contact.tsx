@@ -2,10 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import { Reveal } from "@/components/motion/Reveal";
-import { editorial } from "@/content/editorial";
 
-export function Contact() {
-  const { contact } = editorial;
+type ContactData = { kicker: string; title: string; big: string; email: string; areaOptions: string[]; formNote: string };
+
+export function Contact({ data: contact }: { data: ContactData }) {
   const [area, setArea] = useState("");
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {

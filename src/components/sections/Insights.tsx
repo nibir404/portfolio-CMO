@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
-import { editorial } from "@/content/editorial";
 import { getAllInsights } from "@/lib/content";
 import { insightCategoryLabels } from "@/lib/routes";
 
-export function Insights() {
-  const { insights: editorialInsights } = editorial;
-  const realInsights = getAllInsights().slice(0, 6);
+type InsightsEditorialData = { kicker: string; title: string; posts: Array<{ slug: string; tag: string; title: string; excerpt: string }> };
+
+export async function Insights({ data: editorialInsights }: { data: InsightsEditorialData }) {
+  const realInsights = (await getAllInsights()).slice(0, 6);
 
   return (
     <section className="editorial-section" id="insights" aria-labelledby="insights-title">

@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { site, currentYear } from "@/content/site";
+import { getSite } from "@/lib/content";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const site = await getSite();
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="site-footer" aria-labelledby="site-footer-title">
       <div className="container">

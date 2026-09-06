@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
-import { editorial } from "@/content/editorial";
 
-export function EditorialHero() {
-  const { hero } = editorial;
+type HeroData = { kicker: string; titleHtml: string; subtitleHtml: string; lead: string; primaryCta: { label: string; href: string }; secondaryCta: { label: string; href: string }; role: string; };
+
+export function EditorialHero({ data: hero }: { data: HeroData }) {
 
   return (
     <section

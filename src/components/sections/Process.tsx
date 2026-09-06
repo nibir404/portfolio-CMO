@@ -1,8 +1,8 @@
 import { Reveal } from "@/components/motion/Reveal";
-import { editorial } from "@/content/editorial";
 
-export function Process() {
-  const { process } = editorial;
+type ProcessData = { kicker: string; title: string; steps: Array<{ n: string; title: string; body: string }> };
+
+export function Process({ data: process }: { data: ProcessData }) {
   return (
     <section className="editorial-section" id="process" aria-labelledby="process-title">
       <div className="wrap">

@@ -8,11 +8,11 @@ import { ImageBlock } from "@/components/ui/ImageBlock";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Resources | Abdullah Al Alamin",
   description: "Print media, data analytics R&D, articles, and templates — the working tools the office uses with boards and operators.",
   path: "/resources",
-});
+}); }
 
 type Resource = { kind: string; title: string; format: string; note: string; href: string };
 

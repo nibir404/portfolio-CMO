@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
-import { site } from "@/content/site";
+import { getSite } from "@/lib/content";
 import { buildMetadataBase } from "@/lib/metadata";
 import { personSchema, websiteSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,6 +10,7 @@ import { MobileContactCta } from "@/components/layout/MobileContactCta";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { ThemeSync } from "@/components/layout/ThemeSync";
 import { RevealInit } from "@/components/motion/RevealInit";
+import { HideOnAdmin } from "@/components/layout/HideOnAdmin";
 import "./globals.css";
 
 const display = Fraunces({
@@ -27,19 +28,23 @@ const body = Inter({
   weight: ["400", "500", "600"],
 });
 
-export const metadata: Metadata = {
-  ...buildMetadataBase(),
-  authors: [{ name: site.name, url: site.origin }],
-  creator: site.name,
-  publisher: site.name,
-  openGraph: {
-    ...buildMetadataBase().openGraph,
-    url: site.origin,
-  },
-  twitter: {
-    ...buildMetadataBase().twitter,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSite();
+  const base = await buildMetadataBase();
+  return {
+    ...base,
+    authors: [{ name: site.name, url: site.origin }],
+    creator: site.name,
+    publisher: site.name,
+    openGraph: {
+      ...base.openGraph,
+      url: site.origin,
+    },
+    twitter: {
+      ...base.twitter,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
@@ -47,7 +52,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const [personData, websiteData, site] = await Promise.all([
+    personSchema(),
+    websiteSchema(),
+    getSite(),
+  ]);
+
   return (
     <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
       <head>
@@ -60,12 +71,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <SkipLink href="#main" />
-        <JsonLd data={personSchema()} />
-        <JsonLd data={websiteSchema()} />
-        <SiteHeader />
+        <JsonLd data={personData} />
+        <JsonLd data={websiteData} />
+        <HideOnAdmin>
+          <SiteHeader officeEmail={site.officeEmail} speakingEmail={site.speakingEmail} />
+        </HideOnAdmin>
         <main id="main">{children}</main>
-        <SiteFooter />
-        <MobileContactCta />
+        <HideOnAdmin>
+          <SiteFooter />
+          <MobileContactCta />
+        </HideOnAdmin>
         <ThemeSync />
         <RevealInit />
       </body>

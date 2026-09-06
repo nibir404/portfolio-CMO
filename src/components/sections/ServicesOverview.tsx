@@ -4,8 +4,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/cards/ServiceCard";
 import { getAllServices } from "@/lib/content";
 
-export function ServicesOverview() {
-  const services = getAllServices();
+export async function ServicesOverview() {
+  const services = await getAllServices();
   return (
     <Section surface="surface" ariaLabelledBy="services-overview-title">
       <Container>

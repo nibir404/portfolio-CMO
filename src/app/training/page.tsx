@@ -8,11 +8,11 @@ import { ImageBlock } from "@/components/ui/ImageBlock";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Training | Abdullah Al Alamin",
   description: "How the office trains marketing leaders, boards, and operators to grow the business — through cohort programmes, in-house academies, and 1-to-1 advisory.",
   path: "/training",
-});
+}); }
 
 const programmes = [
   { eyebrow: "Cohort programme", title: "The 12-Week CMO Sprint", body: "A cohort-based programme for newly appointed CMOs and divisional marketing heads. Twelve weeks, one operating model, three deliverables.", audience: "CMOs and senior marketing leaders", format: "12 weeks · weekly 90-min live sessions", href: "#inquiry", image: "/images/all side photo/281c4ba9-98ef-4e55-9218-1c70669e5558.png" },

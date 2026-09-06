@@ -5,8 +5,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WorkCard } from "@/components/cards/WorkCard";
 import { getFeaturedWork } from "@/lib/content";
 
-export function FeaturedWork() {
-  const items = getFeaturedWork();
+export async function FeaturedWork() {
+  const items = await getFeaturedWork();
   return (
     <Section ariaLabelledBy="featured-work-title">
       <Container>

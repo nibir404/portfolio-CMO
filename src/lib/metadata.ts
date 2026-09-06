@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@/content/site";
+import { getSite } from "./content";
 
 export type MetadataInput = {
   title: string;
@@ -14,7 +14,8 @@ export type MetadataInput = {
 
 const DEFAULT_OG = "/images/og-default.png";
 
-export function buildPageMetadata(input: MetadataInput): Metadata {
+export async function buildPageMetadata(input: MetadataInput): Promise<Metadata> {
+  const site = await getSite();
   const path = input.path.startsWith("/") ? input.path : `/${input.path}`;
   const url = `${site.origin}${path}`;
   const image = input.image ?? DEFAULT_OG;
@@ -50,7 +51,8 @@ export function buildPageMetadata(input: MetadataInput): Metadata {
   };
 }
 
-export function buildMetadataBase(): Metadata {
+export async function buildMetadataBase(): Promise<Metadata> {
+  const site = await getSite();
   return {
     metadataBase: new URL(site.origin),
     title: {

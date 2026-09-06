@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
-import { editorial } from "@/content/editorial";
 
-export function EditorialProof() {
-  const { proof } = editorial;
+type ProofData = { kicker: string; title: string; stats: Array<{ value: string; label: string }>; logos: string[]; sectors: string };
+
+export function EditorialProof({ data: proof }: { data: ProofData }) {
   
   const brandLogos = [
     "Brand-1.png",

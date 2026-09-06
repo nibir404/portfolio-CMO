@@ -8,11 +8,11 @@ import { ImageBlock } from "@/components/ui/ImageBlock";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Live Sessions | Abdullah Al Alamin",
   description: "Live, working sessions with the office — CMO roundtables, brand sprints, and AI marketing clinics for boards and senior leadership teams.",
   path: "/live-session",
-});
+}); }
 
 const upcoming = [
   { date: "Quarterly", title: "CMO Roundtable (closed-door)", audience: "Group CMOs and divisional marketing heads", format: "90 minutes · 12 seats", note: "Operator-led discussion on one board-grade question, no recordings.", image: "/images/all side photo/281c4ba9-98ef-4e55-9218-1c70669e5558.png" },

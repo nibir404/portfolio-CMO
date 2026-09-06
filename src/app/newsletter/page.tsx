@@ -7,16 +7,17 @@ import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
 import { ImageBlock } from "@/components/ui/ImageBlock";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
-import { newsletter } from "@/content/newsletter";
+import { getNewsletter } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "AlaminWeekly | Abdullah Al Alamin",
   description: "One brand-strategy insight a week, in your inbox. Frameworks from the operator's desk, with the receipts.",
   path: "/newsletter",
-});
+}); }
 
-export default function NewsletterPage() {
+export default async function NewsletterPage() {
+  const newsletter = await getNewsletter();
   return (
     <>
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "AlaminWeekly", href: "/newsletter" }]} />

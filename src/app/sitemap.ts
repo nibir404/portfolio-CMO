@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
-import { getAllIndexableRoutes } from "@/lib/content";
-import { site } from "@/content/site";
+import { getAllIndexableRoutes, getSite } from "@/lib/content";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = getAllIndexableRoutes();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [routes, site] = await Promise.all([
+    getAllIndexableRoutes(),
+    getSite(),
+  ]);
   return routes.map((entry) => ({
     url: `${site.origin}${entry.path}`,
     changeFrequency: "monthly",

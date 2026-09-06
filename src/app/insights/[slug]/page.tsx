@@ -17,6 +17,7 @@ import {
   getRelatedInsights,
   getRelatedWork,
   getRelatedServices,
+  getSite,
 } from "@/lib/content";
 import { insightCategoryLabels } from "@/lib/routes";
 import { formatDate } from "@/lib/format";
@@ -24,20 +25,19 @@ import { buildPageMetadata } from "@/lib/metadata";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ShareButtons } from "@/components/ui/ShareButtons";
-import { site } from "@/content/site";
 
 type Params = { slug: string };
 
-export function generateStaticParams() {
-  return getAllInsights().map((item) => ({ slug: item.slug }));
+export async function generateStaticParams() {
+  return (await getAllInsights()).map((item) => ({ slug: item.slug }));
 }
 
 export const dynamicParams = false;
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const insight = getInsightBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const insight = await getInsightBySlug(params.slug);
   if (!insight) return {};
-  return buildPageMetadata({
+  return await buildPageMetadata({
     title: insight.seo.title,
     description: insight.seo.description,
     path: insight.seo.path,
@@ -48,22 +48,26 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   });
 }
 
-export default function InsightDetailPage({ params }: { params: Params }) {
-  const insight = getInsightBySlug(params.slug);
+export default async function InsightDetailPage({ params }: { params: Params }) {
+  const insight = await getInsightBySlug(params.slug);
   if (!insight) notFound();
 
-  const related = getRelatedInsights(insight.relatedInsightSlugs ?? [])
-    .filter((item) => item.slug !== insight.slug)
-    .slice(0, 3);
-  const relatedWork = getRelatedWork(insight.relatedWorkSlugs).slice(0, 3);
-  const relatedServices = getRelatedServices(insight.relatedServiceSlugs);
+  const [allRelated, allRelatedWork, relatedServices, site] = await Promise.all([
+    getRelatedInsights(insight.relatedInsightSlugs ?? []),
+    getRelatedWork(insight.relatedWorkSlugs),
+    getRelatedServices(insight.relatedServiceSlugs),
+    getSite(),
+  ]);
+
+  const related = allRelated.filter((item) => item.slug !== insight.slug).slice(0, 3);
+  const relatedWork = allRelatedWork.slice(0, 3);
 
   return (
     <>
       <JsonLd
         data={[
-          articleSchema(insight),
-          breadcrumbSchema([
+          await articleSchema(insight),
+          await breadcrumbSchema([
             { name: "Home", href: "/" },
             { name: "Insights", href: "/insights" },
             {

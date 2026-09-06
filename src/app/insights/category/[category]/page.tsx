@@ -29,23 +29,23 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   if (!isInsightCategory(params.category)) return {};
   const label = insightCategoryLabels[params.category];
   const description = insightCategoryDescriptions[params.category];
-  return buildPageMetadata({ title: `${label} Insights | Abdullah Al Alamin`, description, path: `/insights/category/${params.category}` });
+  return await buildPageMetadata({ title: `${label} Insights | Abdullah Al Alamin`, description, path: `/insights/category/${params.category}` });
 }
 
-export default function InsightCategoryPage({ params }: { params: Params }) {
+export default async function InsightCategoryPage({ params }: { params: Params }) {
   if (!isInsightCategory(params.category)) notFound();
   const label = insightCategoryLabels[params.category];
   const description = insightCategoryDescriptions[params.category];
-  const items = getInsightsByCategory(params.category);
+  const items = await getInsightsByCategory(params.category);
   const heroImage = categoryImages[params.category] ?? "/images/all side photo/c5307815-15e9-4005-addb-f5450988e31e.png";
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }, { name: label, href: `/insights/category/${params.category}` }])} />
+      <JsonLd data={await breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }, { name: label, href: `/insights/category/${params.category}` }])} />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Insights", href: "/insights" }, { name: label, href: `/insights/category/${params.category}` }]} />
       <PageHero
         id="category"

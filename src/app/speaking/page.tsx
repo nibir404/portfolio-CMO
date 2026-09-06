@@ -8,15 +8,14 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SpeakingTopicCard } from "@/components/cards/SpeakingTopicCard";
 import { SpeakingForm } from "@/components/forms/SpeakingForm";
-import { speakingTopics, pastStages } from "@/content/speaking";
+import { getAllSpeakingTopics, getAllPastStages, getProfile } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
-import { profile } from "@/content/profile";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Keynote Speaker on AI Marketing & Brand Strategy | Abdullah Al Alamin",
   description: "Keynotes, juries, and public frameworks. Four bookable topics on the AI-first CMO, compounding brand equity, national branding, and reputation rebuilt in public.",
   path: "/speaking",
-});
+}); }
 
 const logistics = [
   { label: "Bio", value: "Short, medium, and long bios available on request." },
@@ -27,7 +26,13 @@ const logistics = [
 
 const topicImages = ["/images/all side photo/281c4ba9-98ef-4e55-9218-1c70669e5558.png", "/images/all side photo/60b933f1-ce48-40db-8e69-d47caddbf9c3.png", "/images/all side photo/69ad2fc3-8a45-4119-82fe-5e94b9675ddd.png", "/images/all side photo/7f48d23f-b588-426c-86b7-05ca1b3bfab5.png"];
 
-export default function SpeakingPage() {
+export default async function SpeakingPage() {
+  const [speakingTopics, pastStages, profile] = await Promise.all([
+    getAllSpeakingTopics(),
+    getAllPastStages(),
+    getProfile(),
+  ]);
+
   return (
     <>
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Speaking", href: "/speaking" }]} />

@@ -10,12 +10,11 @@ import { Prose } from "@/components/ui/Prose";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { DraftClaimNotice } from "@/components/sections/DraftClaimNotice";
 import { WorkCard } from "@/components/cards/WorkCard";
-import { getWorkBySlug, getAllWork, getAdjacentWork, getRelatedWork, getRelatedServices } from "@/lib/content";
+import { getWorkBySlug, getAllWork, getAdjacentWork, getRelatedWork, getRelatedServices, getSite } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 import { caseStudySchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ShareButtons } from "@/components/ui/ShareButtons";
-import { site } from "@/content/site";
 
 type Params = { slug: string };
 
@@ -27,16 +26,16 @@ const inlineImages = [
   "/images/all side photo/bf36be97-595f-4f03-b208-7f93513e1080 (1).png",
 ];
 
-export function generateStaticParams() {
-  return getAllWork().map((item) => ({ slug: item.slug }));
+export async function generateStaticParams() {
+  return (await getAllWork()).map((item) => ({ slug: item.slug }));
 }
 
 export const dynamicParams = false;
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const item = getWorkBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const item = await getWorkBySlug(params.slug);
   if (!item) return {};
-  return buildPageMetadata({
+  return await buildPageMetadata({
     title: `${item.title} — ${item.company} Case Study | Abdullah Al Alamin`,
     description: item.summary,
     path: item.seo.path,
@@ -46,17 +45,21 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   });
 }
 
-export default function CaseStudyPage({ params }: { params: Params }) {
-  const item = getWorkBySlug(params.slug);
+export default async function CaseStudyPage({ params }: { params: Params }) {
+  const item = await getWorkBySlug(params.slug);
   if (!item) notFound();
-  const { prev, next } = getAdjacentWork(item.slug);
-  const relatedWork = getRelatedWork(item.relatedWorkSlugs ?? []).filter((entry) => entry.slug !== item.slug);
-  const relatedServices = getRelatedServices(item.relatedServiceSlugs);
+  const [{ prev, next }, allRelatedWork, relatedServices, site] = await Promise.all([
+    getAdjacentWork(item.slug),
+    getRelatedWork(item.relatedWorkSlugs ?? []),
+    getRelatedServices(item.relatedServiceSlugs),
+    getSite(),
+  ]);
+  const relatedWork = allRelatedWork.filter((entry) => entry.slug !== item.slug);
   const inline = inlineImages[Math.abs(item.slug.length) % inlineImages.length];
 
   return (
     <>
-      <JsonLd data={[caseStudySchema(item), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Work", href: "/work" }, { name: item.title, href: item.seo.path }])]} />
+      <JsonLd data={[await caseStudySchema(item), await breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Work", href: "/work" }, { name: item.title, href: item.seo.path }])]} />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Work", href: "/work" }, { name: item.title, href: item.seo.path }]} />
       <PageHero
         id="case"

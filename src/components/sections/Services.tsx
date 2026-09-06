@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
-import { editorial } from "@/content/editorial";
 
-export function Services() {
-  const { services } = editorial;
+type ServicesData = { kicker: string; title: string; items: Array<{ num: string; title: string; tagline: string; who: string; what: string; get: string; engagement: string; cta: string }>; footnote: string };
+
+export function Services({ data: services }: { data: ServicesData }) {
 
   return (
     <section id="services" aria-labelledby="services-title" className="max-w-[var(--container)] mx-auto px-4 sm:px-6 lg:px-8 py-16 text-left">

@@ -24,28 +24,34 @@ const serviceBanners: Record<string, string> = {
   "international-expansion": "/images/ab5.jpg",
 };
 
-export function generateStaticParams() {
-  return getAllServices().map((service) => ({ slug: service.slug }));
+export async function generateStaticParams() {
+  return (await getAllServices()).map((service) => ({ slug: service.slug }));
 }
 
 export const dynamicParams = false;
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const service = getServiceBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const service = await getServiceBySlug(params.slug);
   if (!service) return {};
-  return buildPageMetadata({ title: service.seo.title, description: service.seo.description, path: service.seo.path });
+  return await buildPageMetadata({ title: service.seo.title, description: service.seo.description, path: service.seo.path });
 }
 
-export default function ServiceDetailPage({ params }: { params: Params }) {
-  const service = getServiceBySlug(params.slug);
+export default async function ServiceDetailPage({ params }: { params: Params }) {
+  const service = await getServiceBySlug(params.slug);
   if (!service) notFound();
-  const relatedWork = getRelatedWork(service.relatedWorkSlugs).slice(0, 3);
-  const relatedInsights = getRelatedInsights(service.relatedInsightSlugs).slice(0, 3);
+  
+  const [allRelatedWork, allRelatedInsights] = await Promise.all([
+    getRelatedWork(service.relatedWorkSlugs),
+    getRelatedInsights(service.relatedInsightSlugs),
+  ]);
+  
+  const relatedWork = allRelatedWork.slice(0, 3);
+  const relatedInsights = allRelatedInsights.slice(0, 3);
   const banner = serviceBanners[service.slug] ?? "/images/hero.webp";
 
   return (
     <>
-      <JsonLd data={[serviceSchema(service), faqSchema(service.faqs), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: service.name, href: service.seo.path }])]} />
+      <JsonLd data={[await serviceSchema(service), faqSchema(service.faqs), await breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: service.name, href: service.seo.path }])]} />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: service.name, href: service.seo.path }]} />
       <PageHero
         id="service"

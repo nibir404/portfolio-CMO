@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Reveal } from "@/components/motion/Reveal";
-import { profile } from "@/content/profile";
+import { getProfile } from "@/lib/content";
 
 const trustBrands = [
   "Betopia Group",
@@ -14,7 +14,8 @@ const trustBrands = [
   "Akij Foods",
 ];
 
-export function NPHero() {
+export async function NPHero() {
+  const profile = await getProfile();
   return (
     <section className="np-hero" aria-labelledby="np-hero-title">
       <Container>

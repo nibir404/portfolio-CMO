@@ -1,8 +1,8 @@
 import { Reveal } from "@/components/motion/Reveal";
-import { editorial } from "@/content/editorial";
 
-export function About() {
-  const { about } = editorial;
+type AboutData = { kicker: string; title: string; paragraphs: string[]; beliefs: Array<{ headline: string; body: string }> };
+
+export function About({ data: about }: { data: AboutData }) {
   return (
     <section className="editorial-section editorial-section--surface" id="about" aria-labelledby="about-title">
       <div className="wrap">

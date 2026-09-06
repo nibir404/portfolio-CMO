@@ -8,18 +8,19 @@ import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
 import { ImageBlock } from "@/components/ui/ImageBlock";
 import { PressCard } from "@/components/cards/PressCard";
 import { PressForm } from "@/components/forms/PressForm";
-import { pressCoverage, pressKit, interviewTopics } from "@/content/press";
+import { getPressData } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Press & Media | Abdullah Al Alamin",
   description: "Bylines, interviews, and the press kit. Approved bios in three lengths and high-resolution headshots are available on request.",
   path: "/press",
-});
+}); }
 
 const pressImages = ["/images/all side photo/281c4ba9-98ef-4e55-9218-1c70669e5558.png", "/images/all side photo/60b933f1-ce48-40db-8e69-d47caddbf9c3.png", "/images/all side photo/69ad2fc3-8a45-4119-82fe-5e94b9675ddd.png"];
 
-export default function PressPage() {
+export default async function PressPage() {
+  const { pressCoverage, pressKit, interviewTopics } = await getPressData();
   return (
     <>
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Press", href: "/press" }]} />
@@ -53,7 +54,7 @@ export default function PressPage() {
         <Container>
           <EyebrowHeading eyebrow="Press kit" title="Available on request." id="kit-title" />
           <div className="grid grid--2">
-            {pressKit.assets.map((asset) => (
+            {pressKit.assets.map((asset: any) => (
               <article key={asset.label} className="card card--service">
                 <span className="card__meta">Asset</span>
                 <h3>{asset.label}</h3>
@@ -82,7 +83,7 @@ export default function PressPage() {
         <Container>
           <EyebrowHeading eyebrow="Interview topics" title="What the office speaks to." id="topics-title" />
           <ul className="prose">
-            {interviewTopics.map((topic) => (<li key={topic}>{topic}</li>))}
+            {interviewTopics.map((topic: string) => (<li key={topic}>{topic}</li>))}
           </ul>
         </Container>
       </Section>

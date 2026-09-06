@@ -7,16 +7,17 @@ import { PageHero } from "@/components/ui/PageHero";
 import { ImageBlock } from "@/components/ui/ImageBlock";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { PlaybookForm } from "@/components/forms/PlaybookForm";
-import { playbook } from "@/content/playbook";
+import { getPlaybook } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "The 90-Day CMO Playbook | Abdullah Al Alamin",
   description: "The three frameworks I run on day one of every new mandate — and the one I always revisit by day sixty. Eighteen pages, free.",
   path: "/playbook",
-});
+}); }
 
-export default function PlaybookPage() {
+export default async function PlaybookPage() {
+  const playbook = await getPlaybook();
   return (
     <>
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Playbook", href: "/playbook" }]} />

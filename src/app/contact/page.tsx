@@ -7,18 +7,19 @@ import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
 import { ImageBlock } from "@/components/ui/ImageBlock";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
-import { site } from "@/content/site";
+import { getSite } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Contact Abdullah Al Alamin | Group CMO & AI Researcher",
   description: "Get in touch with the office of Abdullah Al Alamin. Submit a mandate brief or contact the office directly.",
   path: "/contact",
-});
+}); }
 
 const channelImages = ["/images/all side photo/281c4ba9-98ef-4e55-9218-1c70669e5558.png", "/images/all side photo/60b933f1-ce48-40db-8e69-d47caddbf9c3.png", "/images/all side photo/69ad2fc3-8a45-4119-82fe-5e94b9675ddd.png"];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const site = await getSite();
   return (
     <>
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Contact", href: "/contact" }]} />

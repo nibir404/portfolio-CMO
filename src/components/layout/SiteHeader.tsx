@@ -6,7 +6,7 @@ import Image from "next/image";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
-export function SiteHeader() {
+export function SiteHeader({ officeEmail, speakingEmail }: { officeEmail: string, speakingEmail: string }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export function SiteHeader() {
             Get Started
           </Link>
           <ThemeToggle />
-          <MobileNav />
+          <MobileNav officeEmail={officeEmail} speakingEmail={speakingEmail} />
         </div>
       </div>
     </header>

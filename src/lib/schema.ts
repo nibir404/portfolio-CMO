@@ -1,6 +1,4 @@
-import { site } from "@/content/site";
-import { profile } from "@/content/profile";
-import { recognitionSummary } from "@/content/recognition";
+import { getSite, getProfile, getRecognitionSummary } from "./content";
 import type {
   FaqEntry,
   Insight,
@@ -10,7 +8,10 @@ import type {
 
 export type JsonLdObject = Record<string, unknown>;
 
-export function personSchema(): JsonLdObject {
+export async function personSchema(): Promise<JsonLdObject> {
+  const site = await getSite();
+  const profile = await getProfile();
+  const recognitionSummary = await getRecognitionSummary();
   const credentials = profile.credentials.map((name) => name);
   return {
     "@context": "https://schema.org",
@@ -31,7 +32,8 @@ export function personSchema(): JsonLdObject {
   };
 }
 
-export function websiteSchema(): JsonLdObject {
+export async function websiteSchema(): Promise<JsonLdObject> {
+  const site = await getSite();
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -41,7 +43,8 @@ export function websiteSchema(): JsonLdObject {
   };
 }
 
-export function breadcrumbSchema(items: Array<{ name: string; href: string }>): JsonLdObject {
+export async function breadcrumbSchema(items: Array<{ name: string; href: string }>): Promise<JsonLdObject> {
+  const site = await getSite();
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -69,7 +72,9 @@ export function faqSchema(faqs: FaqEntry[]): JsonLdObject {
   };
 }
 
-export function serviceSchema(service: Service): JsonLdObject {
+export async function serviceSchema(service: Service): Promise<JsonLdObject> {
+  const site = await getSite();
+  const profile = await getProfile();
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -87,7 +92,9 @@ export function serviceSchema(service: Service): JsonLdObject {
   };
 }
 
-export function caseStudySchema(item: WorkCaseStudy): JsonLdObject {
+export async function caseStudySchema(item: WorkCaseStudy): Promise<JsonLdObject> {
+  const site = await getSite();
+  const profile = await getProfile();
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -114,7 +121,9 @@ export function caseStudySchema(item: WorkCaseStudy): JsonLdObject {
   };
 }
 
-export function articleSchema(item: Insight): JsonLdObject {
+export async function articleSchema(item: Insight): Promise<JsonLdObject> {
+  const site = await getSite();
+  const profile = await getProfile();
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -139,7 +148,9 @@ export function articleSchema(item: Insight): JsonLdObject {
   };
 }
 
-export function organizationSchema(): JsonLdObject {
+export async function organizationSchema(): Promise<JsonLdObject> {
+  const site = await getSite();
+  const profile = await getProfile();
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -150,7 +161,8 @@ export function organizationSchema(): JsonLdObject {
   };
 }
 
-export function blogSchema(): JsonLdObject {
+export async function blogSchema(): Promise<JsonLdObject> {
+  const site = await getSite();
   return {
     "@context": "https://schema.org",
     "@type": "Blog",

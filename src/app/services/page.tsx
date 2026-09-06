@@ -13,12 +13,12 @@ import { buildPageMetadata } from "@/lib/metadata";
 import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Business Transformation & AI Strategy Capabilities | Abdullah Al Alamin",
   description:
     "Pragmatic transformation areas for ambitious organisations: AI Business Transformation, Brand Transformation, Business Growth & Scaling, and International Expansion.",
   path: "/services",
-});
+}); }
 
 const overviewFaqs = [
   { question: "What is your approach to AI transformation?", answer: "I don't recommend AI as a generic tool; I build AI-powered businesses. I work with leadership teams to design operating models, automate manual operations, construct data ingestion pipelines, and integrate predictive analytics directly into business operations." },
@@ -37,11 +37,11 @@ const steps = [
 
 const serviceImages = ["/images/img1.jpg", "/images/ab4.jpg", "/images/img2.jpg", "/images/ab5.jpg"];
 
-export default function ServicesPage() {
-  const services = getAllServices();
+export default async function ServicesPage() {
+  const services = await getAllServices();
   return (
     <>
-      <JsonLd data={[faqSchema(overviewFaqs), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Capabilities", href: "/services" }])]} />
+      <JsonLd data={[faqSchema(overviewFaqs), await breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Capabilities", href: "/services" }])]} />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Capabilities", href: "/services" }]} />
       <PageHero
         id="services"

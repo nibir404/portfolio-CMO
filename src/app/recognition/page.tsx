@@ -7,16 +7,20 @@ import { EyebrowHeading } from "@/components/ui/EyebrowHeading";
 import { ImageBlock } from "@/components/ui/ImageBlock";
 import { RecognitionCard } from "@/components/cards/RecognitionCard";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { recognition, recognitionSummary } from "@/content/recognition";
+import { getRecognition, getRecognitionSummary } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Recognition & Awards | Abdullah Al Alamin",
   description: "Twelve awards across international, government, and industry categories — the credential is the work; these are the footnotes.",
   path: "/recognition",
-});
+}); }
 
-export default function RecognitionPage() {
+export default async function RecognitionPage() {
+  const [recognition, recognitionSummary] = await Promise.all([
+    getRecognition(),
+    getRecognitionSummary(),
+  ]);
   return (
     <>
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Recognition", href: "/recognition" }]} />

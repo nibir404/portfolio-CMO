@@ -10,15 +10,15 @@ import { DraftClaimNotice } from "@/components/sections/DraftClaimNotice";
 import { getAllWork } from "@/lib/content";
 import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> { return await buildPageMetadata({
   title: "Case Studies — Brand & Marketing Transformations | Abdullah Al Alamin",
   description:
     "Seven business transformations across FMCG, building materials, education, and conglomerate portfolios — with the scope, the decision, and the measurable outcome.",
   path: "/work",
-});
+}); }
 
-export default function WorkIndexPage() {
-  const items = getAllWork();
+export default async function WorkIndexPage() {
+  const items = await getAllWork();
   return (
     <>
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Work", href: "/work" }]} />
