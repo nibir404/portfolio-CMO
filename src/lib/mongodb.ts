@@ -8,7 +8,9 @@ interface MongoCache {
 }
 
 // Use global to preserve connection across hot reloads in dev
-const globalWithMongo = globalThis as typeof globalThis & { _mongoCache?: MongoCache };
+const globalWithMongo = globalThis as typeof globalThis & {
+  _mongoCache?: MongoCache;
+};
 
 if (!globalWithMongo._mongoCache) {
   globalWithMongo._mongoCache = { client: null, promise: null };
@@ -19,9 +21,9 @@ const cached = globalWithMongo._mongoCache;
 export async function getMongoClient(): Promise<MongoClient> {
   if (cached.client) return cached.client;
 
-  const MONGODB_URL = process.env["MONGODB-URL"] || "";
+  const MONGODB_URL = process.env["MONGODB_URL"] || "";
   if (!MONGODB_URL) {
-    throw new Error("Please define the MONGODB-URL environment variable");
+    throw new Error("Please define the MONGODB_URL environment variable");
   }
 
   if (!cached.promise) {
