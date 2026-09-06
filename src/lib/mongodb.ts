@@ -1,11 +1,6 @@
 import { MongoClient, Db } from "mongodb";
 
-const MONGODB_URL = process.env["MONGODB-URL"] || "";
 const DB_NAME = process.env.DB_NAME || "abdullah_db";
-
-if (!MONGODB_URL) {
-  throw new Error("Please define the MONGODB-URL environment variable");
-}
 
 interface MongoCache {
   client: MongoClient | null;
@@ -23,6 +18,11 @@ const cached = globalWithMongo._mongoCache;
 
 export async function getMongoClient(): Promise<MongoClient> {
   if (cached.client) return cached.client;
+
+  const MONGODB_URL = process.env["MONGODB-URL"] || "";
+  if (!MONGODB_URL) {
+    throw new Error("Please define the MONGODB-URL environment variable");
+  }
 
   if (!cached.promise) {
     cached.promise = MongoClient.connect(MONGODB_URL);
