@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthFromCookies } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
 import {
   findAll,
   findById,
